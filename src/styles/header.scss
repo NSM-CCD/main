@@ -14,8 +14,19 @@ header {
     color: #344054;
     user-select: none;
 
-    img {
-      margin-top: -2px;
+    svg {
+      margin-top: -4px;
+      margin-left: 8px;
+    }
+
+    &.bg-red {
+      color: #fff;
+      background: #93272c;
+      border: 1px solid #93272c;
+
+      svg path {
+        stroke: #fff;
+      }
     }
   }
 }

@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "gatsby"
-import chevronRight from "../../images/icons/chevron-right.svg"
 import logo from "../../images/american-collectors-logo.svg"
 
 const Header = ({ ctaBackgroundColor }) => (
@@ -11,7 +10,21 @@ const Header = ({ ctaBackgroundColor }) => (
       </Link>
       <button className={`btn-cta ${ctaBackgroundColor}`}>
         Get Insured
-        <img src={chevronRight} alt="Chevron right" />
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.5 15L12.5 10L7.5 5"
+            stroke="#344054"
+            stroke-width="1.66667"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </button>
     </nav>
   </header>
