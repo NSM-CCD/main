@@ -20,9 +20,9 @@ const Header = ({ ctaBackgroundColor }) => (
           <path
             d="M7.5 15L12.5 10L7.5 5"
             stroke="#344054"
-            stroke-width="1.66667"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.66667"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>
