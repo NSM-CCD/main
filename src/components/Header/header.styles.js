@@ -26,6 +26,10 @@ export const HeaderMain = styled.header`
     color: #344054;
     user-select: none;
 
+    &:hover {
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
     @media (min-width: 768px) {
       padding: 10px 18px;
     }
