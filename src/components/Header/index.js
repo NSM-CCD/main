@@ -5,7 +5,7 @@ import logo from "../../images/american-collectors-logo.svg"
 
 const Header = ({ ctaBackgroundColor }) => (
   <HeaderMain>
-    <nav className="container navbar py-3">
+    <nav className="container navbar">
       <Link to="/" href="#">
         <img src={logo} alt="American Collectors" className="img-fluid" />
       </Link>
