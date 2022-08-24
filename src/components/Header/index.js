@@ -1,9 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
+import { HeaderMain } from "./header.styles"
 import logo from "../../images/american-collectors-logo.svg"
 
 const Header = ({ ctaBackgroundColor }) => (
-  <header>
+  <HeaderMain>
     <nav className="container navbar py-3">
       <Link to="/" href="#">
         <img src={logo} alt="American Collectors" className="img-fluid" />
@@ -27,7 +28,7 @@ const Header = ({ ctaBackgroundColor }) => (
         </svg>
       </button>
     </nav>
-  </header>
+  </HeaderMain>
 )
 
 export default Header

@@ -1,4 +1,6 @@
-header {
+import styled from "styled-components"
+
+export const HeaderMain = styled.header`
   border-bottom: 1px solid #eaecf0;
 
   .btn-cta {
@@ -29,4 +31,4 @@ header {
       }
     }
   }
-}
+`
