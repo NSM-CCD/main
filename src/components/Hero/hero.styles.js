@@ -122,7 +122,9 @@ export const HeroContent = styled.div`
     }
 
     hr {
+      height: 2px;
       margin: 24px 0;
+      background: #eaecf0;
     }
 
     .form-subtitle {
@@ -172,12 +174,17 @@ export const HeroContent = styled.div`
     .action-buttons {
       display: flex;
       gap: 12px;
+      justify-content: flex-end;
 
       font-family: "Raleway", sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 20px;
+
+      button {
+        white-space: nowrap;
+      }
 
       .btn-reset {
         background: #fff;
@@ -213,7 +220,7 @@ export const HeroContent = styled.div`
     }
 
     @media (min-width: 1366px) {
-      margin-bottom: 232px;
+      margin-bottom: 202px;
       max-width: 100%;
     }
   }
