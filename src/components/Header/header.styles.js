@@ -4,12 +4,20 @@ export const HeaderMain = styled.header`
   border-bottom: 1px solid #eaecf0;
 
   nav {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px 24px;
 
     @media (min-width: 768px) {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding: 16px 24px;
+    }
+  }
+
+  .logo {
+    max-width: 133px;
+    max-height: 45px;
+
+    @media (min-width: 768px) {
+      max-width: 164px;
+      max-height: 56px;
     }
   }
 

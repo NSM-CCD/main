@@ -1,13 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
 import { HeaderMain } from "./header.styles"
-import logo from "../../images/american-collectors-logo.svg"
+import logo from "../../images/logo-new.webp"
 
 const Header = ({ ctaBackgroundColor }) => (
   <HeaderMain>
     <nav className="container navbar">
       <Link to="/" href="#">
-        <img src={logo} alt="American Collectors" className="img-fluid" />
+        <img src={logo} alt="American Collectors" className="logo img-fluid" />
       </Link>
       <button className={`btn-cta ${ctaBackgroundColor}`}>
         Get Insured

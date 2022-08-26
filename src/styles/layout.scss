@@ -1,3 +1,20 @@
 //Here you can customize bootstrap
 $primary: #663399;
 @import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
+
+:root {
+  --black: #000000;
+  --fiord: #475466;
+  --hippie-blue: #5e8ab4;
+  --mirage: #0f1728;
+  --white: #ffffff;
+  --santas-gray: #98a1b2;
+
+  --font-size-l2: 18px;
+  --font-size-m2: 16px;
+  --font-size-xl2: 20px;
+  --font-size-xxxl: 48px;
+
+  --font-family-raleway: "Raleway", Helvetica;
+}
