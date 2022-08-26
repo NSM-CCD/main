@@ -11,7 +11,6 @@ const ColumnLeft = () => (
 const ColumnLeft1 = styled.div`
   display: flex;
   flex-direction: column;
-  width: 370px;
   align-items: flex-start;
   gap: 8px;
   position: relative;
