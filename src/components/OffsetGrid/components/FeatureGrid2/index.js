@@ -88,9 +88,15 @@ const HeadingKicker = styled.div`
 
 const SearchForAClassicCarValue = styled.h2`
   font-size: 24px;
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px;
+  color: #101828;
 
   @media (min-width: 768px) {
     font-size: 36px;
+    letter-spacing: -0.02em;
   }
 
   @media (min-width: 992px) {
