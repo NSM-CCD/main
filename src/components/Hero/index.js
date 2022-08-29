@@ -23,7 +23,7 @@ const Hero = () => {
   return (
     <HeroSection>
       <HeroContent>
-        <div className="container p-0 px-md-4">
+        <div className="container p-0">
           <div className="row px-0 mx-0">
             <div className="col-12 col-md-6 px-0">
               <div className="heading-block">

@@ -7,7 +7,14 @@ export const HeaderMain = styled.header`
     padding: 12px 24px;
 
     @media (min-width: 768px) {
-      padding: 16px 24px;
+      padding: 16px 0;
+    }
+
+    &.container {
+      @media (min-width: 1366px) {
+        max-width: 1170px;
+        margin: 0 auto;
+      }
     }
   }
 

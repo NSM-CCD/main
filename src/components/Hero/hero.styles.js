@@ -8,7 +8,6 @@ export const HeroSection = styled.section`
 export const HeroContent = styled.div`
   display: flex;
   align-items: flex-start;
-
   padding-top: 40px;
 
   @media (min-width: 768px) {
@@ -17,6 +16,13 @@ export const HeroContent = styled.div`
 
   @media (min-width: 992px) {
     padding-top: 80px;
+  }
+
+  .container {
+    @media (min-width: 1366px) {
+      max-width: 1170px;
+      margin: 0 auto;
+    }
   }
 
   .heading-block {
@@ -117,6 +123,7 @@ export const HeroContent = styled.div`
     .form-container {
       width: 100%;
       max-width: 370px;
+      min-width: 328px;
 
       background: #fff;
       box-shadow: 0 32px 64px -12px rgb(16 24 40 / 14%);
