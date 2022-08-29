@@ -13,6 +13,10 @@ export const FooterMain = styled.footer`
 
 export const Content = styled.div`
   padding: 40px 24px;
+
+  @media (min-width: 768px) {
+    padding: 96px 0 56px;
+  }
 `
 
 export const FooterLinks = styled.div`
@@ -69,7 +73,7 @@ export const Menus = styled.div`
       min-width: 270px;
 
       @media (min-width: 768px) {
-        min-width: 190px;
+        min-width: 180px;
       }
 
       @media (min-width: 992px) {
