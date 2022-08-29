@@ -1,14 +1,8 @@
 import styled from "styled-components"
-import heroBackground from "../../images/hero-bg.webp"
 
 export const HeroSection = styled.section`
-  padding: 0 24px;
+  padding: 0;
   background-color: #f2f4f7;
-  background-image: url(${heroBackground});
-
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
 `
 
 export const HeroContent = styled.div`
@@ -31,8 +25,13 @@ export const HeroContent = styled.div`
     gap: 20px;
     align-items: flex-start;
     margin-bottom: 40px;
+    padding: 0 24px;
 
     max-width: 370px;
+
+    @media (min-width: 768px) {
+      padding: 0;
+    }
 
     @media (min-width: 992px) {
       margin-bottom: 64px;
@@ -84,6 +83,12 @@ export const HeroContent = styled.div`
   }
 
   .trustbar {
+    padding: 0 24px;
+
+    @media (min-width: 768px) {
+      padding: 0;
+    }
+
     .trustbar-logos {
       display: flex;
       gap: 16px 32px;
@@ -98,130 +103,159 @@ export const HeroContent = styled.div`
     }
   }
 
-  .form-container {
-    max-width: 370px;
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
 
-    background: #fff;
-    box-shadow: 0 32px 64px -12px rgb(16 24 40 / 14%);
-    border-radius: 12px;
-    padding: 32px;
-    margin: 32px auto 40px;
+    padding: 0 24px;
 
-    .form-title {
-      font-family: "Raleway", sans-serif;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 30px;
-      color: #101828;
+    @media (min-width: 768px) {
+      justify-content: flex-end;
+      padding: 0;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 370px;
+
+      background: #fff;
+      box-shadow: 0 32px 64px -12px rgb(16 24 40 / 14%);
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 32px;
+
+      margin-bottom: -95px;
+      z-index: 1000;
+
+      @media (min-width: 768px) {
+        margin-top: 0;
+      }
 
       @media (min-width: 992px) {
-        font-size: 24px;
-        line-height: 32px;
+        max-width: 570px;
+        padding: 50px;
+        margin-bottom: -112px;
       }
-    }
 
-    hr {
-      height: 2px;
-      margin: 24px 0;
-      background: #eaecf0;
-    }
+      @media (min-width: 1200px) {
+        max-width: 100%;
+      }
 
-    .form-subtitle {
-      font-family: "Raleway", sans-serif;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      color: #344054;
-    }
+      .form-title {
+        font-family: "Raleway", sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 30px;
+        color: #101828;
 
-    .form {
-      display: flex;
-      flex-flow: column nowrap;
-      gap: 20px;
+        @media (min-width: 992px) {
+          font-size: 24px;
+          line-height: 32px;
+        }
+      }
 
-      .form-group {
-        label {
-          font-family: "Raleway", sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 20px;
-          color: #344054;
-          margin-bottom: 6px;
+      hr {
+        height: 2px;
+        margin: 24px 0;
+        background: #eaecf0;
+      }
+
+      .form-subtitle {
+        font-family: "Raleway", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #344054;
+      }
+
+      .form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 20px;
+
+        .form-group {
+          label {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            color: #344054;
+            margin-bottom: 6px;
+          }
+
+          select.form-select {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+
+            border: 1px solid #d0d5dd;
+            box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+            border-radius: 8px;
+
+            &:invalid,
+            option[value=""] {
+              color: #667085;
+            }
+          }
+        }
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+
+        font-family: "Raleway", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+
+        button {
+          white-space: nowrap;
         }
 
-        select.form-select {
-          font-family: "Raleway", sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 24px;
-
+        .btn-reset {
+          background: #fff;
           border: 1px solid #d0d5dd;
           box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
           border-radius: 8px;
+          padding: 10px 16px;
 
-          &:invalid,
-          option[value=""] {
-            color: #667085;
+          &:hover {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+          }
+        }
+
+        .btn-estimate {
+          background: #93272c;
+          border: 1px solid #93272c;
+          box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+          border-radius: 8px;
+          padding: 10px 16px;
+
+          color: #fff;
+
+          &:hover {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
           }
         }
       }
     }
+  }
+`
 
-    .action-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
+export const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
 
-      font-family: "Raleway", sans-serif;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
-
-      button {
-        white-space: nowrap;
-      }
-
-      .btn-reset {
-        background: #fff;
-        border: 1px solid #d0d5dd;
-        box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
-        border-radius: 8px;
-        padding: 10px 16px;
-
-        &:hover {
-          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-      }
-
-      .btn-estimate {
-        background: #93272c;
-        border: 1px solid #93272c;
-        box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
-        border-radius: 8px;
-        padding: 10px 16px;
-
-        color: #fff;
-
-        &:hover {
-          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-      }
-    }
-
-    @media (min-width: 992px) {
-      max-width: 570px;
-      padding: 50px;
-      margin: 0 0 88px;
-    }
-
-    @media (min-width: 1366px) {
-      margin-bottom: 202px;
-      max-width: 100%;
-    }
+  img {
+    width: 100vw;
+    min-height: 138px;
   }
 `

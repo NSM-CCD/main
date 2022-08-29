@@ -1,7 +1,8 @@
 import React, { useCallback, useMemo, useState } from "react"
-import { HeroContent, HeroSection } from "./hero.styles"
+import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
 import { desktopLogos, getYears, mobileLogos, trustBarLogos } from "./helper"
 import { useMediaQuery } from "../../utils/useMediaQuery"
+import heroBg from "../../images/hero-bg.webp"
 
 const Hero = () => {
   const [year, setYear] = useState("")
@@ -22,9 +23,9 @@ const Hero = () => {
   return (
     <HeroSection>
       <HeroContent>
-        <div className="container p-0 p-md-4">
-          <div className="row">
-            <div className="col-12 col-md-6">
+        <div className="container p-0 px-md-4">
+          <div className="row px-0 mx-0">
+            <div className="col-12 col-md-6 px-0">
               <div className="heading-block">
                 <span className="hero-kicker">
                   Welcome to Classic Car Value
@@ -62,7 +63,7 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 form-wrapper">
               <div className="form-container">
                 <h2 className="form-title">
                   Calculate the value of your classic car
@@ -134,6 +135,9 @@ const Hero = () => {
           </div>
         </div>
       </HeroContent>
+      <ImageWrapper>
+        <img src={heroBg} alt="Hero bottom" className="img-fluid" />
+      </ImageWrapper>
     </HeroSection>
   )
 }
