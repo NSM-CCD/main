@@ -11,18 +11,6 @@ const SlidesContent = forwardRef(({ ...props }, ref) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    centerMode: true,
-    centerPadding: 70,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: false,
-        },
-      },
-    ],
   }
 
   return (

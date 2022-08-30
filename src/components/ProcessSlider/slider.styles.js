@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const ProcessSliderSection = styled.section`
   background-color: #f9fafb;
+  overflow: hidden;
   @media (min-width: 1366px) {
     .container {
       max-width: 1170px;
@@ -22,9 +23,18 @@ export const Content = styled.div`
     .slick-initialized .slick-slide {
       display: block;
       padding-right: 0;
+      min-width: 328px;
 
       @media (min-width: 768px) {
         padding-right: 38px;
+      }
+    }
+
+    .slick-list {
+      overflow: hidden;
+
+      @media (min-width: 540px) {
+        overflow: visible;
       }
     }
   }
@@ -150,7 +160,6 @@ export const Slides = styled.div`
       display: flex;
       flex-direction: column;
       gap: 30px;
-      padding-right: 24px;
 
       @media (min-width: 992px) {
         flex-direction: row;
@@ -198,7 +207,7 @@ export const Slides = styled.div`
 
       .slider-image {
         img {
-          max-width: 328px;
+          max-width: 320px;
 
           @media (min-width: 768px) {
             max-width: 370px;
