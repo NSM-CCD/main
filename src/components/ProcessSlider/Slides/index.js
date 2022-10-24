@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react"
 import Slider from "react-slick"
 import carImage from "../../../images/car-road.webp"
+import dummyCarImage from "../../../images/cadillac.png"
 import { Slides } from "../slider.styles"
 
 const SlidesContent = forwardRef(({ ...props }, ref) => {
@@ -30,7 +31,7 @@ const SlidesContent = forwardRef(({ ...props }, ref) => {
             </div>
 
             <div className="slider-image">
-              <img src={carImage} alt="Slider Featured" />
+              <img src={dummyCarImage} alt="Slider Featured" />
             </div>
           </div>
         </div>
