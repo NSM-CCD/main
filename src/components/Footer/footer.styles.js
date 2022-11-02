@@ -33,6 +33,7 @@ export const FooterLinks = styled.div`
 
   .footer-logo {
     max-width: fit-content;
+    align-self: flex-start;
   }
 `
 

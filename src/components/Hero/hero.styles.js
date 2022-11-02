@@ -203,7 +203,15 @@ export const HeroContent = styled.div`
             border: 1px solid #d0d5dd;
             box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
             border-radius: 8px;
+            
+            &:focus:not(:focus-visible) {
+              outline: none;
+            }
 
+            &:focus-visible {
+              outline: -webkit-focus-ring-color auto 1px;
+            }
+            
             &:invalid,
             option[value=""] {
               color: #667085;
@@ -225,6 +233,10 @@ export const HeroContent = styled.div`
 
         button {
           white-space: nowrap;
+
+          &:hover {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+          }
         }
 
         .btn-reset {
@@ -233,10 +245,6 @@ export const HeroContent = styled.div`
           box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
           border-radius: 8px;
           padding: 10px 16px;
-
-          &:hover {
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-          }
         }
 
         .btn-estimate {
@@ -247,11 +255,6 @@ export const HeroContent = styled.div`
           padding: 10px 16px;
 
           color: #fff;
-
-          &:hover {
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-          }
-        }
       }
     }
   }

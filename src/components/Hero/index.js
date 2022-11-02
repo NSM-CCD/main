@@ -1,11 +1,17 @@
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
 import { desktopLogos, getYears, mobileLogos, trustBarLogos } from "./helper"
 import { useMediaQuery } from "../../utils/useMediaQuery"
 import heroBg from "../../images/hero-bg.webp"
+import HeroForm from "./Form"
+import { getMakesListByYear, getModelsByCompNumYear } from "./helpers"
 
 const Hero = () => {
   const [year, setYear] = useState("")
+  const [companyNum, setCompany] = useState("")
+  const [modelCat, setCategory] = useState("")
+  const [makes, setMakes] = useState([])
+  const [models, setModels] = useState([])
   const isWiderScreen = useMediaQuery("(min-width: 1200px)")
 
   const years = useMemo(
@@ -18,7 +24,72 @@ const Hero = () => {
     []
   )
 
-  const handleYear = useCallback(year => setYear(year.target.value), [])
+  const availableMakes = useMemo(
+    () =>
+      makes.length > 0 &&
+      makes.map(
+        make =>
+          make?.company && (
+            <option key={make.companynum} value={make.companynum}>
+              {make.company}
+            </option>
+          )
+      ),
+    [makes]
+  )
+
+  const availableModels = useMemo(
+    () =>
+      models.length > 0 &&
+      [...new Set(models.map(model => model?.modelcat))].map(
+        i =>
+          i && (
+            <option key={i} value={i}>
+              {i}
+            </option>
+          )
+      ),
+    [models]
+  )
+
+  const availableTrims = useMemo(() => {
+    const filteredModels =
+      models.length > 0 && models.filter(model => model?.modelcat === modelCat)
+
+    return (
+      filteredModels?.length > 0 &&
+      [...new Set(filteredModels.map(model => model?.model))]
+        .map(
+          i =>
+            i && (
+              <option key={i} value={i}>
+                {i}
+              </option>
+            )
+        )
+        .sort()
+        .reverse()
+    )
+  }, [models, modelCat])
+
+  useEffect(() => {
+    if (!year) return null
+    getMakesListByYear(year).then(response => setMakes(response.data))
+  }, [year])
+
+  useEffect(() => {
+    if (!year || !companyNum) return null
+    getModelsByCompNumYear(companyNum, year).then(response =>
+      setModels(response.data)
+    )
+  }, [year, companyNum])
+
+  const handleYear = useCallback(selectedYear => setYear(selectedYear), [])
+  const handleMake = useCallback(selectedMake => setCompany(selectedMake), [])
+  const handleCategory = useCallback(
+    selectedModelCat => setCategory(selectedModelCat),
+    []
+  )
 
   return (
     <HeroSection>
@@ -63,75 +134,16 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 form-wrapper">
-              <div className="form-container">
-                <h2 className="form-title">
-                  Calculate the value of your classic car
-                </h2>
-                <p className="form-subtitle">
-                  Enter the details of your vehicle
-                </p>
-                <hr />
-                <div className="form">
-                  <div className="form-group">
-                    <label htmlFor="year">Select year</label>
-                    <select
-                      id="year"
-                      className="form-select"
-                      aria-label="Default select year"
-                      required
-                      value={year}
-                      onChange={handleYear}
-                    >
-                      <option value="">Select year</option>
-                      {years}
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="make">Select make</label>
-                    <select
-                      id="make"
-                      className="form-select"
-                      aria-label="Default select make"
-                      required
-                    >
-                      <option value="">Select make</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="model">Select model</label>
-                    <select
-                      id="model"
-                      className="form-select"
-                      aria-label="Default select model"
-                      required
-                    >
-                      <option value="">Select model</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="year">Select trim</label>
-                    <select
-                      id="trim"
-                      className="form-select"
-                      aria-label="Default select trim"
-                      required
-                    >
-                      <option value="">Select trim</option>
-                    </select>
-                  </div>
-                  <hr className="m-0" />
-                  <div className="action-buttons">
-                    <button type="reset" className="btn-reset">
-                      Reset Selections
-                    </button>
-                    <button type="button" className="btn-estimate">
-                      Get Estimate
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <HeroForm
+              year={year}
+              years={years}
+              makes={availableMakes}
+              models={availableModels}
+              trims={availableTrims}
+              onChangeYear={handleYear}
+              onChangeMake={handleMake}
+              onChangeModelCat={handleCategory}
+            />
           </div>
         </div>
       </HeroContent>
