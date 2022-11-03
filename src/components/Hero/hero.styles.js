@@ -203,7 +203,7 @@ export const HeroContent = styled.div`
             border: 1px solid #d0d5dd;
             box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
             border-radius: 8px;
-            
+
             &:focus:not(:focus-visible) {
               outline: none;
             }
@@ -211,7 +211,7 @@ export const HeroContent = styled.div`
             &:focus-visible {
               outline: -webkit-focus-ring-color auto 1px;
             }
-            
+
             &:invalid,
             option[value=""] {
               color: #667085;
@@ -255,6 +255,7 @@ export const HeroContent = styled.div`
           padding: 10px 16px;
 
           color: #fff;
+        }
       }
     }
   }

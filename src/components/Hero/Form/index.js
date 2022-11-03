@@ -9,6 +9,8 @@ const HeroForm = ({
   onChangeYear,
   onChangeMake,
   onChangeModelCat,
+  onReset,
+  onEstimate,
 }) => {
   const handleYear = useCallback(
     ({ target }) => onChangeYear(target.value),
@@ -89,10 +91,15 @@ const HeroForm = ({
           </div>
           <hr className="m-0" />
           <div className="action-buttons">
-            <button type="reset" className="btn-reset">
+            <button type="reset" className="btn-reset" onClick={onReset}>
               Reset Selections
             </button>
-            <button type="button" className="btn-estimate">
+            <button
+              type="button"
+              className="btn-estimate"
+              disabled={!models}
+              onClick={onEstimate}
+            >
               Get Estimate
             </button>
           </div>

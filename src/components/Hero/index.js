@@ -1,10 +1,20 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
+
+import ModalMain from "../Modal"
+import HeroForm from "./Form"
+import FormInfo from "./Form/FormInfo"
+
 import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
-import { desktopLogos, getYears, mobileLogos, trustBarLogos } from "./helper"
 import { useMediaQuery } from "../../utils/useMediaQuery"
 import heroBg from "../../images/hero-bg.webp"
-import HeroForm from "./Form"
-import { getMakesListByYear, getModelsByCompNumYear } from "./helpers"
+import {
+  getMakesListByYear,
+  getModelsByCompNumYear,
+  desktopLogos,
+  getYears,
+  mobileLogos,
+  trustBarLogos,
+} from "./helpers"
 
 const Hero = () => {
   const [year, setYear] = useState("")
@@ -12,6 +22,7 @@ const Hero = () => {
   const [modelCat, setCategory] = useState("")
   const [makes, setMakes] = useState([])
   const [models, setModels] = useState([])
+  const [openModalForm, setOpenModalForm] = useState(false)
   const isWiderScreen = useMediaQuery("(min-width: 1200px)")
 
   const years = useMemo(
@@ -91,6 +102,21 @@ const Hero = () => {
     []
   )
 
+  const handleOpenModalForm = useCallback(
+    () => setOpenModalForm(true),
+    [openModalForm]
+  )
+
+  const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
+
+  const handleReset = useCallback(() => {
+    setYear("")
+    setCompany("")
+    setCategory("")
+    setMakes([])
+    setModels([])
+  }, [])
+
   return (
     <HeroSection>
       <HeroContent>
@@ -143,6 +169,8 @@ const Hero = () => {
               onChangeYear={handleYear}
               onChangeMake={handleMake}
               onChangeModelCat={handleCategory}
+              onReset={handleReset}
+              onEstimate={handleOpenModalForm}
             />
           </div>
         </div>
@@ -150,6 +178,10 @@ const Hero = () => {
       <ImageWrapper>
         <img src={heroBg} alt="Hero bottom" className="img-fluid" />
       </ImageWrapper>
+      <ModalMain
+        open={openModalForm}
+        content={<FormInfo onClose={handleCloseModal} />}
+      />
     </HeroSection>
   )
 }
