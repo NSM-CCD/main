@@ -107,7 +107,6 @@ export const TextBlock = styled.div`
   }
 
   button.cp-cta {
-    background: #fff;
     border: 1px solid #d0d5dd;
     box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
     border-radius: 8px;
@@ -120,6 +119,21 @@ export const TextBlock = styled.div`
     font-size: 16px;
     line-height: 24px;
     color: #344054;
+
+    svg {
+      margin-top: -4px;
+      margin-left: 8px;
+    }
+
+    &.bg-red {
+      color: #fff;
+      background: #93272c;
+      border: 1px solid #93272c;
+
+      svg path {
+        stroke: #fff;
+      }
+    }
 
     &:hover {
       box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
