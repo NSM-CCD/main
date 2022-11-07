@@ -2,9 +2,9 @@ import React, { useCallback, useState } from "react"
 import Valuation from "./Valuation"
 import SalesHistory from "./SalesHistory"
 import ModelOverview from "./ModelOverview"
+import Features from "./Features"
 import { ResultsWrapper } from "./results.styled"
 import { scrollToEl } from "../../utils/scrollTo"
-import Features from "./Features"
 
 const ResultsMain = ({ carName, model }) => {
   const [active, setActive] = useState("valuation")
@@ -18,27 +18,26 @@ const ResultsMain = ({ carName, model }) => {
     <ResultsWrapper>
       <div className="container results-container">
         <div className="sidebar-items d-flex flex-column">
-          <a
-            href="#"
+          <button
             onClick={() => handleActive("valuation")}
-            className={active === "valuation" ? "active" : ""}
+            className={`side-item ${active === "valuation" ? "active" : ""}`}
           >
             Valuation
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
             onClick={() => handleActive("salesHistory")}
-            className={active === "salesHistory" ? "active" : ""}
+            className={`side-item ${active === "salesHistory" ? "active" : ""}`}
           >
             Sales History
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
             onClick={() => handleActive("modelOverview")}
-            className={active === "modelOverview" ? "active" : ""}
+            className={`side-item ${
+              active === "modelOverview" ? "active" : ""
+            }`}
           >
             Model Overview
-          </a>
+          </button>
         </div>
         <div className="content-wrapper">
           <Valuation carName={carName} model={model} />

@@ -15,11 +15,13 @@ export const ResultsWrapper = styled.div`
       flex-direction: column;
       flex: 0 30%;
 
-      a {
+      button.side-item {
         border-radius: 6px;
-        text-decoration: none;
+        background-color: transparent;
+        border: none;
         margin: 0;
         padding: 8px 12px;
+        text-align: left;
 
         font-family: "Raleway", sans-serif;
         font-weight: 500;
