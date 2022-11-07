@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useCallback } from "react"
+import { navigate } from "gatsby"
 
 import Link from "../../../../utils/link"
 import { FormInfoWrapper } from "./forminfo.styles"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
 
-const FormInfo = ({ onClose }) => {
+const FormInfo = ({ carName, model, onClose }) => {
+  const handleSubmit = useCallback(
+    () => navigate("/results", { state: { carName, model } }),
+    []
+  )
+
   return (
     <FormInfoWrapper>
       <div className="progress">
@@ -64,7 +70,7 @@ const FormInfo = ({ onClose }) => {
             <img src={chevronLeftIcon} alt="chevron" />
             Go back
           </button>
-          <button type="button" className="btn-estimate">
+          <button type="button" className="btn-estimate" onClick={handleSubmit}>
             Get Estimate
           </button>
         </div>
