@@ -215,6 +215,112 @@ export const ResultsWrapper = styled.div`
         }
       }
 
+      .restart-calc {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        text-decoration: none;
+
+        @media (min-width: 768px) {
+          gap: 12px;
+          justify-content: flex-start;
+        }
+
+        span {
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 28px;
+          color: #667085;
+          width: fit-content;
+        }
+      }
+
+      .related-vehicles {
+        background-color: #fff;
+        border-radius: 12px;
+
+        display: flex;
+        flex-direction: column;
+
+        .related-vehicles-title {
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+
+          color: #163750;
+
+          padding: 12px 12px 0;
+
+          @media (min-width: 768px) {
+            font-size: 30px;
+            line-height: 38px;
+            padding: 48px 48px 24px;
+          }
+        }
+
+        .vehicles-list {
+          .vehicle-details {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            text-decoration: none;
+            border-top: 1px solid #eaecf0;
+
+            padding: 12px;
+
+            &:hover {
+              background-color: #f1f8fc;
+            }
+
+            @media (min-width: 768px) {
+              padding: 24px 48px;
+            }
+
+            p.details {
+              display: flex;
+              gap: 6px;
+
+              @media (min-width: 768px) {
+                gap: 12px;
+              }
+
+              .name {
+                font-family: "Raleway", sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 20px;
+                color: #163750;
+
+                @media (min-width: 768px) {
+                  font-size: 18px;
+                  line-height: 28px;
+                }
+              }
+
+              .model {
+                font-family: "Raleway", sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+                color: #475467;
+
+                @media (min-width: 768px) {
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+            }
+          }
+        }
+      }
+
       .back-share {
         display: flex;
         justify-content: space-between;
