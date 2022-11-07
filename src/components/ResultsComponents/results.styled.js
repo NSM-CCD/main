@@ -18,6 +18,8 @@ export const ResultsWrapper = styled.div`
 
     .sidebar-items {
       position: sticky;
+      top: 89px;
+      align-self: flex-start;
       display: flex;
       flex-direction: column;
       flex: 0 30%;
