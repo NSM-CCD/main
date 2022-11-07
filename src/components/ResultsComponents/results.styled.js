@@ -4,6 +4,13 @@ export const ResultsWrapper = styled.div`
   background: linear-gradient(180deg, #f1f5f8 0%, #f9fafb 100%);
   padding: 56px 96px 0;
 
+  & .container.results-container {
+    @media (min-width: 1366px) {
+      max-width: 1170px;
+      margin: 0 auto;
+    }
+  }
+
   .results-container {
     position: relative;
     display: flex;
