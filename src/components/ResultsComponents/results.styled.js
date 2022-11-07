@@ -195,8 +195,11 @@ export const ResultsWrapper = styled.div`
           line-height: 20px;
           color: #5379a2;
           margin: 0;
-          padding-left: 0;
-          padding-right: 0;
+
+          &.btn-back {
+            padding-left: 0;
+            padding-right: 0;
+          }
 
           &.btn-share {
             background: #e7f2f7;
