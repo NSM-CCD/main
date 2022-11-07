@@ -4,10 +4,18 @@ const RelatedVehicles = () => (
   <div className="related-vehicles">
     <h2 className="related-vehicles-title">Related Vehicles</h2>
     <div className="vehicles-list">
-      {[4, 5, 6, 7, 8].map(i => (
+      {[
+        "INTEGRA",
+        "INTEGRA GS",
+        "INTEGRA RS",
+        "INTEGRA LS",
+        "LEGEND",
+        "LEGEND L",
+        "LEGEND LS",
+      ].map(i => (
         <a key={i} href="#" className="vehicle-details">
           <p className="details m-0">
-            <span className="name">{`197${i} Cadillac Deville`}</span>
+            <span className="name">Acura {i}</span>
             <span className="model">2 Door Coupe</span>
           </p>
           <svg
