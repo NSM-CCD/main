@@ -17,7 +17,7 @@ const ResultsMain = ({ carName, model }) => {
   return (
     <ResultsWrapper>
       <div className="container results-container">
-        <div className="sidebar-items d-flex flex-column">
+        <div className="sidebar-items">
           <button
             onClick={() => handleActive("valuation")}
             className={`side-item ${active === "valuation" ? "active" : ""}`}

@@ -1,8 +1,13 @@
 import styled from "styled-components"
 
 export const ResultsWrapper = styled.div`
-  background: linear-gradient(180deg, #f1f5f8 0%, #f9fafb 100%);
-  padding: 56px 96px 0;
+  background-color: #fff;
+  padding: 40px 12px 0;
+
+  @media (min-width: 768px) {
+    padding: 56px 96px 0;
+    background: linear-gradient(180deg, #f1f5f8 0%, #f9fafb 100%);
+  }
 
   & .container.results-container {
     @media (min-width: 1366px) {
@@ -20,9 +25,13 @@ export const ResultsWrapper = styled.div`
       position: sticky;
       top: 89px;
       align-self: flex-start;
-      display: flex;
+      display: none;
       flex-direction: column;
       flex: 0 30%;
+
+      @media (min-width: 992px) {
+        display: flex;
+      }
 
       button.side-item {
         border-radius: 6px;
@@ -64,11 +73,15 @@ export const ResultsWrapper = styled.div`
         background: #f1f8fc;
         border: 1px solid #c5deec;
         border-radius: 12px;
-        padding: 40px;
+        padding: 12px;
 
         display: flex;
         flex-direction: column;
         gap: 16px;
+
+        @media (min-width: 564px) {
+          padding: 40px;
+        }
 
         .features-title {
           font-family: "Raleway", sans-serif;
@@ -87,7 +100,7 @@ export const ResultsWrapper = styled.div`
           .features-items {
             display: flex;
             justify-content: space-between;
-            flex: 0 48%;
+            flex: 0 100%;
             padding: 16px;
             cursor: pointer;
 
@@ -95,8 +108,12 @@ export const ResultsWrapper = styled.div`
             border: 1px solid #eaecf0;
             border-radius: 8px;
 
-            max-width: 437px;
             width: 100%;
+
+            @media (min-width: 768px) {
+              flex: 0 48%;
+              max-width: 437px;
+            }
 
             &.active {
               background: #e7f2f7;
@@ -125,13 +142,16 @@ export const ResultsWrapper = styled.div`
       }
 
       .model-overview {
-        padding: 48px;
         border-radius: 12px;
         background-color: #fff;
 
         display: flex;
         flex-direction: column;
         gap: 32px;
+
+        @media (min-width: 768px) {
+          padding: 48px;
+        }
 
         .model-overview-title {
           font-family: "Raleway", sans-serif;
@@ -168,15 +188,21 @@ export const ResultsWrapper = styled.div`
       }
 
       .chart-wrapper {
-        padding: 48px;
         background-color: #fff;
         border-radius: 12px;
+
+        @media (min-width: 768px) {
+          padding: 48px;
+        }
       }
 
       .sales-history {
-        padding: 48px;
         background-color: #fff;
         border-radius: 12px;
+
+        @media (min-width: 768px) {
+          padding: 48px;
+        }
 
         .sales-history-title {
           font-family: "Raleway", sans-serif;

@@ -63,5 +63,17 @@ export const HeaderMain = styled.header`
         stroke: #fff;
       }
     }
+
+    &.bg-blue {
+      color: #fff;
+      background: #5e8ab4;
+      border: 1px solid #5e8ab4;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
+
+      svg path {
+        stroke: #fff;
+      }
+    }
   }
 `
