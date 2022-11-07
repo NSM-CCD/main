@@ -4,9 +4,10 @@ import SalesHistory from "./SalesHistory"
 import ModelOverview from "./ModelOverview"
 import { ResultsWrapper } from "./results.styled"
 import { scrollToEl } from "../../utils/scrollTo"
+import Features from "./Features"
 
 const ResultsMain = ({ carName, model }) => {
-  const [active, setActive] = useState("")
+  const [active, setActive] = useState("valuation")
 
   const handleActive = useCallback(item => {
     scrollToEl(item)
@@ -41,6 +42,7 @@ const ResultsMain = ({ carName, model }) => {
         </div>
         <div className="content-wrapper">
           <Valuation carName={carName} model={model} />
+          <Features />
           <SalesHistory />
           <ModelOverview />
         </div>

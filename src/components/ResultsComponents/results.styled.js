@@ -35,6 +35,10 @@ export const ResultsWrapper = styled.div`
     }
 
     .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
       .valuation-heading {
         font-family: "Raleway", sans-serif;
         font-style: normal;
@@ -43,11 +47,73 @@ export const ResultsWrapper = styled.div`
         line-height: 44px;
         letter-spacing: -0.02em;
         color: #163750;
-        margin-bottom: 40px;
+      }
+
+      .features-block {
+        background: #f1f8fc;
+        border: 1px solid #c5deec;
+        border-radius: 12px;
+        padding: 40px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .features-title {
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: #3a576f;
+        }
+
+        .items-wrapper {
+          display: flex;
+          flex-flow: row wrap;
+          gap: 16px;
+
+          .features-items {
+            display: flex;
+            justify-content: space-between;
+            flex: 0 48%;
+            padding: 16px;
+            cursor: pointer;
+
+            background: #fff;
+            border: 1px solid #eaecf0;
+            border-radius: 8px;
+
+            max-width: 437px;
+            width: 100%;
+
+            &.active {
+              background: #e7f2f7;
+            }
+
+            .item-title {
+              margin: 0;
+              font-family: "Raleway", sans-serif;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 24px;
+              color: #3a576f;
+            }
+
+            .item-description {
+              font-family: "Raleway", sans-serif;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 20px;
+              color: #32648d;
+            }
+          }
+        }
       }
 
       .model-overview {
-        margin-top: 32px;
         padding: 48px;
         border-radius: 12px;
         background-color: #fff;
@@ -97,10 +163,19 @@ export const ResultsWrapper = styled.div`
       }
 
       .sales-history {
-        margin-top: 32px;
         padding: 48px;
         background-color: #fff;
         border-radius: 12px;
+
+        .sales-history-title {
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 30px;
+          line-height: 38px;
+          color: #163750;
+          margin-bottom: 24px;
+        }
       }
 
       .back-share {
@@ -119,6 +194,8 @@ export const ResultsWrapper = styled.div`
           font-size: 14px;
           line-height: 20px;
           color: #5379a2;
+          margin: 0;
+          padding: 0;
 
           &.btn-share {
             background: #e7f2f7;
