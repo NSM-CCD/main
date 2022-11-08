@@ -107,6 +107,15 @@ export const HeroContent = styled.div`
         max-width: 100%;
       }
     }
+
+    .trustbar-kicker {
+      font-family: "Raleway", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      color: #344054;
+    }
   }
 
   .form-wrapper {
@@ -128,7 +137,7 @@ export const HeroContent = styled.div`
       background: #fff;
       box-shadow: 0 32px 64px -12px rgb(16 24 40 / 14%);
       border-radius: 12px;
-      padding: 32px;
+      padding: 24px;
       margin-top: 32px;
 
       margin-bottom: -95px;
@@ -136,6 +145,7 @@ export const HeroContent = styled.div`
 
       @media (min-width: 768px) {
         margin-top: 0;
+        padding: 32px;
       }
 
       @media (min-width: 992px) {

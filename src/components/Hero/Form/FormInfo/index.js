@@ -23,7 +23,6 @@ const FormInfo = ({ carName, model, onClose }) => {
             Enter your final information to get your pricing
           </span>
         </div>
-        <hr className="m-0" />
       </div>
       <div className="form">
         <div className="form-group">
@@ -64,7 +63,6 @@ const FormInfo = ({ carName, model, onClose }) => {
         </p>
       </div>
       <div className="action-buttons">
-        <hr className="m-0 w-100" />
         <div className="buttons w-100">
           <button type="reset" className="btn-back" onClick={onClose}>
             <img src={chevronLeftIcon} alt="chevron" />

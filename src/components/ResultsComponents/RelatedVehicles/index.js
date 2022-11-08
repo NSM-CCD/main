@@ -4,15 +4,7 @@ const RelatedVehicles = () => (
   <div className="related-vehicles">
     <h2 className="related-vehicles-title">Related Vehicles</h2>
     <div className="vehicles-list">
-      {[
-        "INTEGRA",
-        "INTEGRA GS",
-        "INTEGRA RS",
-        "INTEGRA LS",
-        "LEGEND",
-        "LEGEND L",
-        "LEGEND LS",
-      ].map(i => (
+      {["INTEGRA", "INTEGRA GS", "INTEGRA RS", "INTEGRA LS"].map(i => (
         <a key={i} href="#" className="vehicle-details">
           <p className="details m-0">
             <span className="name">Acura {i}</span>

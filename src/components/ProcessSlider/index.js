@@ -1,9 +1,11 @@
-import React, { useCallback, useRef } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import SlidesContent from "./Slides"
 import ArrowButtons from "./ArrowButtons"
 import { Content, HeadingBlock, ProcessSliderSection } from "./slider.styles"
 
 const ProcessSlider = () => {
+  const [idx, setIndex] = useState(0)
+
   const sliderRef = useRef()
 
   const handlePrev = useCallback(
@@ -14,6 +16,11 @@ const ProcessSlider = () => {
     () => sliderRef?.current?.slickNext(),
     [sliderRef]
   )
+
+  const handleBeforeChange = (prev, next) => {
+    console.log(prev, next)
+    setIndex(next)
+  }
 
   return (
     <ProcessSliderSection>
@@ -34,10 +41,10 @@ const ProcessSlider = () => {
             </HeadingBlock>
           </div>
           <div className="container d-container">
-            <SlidesContent ref={sliderRef} />
+            <SlidesContent ref={sliderRef} beforeChange={handleBeforeChange} />
           </div>
           <div className="m-arrows container p-0">
-            <ArrowButtons onNext={handleNext} onPrev={handlePrev} />
+            <ArrowButtons idx={idx} onNext={handleNext} onPrev={handlePrev} />
           </div>
         </Content>
       </div>

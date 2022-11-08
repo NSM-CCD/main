@@ -4,7 +4,7 @@ import carImage from "../../../images/car-road.webp"
 import dummyCarImage from "../../../images/cadillac.png"
 import { Slides } from "../slider.styles"
 
-const SlidesContent = forwardRef(({ ...props }, ref) => {
+const SlidesContent = forwardRef(({ beforeChange, ...props }, ref) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -12,6 +12,7 @@ const SlidesContent = forwardRef(({ ...props }, ref) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    beforeChange: beforeChange,
   }
 
   return (

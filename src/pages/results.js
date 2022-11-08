@@ -24,7 +24,7 @@ const ResultsPage = props => {
     <Layout ctaBackgroundColor={ctaColor}>
       <Seo title="Home" />
       <ResultsMain
-        carName="1999 Acura NSX"
+        carName={props?.location?.state?.carName}
         model={props?.location?.state?.model}
       />
       <ConversionPanel ctaButtonColor="bg-red" />

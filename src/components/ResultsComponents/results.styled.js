@@ -60,6 +60,10 @@ export const ResultsWrapper = styled.div`
       gap: 40px;
 
       .valuation-heading {
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+
         font-family: "Raleway", sans-serif;
         font-style: normal;
         font-weight: 700;
@@ -67,6 +71,34 @@ export const ResultsWrapper = styled.div`
         line-height: 44px;
         letter-spacing: -0.02em;
         color: #163750;
+
+        h2.car-name {
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 28px;
+          color: #163750;
+
+          @media (min-width: 768px) {
+            font-size: 36px;
+            line-height: 44px;
+          }
+        }
+
+        p.model {
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #475467;
+
+          @media (min-width: 768px) {
+            font-size: 20px;
+            line-height: 30px;
+          }
+        }
       }
 
       .features-block {

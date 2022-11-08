@@ -46,6 +46,16 @@ export const HeadingBlock = styled.div`
     color: #5e8ab4;
   }
 
+  .description {
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #475467;
+    margin: 0;
+  }
+
   .heading {
     font-family: "Raleway", sans-serif;
     font-style: normal;
@@ -68,16 +78,6 @@ export const HeadingBlock = styled.div`
     @media (min-width: 992px) {
       font-size: 48px;
       line-height: 60px;
-    }
-
-    .description {
-      font-family: "Raleway", sans-serif;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 30px;
-      color: #475467;
-      margin: 0;
     }
   }
 `

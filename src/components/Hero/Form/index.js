@@ -9,6 +9,7 @@ const HeroForm = ({
   onChangeYear,
   onChangeMake,
   onChangeModelCat,
+  onChangeTrim,
   onReset,
   onEstimate,
 }) => {
@@ -18,13 +19,22 @@ const HeroForm = ({
   )
 
   const handleMake = useCallback(
-    ({ target }) => onChangeMake(target.value),
+    e => {
+      const id = e.nativeEvent.target.selectedIndex
+      const textValue = e.nativeEvent.target[id].text
+      onChangeMake(e.target.value, textValue)
+    },
     [onChangeMake]
   )
 
   const handleCategory = useCallback(
     ({ target }) => onChangeModelCat(target.value),
     [onChangeModelCat]
+  )
+
+  const handleTrimChange = useCallback(
+    ({ target }) => onChangeTrim(target.value),
+    [onChangeTrim]
   )
 
   return (
@@ -84,6 +94,7 @@ const HeroForm = ({
               aria-label="Default select trim"
               required
               disabled={!trims}
+              onChange={handleTrimChange}
             >
               <option value="">Select trim</option>
               {trims}

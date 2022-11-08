@@ -18,8 +18,10 @@ import {
 
 const Hero = () => {
   const [year, setYear] = useState("")
+  const [company, setCompanyName] = useState("")
   const [companyNum, setCompany] = useState("")
   const [modelCat, setCategory] = useState("")
+  const [trim, setTrim] = useState("")
   const [makes, setMakes] = useState([])
   const [models, setModels] = useState([])
   const [openModalForm, setOpenModalForm] = useState(false)
@@ -41,7 +43,11 @@ const Hero = () => {
       makes.map(
         make =>
           make?.company && (
-            <option key={make.companynum} value={make.companynum}>
+            <option
+              key={make.companynum}
+              value={make.companynum}
+              data-val={make.company}
+            >
               {make.company}
             </option>
           )
@@ -96,11 +102,18 @@ const Hero = () => {
   }, [year, companyNum])
 
   const handleYear = useCallback(selectedYear => setYear(selectedYear), [])
-  const handleMake = useCallback(selectedMake => setCompany(selectedMake), [])
+
+  const handleMake = useCallback((selectedMake, makeValue) => {
+    setCompanyName(makeValue)
+    setCompany(selectedMake)
+  }, [])
+
   const handleCategory = useCallback(
     selectedModelCat => setCategory(selectedModelCat),
     []
   )
+
+  const handleTrim = useCallback(selectedTrim => setTrim(selectedTrim), [])
 
   const handleOpenModalForm = useCallback(
     () => setOpenModalForm(true),
@@ -169,6 +182,7 @@ const Hero = () => {
               onChangeYear={handleYear}
               onChangeMake={handleMake}
               onChangeModelCat={handleCategory}
+              onChangeTrim={handleTrim}
               onReset={handleReset}
               onEstimate={handleOpenModalForm}
             />
@@ -180,7 +194,13 @@ const Hero = () => {
       </ImageWrapper>
       <ModalMain
         open={openModalForm}
-        content={<FormInfo onClose={handleCloseModal} />}
+        content={
+          <FormInfo
+            carName={`${year} ${company} ${modelCat}`}
+            model={trim}
+            onClose={handleCloseModal}
+          />
+        }
       />
     </HeroSection>
   )

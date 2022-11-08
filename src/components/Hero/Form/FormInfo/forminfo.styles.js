@@ -22,6 +22,7 @@ export const FormInfoWrapper = styled.div`
     .title-wrapper {
       display: flex;
       flex-direction: column;
+      gap: 8px;
 
       .title {
         font-family: "Raleway", sans-serif;
@@ -130,8 +131,8 @@ export const FormInfoWrapper = styled.div`
       }
 
       .btn-estimate {
-        background: #93272c;
-        border: 1px solid #93272c;
+        background: #bd5658;
+        border: 1px solid #bd5658;
         box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
         border-radius: 8px;
         padding: 10px 16px;

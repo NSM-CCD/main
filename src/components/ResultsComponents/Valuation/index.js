@@ -47,8 +47,8 @@ const Valuation = ({ carName, model }) => {
           </button>
         </div>
         <div className="valuation-heading">
-          {carName && <h2 className="car-name">{carName}</h2>}
-          {model && <p className="m-0">{model}</p>}
+          {carName && <h2 className="m-0 car-name">{carName}</h2>}
+          {model && <p className="m-0 model">{model}</p>}
         </div>
       </div>
       <div className="chart-wrapper">

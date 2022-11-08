@@ -100,10 +100,15 @@ export const TextBlock = styled.div`
     font-family: "Raleway", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 24px;
     color: #475467;
     margin: 0;
+
+    @media (min-width: 768px) {
+      font-size: 20px;
+      line-height: 30px;
+    }
   }
 
   button.cp-cta {
