@@ -12,7 +12,7 @@ const SlidesContent = forwardRef(({ beforeChange, ...props }, ref) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    beforeChange: beforeChange,
+    beforeChange,
   }
 
   return (

@@ -3,9 +3,9 @@ import prevArrow from "../../../images/icons/arrow-left.svg"
 import nextArrow from "../../../images/icons/arrow-right.svg"
 import { ArrowButtonsWrapper } from "../slider.styles"
 
-const ArrowButtons = ({ idx, onPrev, onNext }) => (
+const ArrowButtons = ({ isFirst, isLast, onPrev, onNext }) => (
   <ArrowButtonsWrapper>
-    <button className={idx === 0 ? "last-item" : ""} onClick={onPrev}>
+    <button className={isFirst ? "first-item" : ""} onClick={onPrev}>
       <svg
         width="32"
         height="32"
@@ -22,7 +22,7 @@ const ArrowButtons = ({ idx, onPrev, onNext }) => (
         />
       </svg>
     </button>
-    <button onClick={onNext}>
+    <button className={isLast ? "last-item" : ""} onClick={onNext}>
       <svg
         width="32"
         height="32"

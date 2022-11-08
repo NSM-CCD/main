@@ -4,23 +4,18 @@ import ArrowButtons from "./ArrowButtons"
 import { Content, HeadingBlock, ProcessSliderSection } from "./slider.styles"
 
 const ProcessSlider = () => {
-  const [idx, setIndex] = useState(0)
+  const [isFirst, setFirst] = useState(true)
+  const [isLast, setLast] = useState(false)
 
   const sliderRef = useRef()
 
-  const handlePrev = useCallback(
-    () => sliderRef?.current?.slickPrev(),
-    [sliderRef]
-  )
-  const handleNext = useCallback(
-    () => sliderRef?.current?.slickNext(),
-    [sliderRef]
-  )
+  const handlePrev = useCallback(() => sliderRef?.current?.slickPrev(), [])
+  const handleNext = useCallback(() => sliderRef?.current?.slickNext(), [])
 
-  const handleBeforeChange = (prev, next) => {
-    console.log(prev, next)
-    setIndex(next)
-  }
+  const handleBeforeChange = useCallback((prev, next) => {
+    setFirst(next === 0)
+    setLast(next === 2)
+  }, [])
 
   return (
     <ProcessSliderSection>
@@ -35,7 +30,12 @@ const ProcessSlider = () => {
                 </p>
 
                 <div className="arrows">
-                  <ArrowButtons onNext={handleNext} onPrev={handlePrev} />
+                  <ArrowButtons
+                    isFirst={isFirst}
+                    isLast={isLast}
+                    onNext={handleNext}
+                    onPrev={handlePrev}
+                  />
                 </div>
               </div>
             </HeadingBlock>
@@ -44,7 +44,12 @@ const ProcessSlider = () => {
             <SlidesContent ref={sliderRef} beforeChange={handleBeforeChange} />
           </div>
           <div className="m-arrows container p-0">
-            <ArrowButtons idx={idx} onNext={handleNext} onPrev={handlePrev} />
+            <ArrowButtons
+              isFirst={isFirst}
+              isLast={isLast}
+              onNext={handleNext}
+              onPrev={handlePrev}
+            />
           </div>
         </Content>
       </div>

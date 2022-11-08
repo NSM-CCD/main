@@ -57,6 +57,12 @@ export const ArrowButtonsWrapper = styled.div`
     outline: none;
     background: transparent;
     border: none;
+
+    &.first-item,
+    &.last-item {
+      cursor: default;
+      opacity: 0.5;
+    }
   }
 `
 
