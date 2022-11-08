@@ -3,6 +3,7 @@ import * as React from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import ConversionPanel from "../components/ConversionPanel"
+import ConversionIntegration from "../components/CoversionIntegration"
 import ResultsMain from "../components/ResultsComponents"
 import { useMediaQuery } from "../utils/useMediaQuery"
 
@@ -28,6 +29,7 @@ const ResultsPage = props => {
         model={props?.location?.state?.model}
       />
       <ConversionPanel ctaButtonColor="bg-red" />
+      <ConversionIntegration />
     </Layout>
   )
 }
