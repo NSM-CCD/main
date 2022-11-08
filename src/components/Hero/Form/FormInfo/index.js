@@ -8,7 +8,7 @@ import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
 const FormInfo = ({ carName, model, onClose }) => {
   const handleSubmit = useCallback(
     () => navigate("/results", { state: { carName, model } }),
-    []
+    [carName, model]
   )
 
   return (
