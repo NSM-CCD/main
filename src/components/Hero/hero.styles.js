@@ -90,8 +90,10 @@ export const HeroContent = styled.div`
 
   .trustbar {
     padding: 0 24px;
+    display: none;
 
     @media (min-width: 768px) {
+      display: block;
       padding: 0;
     }
 
@@ -138,13 +140,12 @@ export const HeroContent = styled.div`
       box-shadow: 0 32px 64px -12px rgb(16 24 40 / 14%);
       border-radius: 12px;
       padding: 24px;
-      margin-top: 32px;
+      margin-top: 0;
 
       margin-bottom: -95px;
       z-index: 1000;
 
       @media (min-width: 768px) {
-        margin-top: 0;
         padding: 32px;
       }
 
