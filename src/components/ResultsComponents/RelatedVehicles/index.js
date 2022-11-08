@@ -1,7 +1,7 @@
 import React from "react"
 
 const RelatedVehicles = () => (
-  <div className="related-vehicles">
+  <div className="related-vehicles" id="relatedVehicles">
     <h2 className="related-vehicles-title">Related Vehicles</h2>
     <div className="vehicles-list">
       {["INTEGRA", "INTEGRA GS", "INTEGRA RS", "INTEGRA LS"].map(i => (

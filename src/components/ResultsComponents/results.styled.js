@@ -33,13 +33,13 @@ export const ResultsWrapper = styled.div`
         display: flex;
       }
 
-      button.side-item {
+      a.side-item {
+        text-decoration: none;
         border-radius: 6px;
-        background-color: transparent;
-        border: none;
         margin: 0;
         padding: 8px 12px;
         text-align: left;
+        cursor: pointer;
 
         font-family: "Raleway", sans-serif;
         font-weight: 500;

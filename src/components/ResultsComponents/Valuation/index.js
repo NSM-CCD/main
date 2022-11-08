@@ -7,7 +7,7 @@ const Valuation = ({ carName, model }) => {
   return (
     <>
       <div className="heading-and-actions">
-        <div className="back-share" id="valuation">
+        <div className="back-share">
           <button className="btn btn-back" onClick={handleBack}>
             <svg
               width="20"
@@ -51,7 +51,7 @@ const Valuation = ({ carName, model }) => {
           {model && <p className="m-0 model">{model}</p>}
         </div>
       </div>
-      <div className="chart-wrapper">
+      <div className="chart-wrapper" id="valuation">
         <iframe
           src="https://www.classic.com/widget/GZOqi1GRoCr5m/"
           width="100%"
