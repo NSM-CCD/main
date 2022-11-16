@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const FormInfoWrapper = styled.div`
+export const FormInfoWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;

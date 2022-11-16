@@ -53,11 +53,12 @@ const Valuation = ({ carName, model }) => {
       </div>
       <div className="chart-wrapper" id="valuation">
         <iframe
+          title="Valuation Chart"
           src="https://www.classic.com/widget/GZOqi1GRoCr5m/"
           width="100%"
           height="480"
           style={{ border: 0 }}
-        ></iframe>
+        />
       </div>
     </>
   )

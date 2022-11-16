@@ -1,6 +1,4 @@
 import React from "react"
-import prevArrow from "../../../images/icons/arrow-left.svg"
-import nextArrow from "../../../images/icons/arrow-right.svg"
 import { ArrowButtonsWrapper } from "../slider.styles"
 
 const ArrowButtons = ({ isFirst, isLast, onPrev, onNext }) => (

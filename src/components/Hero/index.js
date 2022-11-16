@@ -115,10 +115,7 @@ const Hero = () => {
 
   const handleTrim = useCallback(selectedTrim => setTrim(selectedTrim), [])
 
-  const handleOpenModalForm = useCallback(
-    () => setOpenModalForm(true),
-    [openModalForm]
-  )
+  const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
 
   const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
 
