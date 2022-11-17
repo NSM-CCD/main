@@ -21,6 +21,13 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       type="text/javascript"
     />,
     <script id="customjs" type="text/javascript" />,
+    <script
+      type="text/javascript"
+      dangerouslySetInnerHTML={{
+        __html: `var optOut = true;
+      var optOutHostId = 'a3um9k34VbEO6VAHukn6t6';`,
+      }}
+    />,
   ])
 
   setPostBodyComponents([
