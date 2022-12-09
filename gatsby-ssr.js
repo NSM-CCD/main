@@ -33,7 +33,9 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
   ])
 
   setPostBodyComponents([
-    <noscript dangerouslySetInnerHTML={{ __html: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZCKKD" height="0" width="0" style="display:none;visibility:hidden" />'}} />,
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZCKKD" height="0" width="0" style={{display: "none", visibility: "hidden"}} />
+    </noscript>,
     <script
       type="text/javascript"
       dangerouslySetInnerHTML={{
