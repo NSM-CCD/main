@@ -82,10 +82,8 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
         __html: `var cdAnalytics = new clickdimensions.Analytics('analytics.clickdimensions.com');
         cdAnalytics.setDomain('clickdimensions.com');
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
-        cdAnalytics.setPageType('FORM');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
-        cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);
-        cdAnalytics.trackPage();`,
+        cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);`,
       }}
     />,
   ])

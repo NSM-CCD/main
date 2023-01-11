@@ -143,7 +143,7 @@ export const HeroContent = styled.div`
       margin-top: 0;
 
       margin-bottom: -95px;
-      z-index: 1000;
+      z-index: 1;
 
       @media (min-width: 768px) {
         padding: 32px;

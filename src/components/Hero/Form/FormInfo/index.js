@@ -52,12 +52,7 @@ const FormInfo = ({ carName, model, onClose }) => {
     })
 
     await axios
-      .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd, {
-        withCredentials: false,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
+      .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd)
       .then(() => {
         toast.success("Success!", {
           autoClose: 2000,
@@ -69,8 +64,13 @@ const FormInfo = ({ carName, model, onClose }) => {
       })
       .catch(err => {
         console.log(err)
-        setSubmitting(false)
-        toast.error("There was an error processing your request!")
+        toast.info("Oops, something went wrong!", {
+          autoClose: 1500,
+          onClose: () => {
+            setSubmitting(false)
+            navigate("/results", { state: { carName, model } })
+          },
+        })
       })
   }, [carName, model, formObj])
 
