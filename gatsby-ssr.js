@@ -6,13 +6,18 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       src="https://cdn-us.clickdimensions.com/web/v10/cdform.jquery.js"
       type="text/javascript"
     />,
-    <script type="text/javascript" dangerouslySetInnerHTML={{
-      __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5ZCKKD');`}} />,
+    <script
+      type="text/javascript"
+      dangerouslySetInnerHTML={{
+        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5ZCKKD');`,
+      }}
+    />,
     <script
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `clickd_jquery = jQuery.noConflict(true);`,
       }}
+      defer
     />,
     <script
       src="https://cdn-us.clickdimensions.com/web/v10/cdform.min.noanalytics.js"
@@ -34,7 +39,12 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
 
   setPostBodyComponents([
     <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZCKKD" height="0" width="0" style={{display: "none", visibility: "hidden"}} />
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5ZCKKD"
+        height="0"
+        width="0"
+        style={{ display: "none", visibility: "hidden" }}
+      />
     </noscript>,
     <script
       type="text/javascript"
@@ -44,10 +54,8 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
         clickd_pageType = 'Form';
         clickd_handlersLocation = "https://analytics.clickdimensions.com";
         clickd_directory = "https://cdn-us.clickdimensions.com/web/v10";
-        FitSize();
-        SetFormResizable();
-        initForm();
       }
+      
       clickd_jquery(function() {
         onDocumentReady()
       })`,
@@ -60,10 +68,6 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
     <script
       type="text/javascript"
       src="https://analytics.clickdimensions.com/optout.js"
-    />,
-    <script
-      type="text/javascript"
-      src="https://analytics.clickdimensions.com/forms.js"
     />,
     <script
       type="text/javascript"
@@ -80,13 +84,8 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
         cdAnalytics.setPageType('FORM');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
-        cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);`,
-      }}
-    />,
-    <script
-      type="text/javascript"
-      dangerouslySetInnerHTML={{
-        __html: `var cdForms = new clickdimensions.Forms();`,
+        cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);
+        cdAnalytics.trackPage();`,
       }}
     />,
   ])

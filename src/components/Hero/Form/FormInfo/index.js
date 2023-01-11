@@ -47,11 +47,17 @@ const FormInfo = ({ carName, model, onClose }) => {
     const fd = new FormData()
 
     Object.entries(formObj).forEach(([key, value]) => {
+      console.log(key, value)
       fd.append(key, value)
     })
 
     await axios
-      .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd)
+      .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd, {
+        withCredentials: false,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
       .then(() => {
         toast.success("Success!", {
           autoClose: 2000,
