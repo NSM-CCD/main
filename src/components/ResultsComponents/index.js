@@ -17,7 +17,7 @@ const ResultsMain = ({ carName, model }) => (
           spy
           smooth
           duration={250}
-          offset={-250}
+          offset={-280}
           activeClass="active"
           to="valuation"
           className="side-item"
