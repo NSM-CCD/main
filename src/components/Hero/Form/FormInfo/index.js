@@ -47,7 +47,6 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
     const fd = new FormData()
 
     Object.entries(formObj).forEach(([key, value]) => {
-      console.log(key, value)
       fd.append(key, value)
     })
 

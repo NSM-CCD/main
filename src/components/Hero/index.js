@@ -30,10 +30,10 @@ const Hero = () => {
     startYear,
     endYear,
     setParentChartUrl,
-    setMarketId,
+    selectedGeneration,
     setMakes,
     setClassicMakes,
-    fetchMarket,
+    setDescription,
     resetForm,
   } = useContext(CalculatorContext)
 
@@ -48,7 +48,7 @@ const Hero = () => {
       setClassicMakes(makeModel?.data?.makes)
       console.log(makeModel?.data?.makes)
     }
-  }, [makeModel])
+  }, [makeModel, setMakes, setClassicMakes])
 
   const availableMakes = useMemo(
     () =>
@@ -61,22 +61,30 @@ const Hero = () => {
     [makes]
   )
 
-  const availableModels = useMemo(() => {
-    const filteredMake = classicMakes.filter(m => m.name === selectedMake)
+  const filteredMake = useMemo(
+    () => classicMakes.filter(m => m.name === selectedMake),
+    [classicMakes, selectedMake]
+  )
 
+  const availableModelData = useMemo(() => {
     if (filteredMake?.length > 0 && filteredMake[0]?.models?.length > 1) {
-      const toSortData = [].concat(filteredMake[0]?.models)
-
-      return toSortData
+      return []
+        .concat(filteredMake[0]?.models)
         .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
-        .map(
-          i =>
-            i?.name && (
-              <option key={i.name} value={i.name}>
-                {i.name}
-              </option>
-            )
-        )
+    }
+    return []
+  }, [filteredMake])
+
+  const availableModels = useMemo(() => {
+    if (availableModelData?.length > 0) {
+      return availableModelData.map(
+        i =>
+          i?.name && (
+            <option key={i.name} value={i.name}>
+              {i.name}
+            </option>
+          )
+      )
     }
 
     return (
@@ -84,22 +92,57 @@ const Hero = () => {
         No available model!
       </option>
     )
-  }, [classicMakes, selectedMake])
+  }, [classicMakes, selectedMake, filteredMake])
+
+  const availableGeneration = useMemo(() => {
+    if (availableModelData?.length > 0) {
+      return availableModelData.map(i => {
+        if (i?.name === selectedModel && i?.modelGeneration?.length > 0) {
+          const toSortData = []
+            .concat(i?.modelGeneration)
+            .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+
+          return toSortData.map(m => (
+            <option key={m.name} value={m.name}>
+              {m.name}
+            </option>
+          ))
+        }
+      })
+    }
+
+    return (
+      <option key="no-model-generation" value="">
+        No available model generation!
+      </option>
+    )
+  }, [classicMakes, selectedMake, selectedModel, filteredMake])
 
   const years = useMemo(() => {
-    if (startYear && endYear) {
-      return getYears(startYear, endYear).map(year => (
+    if (selectedGeneration && availableModelData?.length > 0) {
+      const selectedModelData = availableModelData.filter(
+        m => m.name === selectedModel
+      )
+      const filteredGenData = selectedModelData[0]?.modelGeneration.filter(
+        g => g.name === selectedGeneration
+      )
+
+      return getYears(
+        filteredGenData[0]?.year_start,
+        filteredGenData[0]?.year_end
+      ).map(year => (
         <option key={year} value={year}>
           {year}
         </option>
       ))
     }
+
     return (
       <option key="no-year" value="">
         No available year!
       </option>
     )
-  }, [startYear, endYear])
+  }, [selectedGeneration, availableModelData])
 
   useEffect(() => {
     if (selectedMake && selectedModel) {
@@ -115,17 +158,14 @@ const Hero = () => {
 
   useEffect(async () => {
     if (data) {
-      const marketId = data?.createMarketWidgetFromTaxonomyName?.data?.marketId
       const parentChartUrl = data?.createMarketWidgetFromTaxonomyName?.data?.url
+      const description =
+        data?.createMarketWidgetFromTaxonomyName?.data?.description
 
-      setMarketId(marketId)
       setParentChartUrl(parentChartUrl)
-
-      if (marketId) {
-        await fetchMarket(marketId).then()
-      }
+      setDescription(description)
     }
-  }, [data, fetchMarket])
+  }, [data, setParentChartUrl, setDescription])
 
   const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
 
@@ -177,6 +217,7 @@ const Hero = () => {
             <HeroForm
               makeOptions={availableMakes}
               modelOptions={availableModels}
+              generationOptions={availableGeneration}
               yearOptions={years}
               onReset={resetForm}
               onEstimate={handleOpenModalForm}

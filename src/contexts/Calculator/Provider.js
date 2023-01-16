@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react"
 
 import { CalculatorContext } from "."
-import aciClient from "../../utils/aciClient"
 
 const CalculatorProvider = ({ children }) => {
   const [isLoadingMake, setIsLoadingMake] = useState(false)
@@ -11,6 +10,7 @@ const CalculatorProvider = ({ children }) => {
   const [selectedMake, setSelectedMake] = useState("")
   const [selectedModel, setSelectedModel] = useState("")
   const [selectedVariant, setSelectedVariant] = useState("")
+  const [selectedGeneration, setSelectedGeneration] = useState("")
   const [selectedTrim, setSelectedTrim] = useState("")
   const [chartUrl, setChartUrl] = useState("")
   const [parentChartUrl, setParentChartUrl] = useState("")
@@ -23,30 +23,12 @@ const CalculatorProvider = ({ children }) => {
   const [makes, setMakes] = useState([])
   const [relatedVehicles, setRelatedVehicles] = useState([])
 
-  const fetchMarket = useCallback(async marketId => {
-    // by pass cors issue with just cors - temporary solution
-    //https://justcors.com/l_42d5nkpzh3g/
-    await aciClient
-      .get(
-        `https://justcors.com/l_42d5nkpzh3g/https://api.classic.com/api/search_vehicles/insights/?markets__in=${marketId}`
-      )
-      .then(({ data }) => {
-        console.log(data, "testing aci client")
-        const yearStart = data?.market?.model_year_start
-        const yearEnd = data?.market?.model_year_end
-        if (yearStart && yearEnd) {
-          setStartYear(yearStart)
-          setEndYear(yearEnd)
-        }
-      })
-      .catch(err => console.log(err, "error inside Provider"))
-  }, [])
-
   const resetForm = useCallback(() => {
     setSelectedMake("")
     setSelectedModel("")
     setSelectedYear(0)
     setSelectedVariant("")
+    setSelectedGeneration("")
     setSelectedTrim("")
     setRelatedVehicles([])
     setChartUrl("")
@@ -64,6 +46,7 @@ const CalculatorProvider = ({ children }) => {
       selectedMake,
       selectedModel,
       selectedVariant,
+      selectedGeneration,
       selectedTrim,
       selectedYear,
       startYear,
@@ -81,6 +64,7 @@ const CalculatorProvider = ({ children }) => {
       setSelectedMake,
       setSelectedModel,
       setSelectedVariant,
+      setSelectedGeneration,
       setSelectedTrim,
       setChartUrl,
       setParentChartUrl,
@@ -90,8 +74,6 @@ const CalculatorProvider = ({ children }) => {
       setClassicMakes,
       setMakes,
       setRelatedVehicles,
-      setMarketId,
-      fetchMarket,
       resetForm,
     }),
     [
@@ -100,6 +82,7 @@ const CalculatorProvider = ({ children }) => {
       selectedMake,
       selectedModel,
       selectedVariant,
+      selectedGeneration,
       selectedTrim,
       selectedYear,
       startYear,
@@ -117,6 +100,7 @@ const CalculatorProvider = ({ children }) => {
       setSelectedMake,
       setSelectedModel,
       setSelectedVariant,
+      setSelectedGeneration,
       setSelectedTrim,
       setChartUrl,
       setParentChartUrl,
@@ -126,8 +110,6 @@ const CalculatorProvider = ({ children }) => {
       setClassicMakes,
       setMakes,
       setRelatedVehicles,
-      setMarketId,
-      fetchMarket,
       resetForm,
     ]
   )

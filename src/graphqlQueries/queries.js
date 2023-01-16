@@ -44,6 +44,9 @@ export const MAKE_MODEL = gql`
         modelVariant {
           id
           name
+          make_id
+          model_id
+          search_phrases
           modelTrim {
             id
             name

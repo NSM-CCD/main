@@ -4,6 +4,7 @@ import { CalculatorContext } from "../../../contexts/Calculator"
 const HeroForm = ({
   makeOptions,
   modelOptions,
+  generationOptions,
   yearOptions,
   variantOptions,
   trimOptions,
@@ -16,11 +17,13 @@ const HeroForm = ({
     selectedMake,
     selectedModel,
     selectedVariant,
+    selectedGeneration,
     selectedYear,
     setSelectedYear,
     setSelectedMake,
     setSelectedModel,
     setSelectedTrim,
+    setSelectedGeneration,
     resetForm,
   } = useContext(CalculatorContext)
 
@@ -42,6 +45,11 @@ const HeroForm = ({
   const handleTrimChange = useCallback(
     ({ target }) => setSelectedTrim(target.value),
     [setSelectedTrim]
+  )
+
+  const handleGenerationChange = useCallback(
+    ({ target }) => setSelectedGeneration(target.value),
+    [setSelectedGeneration]
   )
 
   return (
@@ -81,26 +89,45 @@ const HeroForm = ({
               {modelOptions}
             </select>
           </div>
-          <div className="form-group">
-            <label htmlFor="year">Select year</label>
-            <select
-              id="year"
-              className="form-select"
-              aria-label="Default select year"
-              required
-              disabled={
-                !selectedMake && !selectedModel && !startYear && !endYear
-              }
-              value={selectedYear}
-              onChange={handleYear}
-            >
-              <option value="">Select year</option>
-              {yearOptions}
-            </select>
-          </div>
+          {generationOptions?.length > 0 && (
+            <div className="form-group">
+              <label htmlFor="generation">Select model generation</label>
+              <select
+                id="generation"
+                className="form-select"
+                aria-label="Default select generation"
+                required
+                disabled={!generationOptions.length > 0}
+                value={selectedGeneration}
+                onChange={handleGenerationChange}
+              >
+                <option value="">Select generation</option>
+                {generationOptions}
+              </select>
+            </div>
+          )}
+          {yearOptions?.length > 0 && (
+            <div className="form-group">
+              <label htmlFor="year">Select year</label>
+              <select
+                id="year"
+                className="form-select"
+                aria-label="Default select year"
+                required
+                disabled={
+                  !selectedMake && !selectedModel && !startYear && !endYear
+                }
+                value={selectedYear}
+                onChange={handleYear}
+              >
+                <option value="">Select year</option>
+                {yearOptions}
+              </select>
+            </div>
+          )}
           {variantOptions?.length > 0 && (
             <div className="form-group">
-              <label htmlFor="year">Select variant</label>
+              <label htmlFor="variant">Select variant</label>
               <select
                 id="variant"
                 className="form-select"
@@ -109,7 +136,7 @@ const HeroForm = ({
                 disabled={!variantOptions.length > 0}
                 onChange={handleTrimChange}
               >
-                <option value="">Select trim</option>
+                <option value="">Select variant</option>
                 {variantOptions}
               </select>
             </div>
