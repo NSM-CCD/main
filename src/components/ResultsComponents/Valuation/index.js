@@ -1,8 +1,14 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useContext } from "react"
 import { navigate } from "gatsby"
+import { CalculatorContext } from "../../../contexts/Calculator"
 
 const Valuation = ({ carName, model, chartUrl }) => {
-  const handleBack = useCallback(() => navigate("/"), [])
+  const { resetForm } = useContext(CalculatorContext)
+
+  const handleBack = useCallback(() => {
+    resetForm()
+    navigate("/")
+  }, [resetForm])
 
   return (
     <>

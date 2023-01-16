@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useCallback, useContext } from "react"
 import Valuation from "./Valuation"
 import SalesHistory from "./SalesHistory"
 import ModelOverview from "./ModelOverview"
@@ -20,9 +20,11 @@ const ResultsMain = () => {
     description,
     chartUrl,
     parentChartUrl,
+    resetForm,
   } = useContext(CalculatorContext)
 
-  console.log(description)
+  const handleReset = useCallback(() => resetForm(), [resetForm])
+
   return (
     <ResultsWrapper>
       <div className="container results-container">
@@ -86,7 +88,7 @@ const ResultsMain = () => {
           {parentChartUrl && <SalesHistory parentChartUrl={parentChartUrl} />}
           {description && <ModelOverview description={description} />}
           <RelatedVehicles />
-          <Link to="/" className="restart-calc">
+          <Link to="/" className="restart-calc" onClick={handleReset}>
             <span>
               Looking to get the valuation of another car? Restart calculation
             </span>
