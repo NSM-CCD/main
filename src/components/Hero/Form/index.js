@@ -95,7 +95,7 @@ const HeroForm = ({
               {modelOptions}
             </select>
           </div>
-          {generationOptions?.length && (
+          {(generationOptions?.length || !(selectedMake && selectedModel)) && (
             <>
               <div className="form-group">
                 <label htmlFor="generation">Select model generation</label>
