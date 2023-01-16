@@ -51,11 +51,10 @@ const CalculatorProvider = ({ children }) => {
 
   useEffect(() => {
     if (data) {
-      console.log(data, "provider data")
       const chartUrl = data?.createMarketWidgetFromTaxonomyName?.data?.url
 
       const description =
-        data?.createMarketWidgetFromTaxonomyName?.data?.description
+        data?.createMarketWidgetFromTaxonomyName?.data?.market?.description
 
       setDescription(description)
       setChartUrl(chartUrl)

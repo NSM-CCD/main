@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext } from "react"
 import Valuation from "./Valuation"
 import SalesHistory from "./SalesHistory"
 import ModelOverview from "./ModelOverview"
@@ -8,37 +8,21 @@ import RelatedVehicles from "./RelatedVehicles"
 import { ResultsWrapper } from "./results.styled"
 import Link from "../../utils/link"
 import { Link as ScrollLink } from "react-scroll"
-import { useMutation } from "@apollo/client"
-import { MARKET_WIDGET } from "../../graphqlQueries/queries"
+import { CalculatorContext } from "../../contexts/Calculator"
 
-const ResultsMain = ({ carName, model, makeName, modelName }) => {
-  const [description, setDescription] = useState("")
-  const [chartUrl, setChartUrl] = useState("")
+const ResultsMain = () => {
+  const {
+    selectedMake,
+    selectedModel,
+    selectedGeneration,
+    selectedVariant,
+    selectedYear,
+    description,
+    chartUrl,
+    parentChartUrl,
+  } = useContext(CalculatorContext)
 
-  const [createMarketWidgetFromTaxonomyName, { data }] =
-    useMutation(MARKET_WIDGET)
-
-  useEffect(() => {
-    if (makeName && modelName) {
-      createMarketWidgetFromTaxonomyName({
-        variables: {
-          makeName: "toyota",
-          modelName: "tacoma",
-          domain: "",
-        },
-      }).then()
-    }
-  }, [createMarketWidgetFromTaxonomyName, makeName, modelName])
-
-  useEffect(() => {
-    if (data) {
-      const res = data?.createMarketWidgetFromTaxonomyName?.data
-      console.log(data)
-      setDescription(res?.market?.description)
-      setChartUrl(res?.hashId)
-    }
-  }, [data])
-
+  console.log(description)
   return (
     <ResultsWrapper>
       <div className="container results-container">
@@ -93,9 +77,13 @@ const ResultsMain = ({ carName, model, makeName, modelName }) => {
           </ScrollLink>
         </div>
         <div className="content-wrapper">
-          <Valuation carName={carName} model={model} hashId={chartUrl} />
+          <Valuation
+            carName={`${selectedYear} ${selectedMake}`}
+            model={`${selectedModel} ${selectedGeneration || selectedVariant}`}
+            chartUrl={chartUrl}
+          />
           <Features />
-          {chartUrl && <SalesHistory hashId={chartUrl} />}
+          {parentChartUrl && <SalesHistory parentChartUrl={parentChartUrl} />}
           {description && <ModelOverview description={description} />}
           <RelatedVehicles />
           <Link to="/" className="restart-calc">

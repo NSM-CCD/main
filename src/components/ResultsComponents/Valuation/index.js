@@ -1,12 +1,15 @@
 import React, { useCallback } from "react"
 import { navigate } from "gatsby"
 
-const Valuation = ({ carName, model, hashId }) => {
+const Valuation = ({ carName, model, chartUrl }) => {
   const handleBack = useCallback(() => navigate("/"), [])
 
   return (
     <>
-      <div className="heading-and-actions">
+      <div
+        className="heading-and-actions"
+        id={!chartUrl ? "valuation" : "heading-valuation"}
+      >
         <div className="back-share">
           <button className="btn btn-back" onClick={handleBack}>
             <svg
@@ -51,16 +54,12 @@ const Valuation = ({ carName, model, hashId }) => {
           {model && <p className="m-0 model">{model}</p>}
         </div>
       </div>
-      {hashId && (
-        <div className="chart-wrapper" id="valuation">
-          <iframe
-            title="Valuation Chart"
-            src={`https://www.classic.com/widget/${hashId}/`}
-            width="100%"
-            height="480"
-            style={{ border: 0 }}
-          />
-        </div>
+      {chartUrl && (
+        <div
+          className="chart-wrapper"
+          id="valuation"
+          dangerouslySetInnerHTML={{ __html: chartUrl }}
+        />
       )}
     </>
   )
