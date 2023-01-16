@@ -79,22 +79,21 @@ const Hero = () => {
   }, [classicMakes, selectedMake, filteredMake])
 
   const availableGeneration = useMemo(() => {
-    if (availableModelData?.length > 0) {
-      return availableModelData.map(i => {
-        if (i?.name === selectedModel && i?.modelGeneration?.length > 0) {
-          const toSortData = []
-            .concat(i?.modelGeneration)
-            .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+    const selectedModelData =
+      availableModelData?.length > 0 &&
+      availableModelData.filter(a => a.name === selectedModel)[0]
+    if (selectedModelData?.modelGeneration?.length > 0) {
+      const toSortData = []
+        .concat(selectedModelData?.modelGeneration)
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
 
-          toSortData.map(d => relatedVehicleData.push(d.name))
+      toSortData.map(d => relatedVehicleData.push(d.name))
 
-          return toSortData.map(m => (
-            <option key={m.name} value={m.name}>
-              {m.name}
-            </option>
-          ))
-        }
-      })
+      return toSortData.map(m => (
+        <option key={m.name} value={m.name}>
+          {m.name}
+        </option>
+      ))
     }
 
     return (
@@ -105,22 +104,21 @@ const Hero = () => {
   }, [availableModelData, selectedModel])
 
   const availableVariant = useMemo(() => {
-    if (availableModelData?.length > 0) {
-      return availableModelData.map(i => {
-        if (i?.name === selectedModel && i?.modelVariant?.length > 0) {
-          const toSortData = []
-            .concat(i?.modelVariant)
-            .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+    const selectedModelData =
+      availableModelData?.length > 0 &&
+      availableModelData.filter(a => a.name === selectedModel)[0]
+    if (selectedModelData?.modelVariant?.length > 0) {
+      const toSortData = []
+        .concat(selectedModelData?.modelVariant)
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
 
-          toSortData.map(d => relatedVehicleData.push(d.name))
+      toSortData.map(d => relatedVehicleData.push(d.name))
 
-          return toSortData.map(m => (
-            <option key={m.name} value={m.name}>
-              {m.name}
-            </option>
-          ))
-        }
-      })
+      return toSortData.map(m => (
+        <option key={m.name} value={m.name}>
+          {m.name}
+        </option>
+      ))
     }
 
     return (
