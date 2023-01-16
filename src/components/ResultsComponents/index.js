@@ -80,8 +80,8 @@ const ResultsMain = () => {
         </div>
         <div className="content-wrapper">
           <Valuation
-            carName={`${selectedYear} ${selectedMake}`}
-            model={`${selectedModel} ${selectedGeneration || selectedVariant}`}
+            carName={`${selectedYear} ${selectedMake} ${selectedModel}`}
+            model={`${selectedGeneration || selectedVariant}`}
             chartUrl={chartUrl}
           />
           <Features />

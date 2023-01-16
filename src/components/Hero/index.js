@@ -32,13 +32,16 @@ const Hero = () => {
     setIsLoadingMake,
     setMakes,
     setClassicMakes,
+    relatedVehicles,
+    setRelatedVehicles,
     resetForm,
   } = useContext(CalculatorContext)
 
   const makeModel = useQuery(MAKE_MODEL)
-
   const [createMarketWidgetFromTaxonomyName, { data }] =
     useMutation(MARKET_WIDGET)
+
+  const relatedVehicleData = []
 
   useEffect(() => {
     if (makeModel?.loading) {
@@ -106,6 +109,8 @@ const Hero = () => {
           const toSortData = []
             .concat(i?.modelGeneration)
             .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+
+          toSortData.map(d => relatedVehicleData.push(d.name))
 
           return toSortData.map(m => (
             <option key={m.name} value={m.name}>
@@ -192,8 +197,16 @@ const Hero = () => {
     }
   }, [data, setParentChartUrl])
 
-  const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
+  useEffect(() => {
+    if (relatedVehicleData?.length > 0) {
+      const filteredRelatedVehicles = relatedVehicleData.filter(
+        r => r !== selectedGeneration
+      )
+      setRelatedVehicles(filteredRelatedVehicles)
+    }
+  }, [relatedVehicleData, selectedGeneration])
 
+  const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
   const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
 
   return (
