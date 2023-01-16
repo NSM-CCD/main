@@ -1,5 +1,6 @@
-import React, { useContext } from "react"
+import React, { useCallback, useContext } from "react"
 import { CalculatorContext } from "../../../contexts/Calculator"
+import { navigate } from "gatsby"
 
 const RelatedVehicles = () => {
   const {
@@ -8,7 +9,26 @@ const RelatedVehicles = () => {
     selectedModel,
     selectedGeneration,
     selectedVariant,
+    setSelectedGeneration,
+    setSelectedVariant,
   } = useContext(CalculatorContext)
+
+  const handleLoadRelatedVehicle = useCallback(
+    related => {
+      if (selectedGeneration) {
+        setSelectedGeneration(related)
+      } else if (selectedVariant) {
+        setSelectedVariant(related)
+      }
+      navigate("/")
+    },
+    [
+      selectedGeneration,
+      selectedVariant,
+      setSelectedGeneration,
+      setSelectedVariant,
+    ]
+  )
 
   return (
     <div className="related-vehicles" id="relatedVehicles">
@@ -20,7 +40,12 @@ const RelatedVehicles = () => {
         )
           .filter(r => r !== selectedGeneration && r !== selectedVariant)
           .map(i => (
-            <a key={i} href="#" className="vehicle-details">
+            <a
+              key={i}
+              href="#"
+              className="vehicle-details"
+              onClick={() => handleLoadRelatedVehicle(i)}
+            >
               <p className="details m-0">
                 <span className="name">{`${selectedMake} ${selectedModel}`}</span>
                 <span className="model">{i}</span>
