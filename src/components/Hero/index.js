@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 
 import ModalMain from "../Modal"
 import HeroForm from "./Form"
@@ -7,125 +13,123 @@ import FormInfo from "./Form/FormInfo"
 import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
 import { useMediaQuery } from "../../utils/useMediaQuery"
 import heroBg from "../../images/hero-bg.webp"
-import {
-  getMakesListByYear,
-  getModelsByCompNumYear,
-  desktopLogos,
-  getYears,
-  mobileLogos,
-  trustBarLogos,
-} from "./helpers"
+import { desktopLogos, getYears, mobileLogos, trustBarLogos } from "./helpers"
+import { useMutation, useQuery } from "@apollo/client"
+import { MAKE_MODEL, MARKET_WIDGET } from "../../graphqlQueries/queries"
+import { CalculatorContext } from "../../contexts/Calculator"
 
 const Hero = () => {
-  const [year, setYear] = useState("")
-  const [company, setCompanyName] = useState("")
-  const [companyNum, setCompany] = useState("")
-  const [modelCat, setCategory] = useState("")
-  const [trim, setTrim] = useState("")
-  const [makes, setMakes] = useState([])
-  const [models, setModels] = useState([])
   const [openModalForm, setOpenModalForm] = useState(false)
   const isWiderScreen = useMediaQuery("(min-width: 1200px)")
 
-  const years = useMemo(
-    () =>
-      getYears(1926).map(year => (
-        <option key={year} value={year}>
-          {year}
-        </option>
-      )),
-    []
-  )
+  const {
+    makes,
+    classicMakes,
+    selectedMake,
+    selectedModel,
+    startYear,
+    endYear,
+    setParentChartUrl,
+    setMarketId,
+    setMakes,
+    setClassicMakes,
+    fetchMarket,
+    resetForm,
+  } = useContext(CalculatorContext)
+
+  const makeModel = useQuery(MAKE_MODEL)
+
+  const [createMarketWidgetFromTaxonomyName, { data }] =
+    useMutation(MARKET_WIDGET)
+
+  useEffect(() => {
+    if (makeModel?.data) {
+      setMakes(makeModel?.data?.makes?.map(make => make.name).sort())
+      setClassicMakes(makeModel?.data?.makes)
+      console.log(makeModel?.data?.makes)
+    }
+  }, [makeModel])
 
   const availableMakes = useMemo(
     () =>
       makes.length > 0 &&
-      makes.map(
-        make =>
-          make?.company && (
-            <option
-              key={make.companynum}
-              value={make.companynum}
-              data-val={make.company}
-            >
-              {make.company}
-            </option>
-          )
-      ),
+      makes.map(make => (
+        <option key={make} value={make} data-val={make}>
+          {make}
+        </option>
+      )),
     [makes]
   )
 
-  const availableModels = useMemo(
-    () =>
-      models.length > 0 &&
-      [...new Set(models.map(model => model?.modelcat))].map(
-        i =>
-          i && (
-            <option key={i} value={i}>
-              {i}
-            </option>
-          )
-      ),
-    [models]
-  )
+  const availableModels = useMemo(() => {
+    const filteredMake = classicMakes.filter(m => m.name === selectedMake)
 
-  const availableTrims = useMemo(() => {
-    const filteredModels =
-      models.length > 0 && models.filter(model => model?.modelcat === modelCat)
+    if (filteredMake?.length > 0 && filteredMake[0]?.models?.length > 1) {
+      const toSortData = [].concat(filteredMake[0]?.models)
 
-    return (
-      filteredModels?.length > 0 &&
-      [...new Set(filteredModels.map(model => model?.model))]
+      return toSortData
+        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
         .map(
           i =>
-            i && (
-              <option key={i} value={i}>
-                {i}
+            i?.name && (
+              <option key={i.name} value={i.name}>
+                {i.name}
               </option>
             )
         )
-        .sort()
-        .reverse()
+    }
+
+    return (
+      <option key="no-model" value="">
+        No available model!
+      </option>
     )
-  }, [models, modelCat])
+  }, [classicMakes, selectedMake])
+
+  const years = useMemo(() => {
+    if (startYear && endYear) {
+      return getYears(startYear, endYear).map(year => (
+        <option key={year} value={year}>
+          {year}
+        </option>
+      ))
+    }
+    return (
+      <option key="no-year" value="">
+        No available year!
+      </option>
+    )
+  }, [startYear, endYear])
 
   useEffect(() => {
-    if (!year) return null
-    getMakesListByYear(year).then(response => setMakes(response.data))
-  }, [year])
+    if (selectedMake && selectedModel) {
+      createMarketWidgetFromTaxonomyName({
+        variables: {
+          makeName: selectedMake,
+          modelName: selectedModel,
+          domain: "classiccarvalue.com",
+        },
+      }).then()
+    }
+  }, [createMarketWidgetFromTaxonomyName, selectedMake, selectedModel])
 
-  useEffect(() => {
-    if (!year || !companyNum) return null
-    getModelsByCompNumYear(companyNum, year).then(response =>
-      setModels(response.data)
-    )
-  }, [year, companyNum])
+  useEffect(async () => {
+    if (data) {
+      const marketId = data?.createMarketWidgetFromTaxonomyName?.data?.marketId
+      const parentChartUrl = data?.createMarketWidgetFromTaxonomyName?.data?.url
 
-  const handleYear = useCallback(selectedYear => setYear(selectedYear), [])
+      setMarketId(marketId)
+      setParentChartUrl(parentChartUrl)
 
-  const handleMake = useCallback((selectedMake, makeValue) => {
-    setCompanyName(makeValue)
-    setCompany(selectedMake)
-  }, [])
-
-  const handleCategory = useCallback(
-    selectedModelCat => setCategory(selectedModelCat),
-    []
-  )
-
-  const handleTrim = useCallback(selectedTrim => setTrim(selectedTrim), [])
+      if (marketId) {
+        await fetchMarket(marketId).then()
+      }
+    }
+  }, [data, fetchMarket])
 
   const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
 
   const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
-
-  const handleReset = useCallback(() => {
-    setYear("")
-    setCompany("")
-    setCategory("")
-    setMakes([])
-    setModels([])
-  }, [])
 
   return (
     <HeroSection>
@@ -171,16 +175,10 @@ const Hero = () => {
               </div>
             </div>
             <HeroForm
-              year={year}
-              years={years}
-              makes={availableMakes}
-              models={availableModels}
-              trims={availableTrims}
-              onChangeYear={handleYear}
-              onChangeMake={handleMake}
-              onChangeModelCat={handleCategory}
-              onChangeTrim={handleTrim}
-              onReset={handleReset}
+              makeOptions={availableMakes}
+              modelOptions={availableModels}
+              yearOptions={years}
+              onReset={resetForm}
               onEstimate={handleOpenModalForm}
             />
           </div>
@@ -191,13 +189,7 @@ const Hero = () => {
       </ImageWrapper>
       <ModalMain
         open={openModalForm}
-        content={
-          <FormInfo
-            carName={`${year} ${company} ${modelCat}`}
-            model={trim}
-            onClose={handleCloseModal}
-          />
-        }
+        content={<FormInfo onClose={handleCloseModal} />}
       />
     </HeroSection>
   )

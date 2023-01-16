@@ -7,7 +7,7 @@ import Link from "../../../../utils/link"
 import { FormInfoWrapper } from "./forminfo.styles"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
 
-const FormInfo = ({ carName, model, onClose }) => {
+const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
   const [submitting, setSubmitting] = useState(false)
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
@@ -58,7 +58,9 @@ const FormInfo = ({ carName, model, onClose }) => {
           autoClose: 2000,
           onClose: () => {
             setSubmitting(false)
-            navigate("/results", { state: { carName, model } })
+            navigate("/results", {
+              state: { carName, model, makeName, modelName },
+            })
           },
         })
       })
@@ -68,7 +70,9 @@ const FormInfo = ({ carName, model, onClose }) => {
           autoClose: 1500,
           onClose: () => {
             setSubmitting(false)
-            navigate("/results", { state: { carName, model } })
+            navigate("/results", {
+              state: { carName, model, makeName, modelName },
+            })
           },
         })
       })
@@ -82,9 +86,6 @@ const FormInfo = ({ carName, model, onClose }) => {
       <div className="heading">
         <div className="title-wrapper">
           <p className="title">Almost there!</p>
-          <span className="sub-title">
-            Enter your final information to get your pricing
-          </span>
         </div>
       </div>
       <div className="form">
@@ -121,14 +122,16 @@ const FormInfo = ({ carName, model, onClose }) => {
       </div>
       <div className="terms-policy">
         <p className="agreement m-0">
-          By clicking submit, I agree to the&nbsp;
+          Your personal Information will never be shared and is Optional. By
+          clicking "Get Estimate" You agree to the&nbsp;
           <Link to="/terms" openInNewTab>
             Terms
           </Link>
           &nbsp;and&nbsp;
           <Link to="/privacy" openInNewTab>
-            Privacy Policy*
+            Privacy Policy
           </Link>
+          .
         </p>
       </div>
       <div className="action-buttons">

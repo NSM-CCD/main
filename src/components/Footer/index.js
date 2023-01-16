@@ -25,8 +25,6 @@ const Footer = () => (
               <p className="menu-title">Partners</p>
               <a href="#">Classiccars.com</a>
               <a href="#">Hemmings</a>
-              <a href="#">americanmusclecarz.com</a>
-              <a href="#">classicandcollectorcars.com</a>
               <a href="#">Auto Trader - Classics</a>
               <a href="#">eBay Motors</a>
             </div>

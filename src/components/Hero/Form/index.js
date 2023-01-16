@@ -1,40 +1,47 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useContext } from "react"
+import { CalculatorContext } from "../../../contexts/Calculator"
 
 const HeroForm = ({
-  year,
-  years,
-  makes,
-  models,
-  trims,
-  onChangeYear,
-  onChangeMake,
-  onChangeModelCat,
-  onChangeTrim,
-  onReset,
+  makeOptions,
+  modelOptions,
+  yearOptions,
+  variantOptions,
+  trimOptions,
   onEstimate,
 }) => {
+  const {
+    isLoadingMake,
+    startYear,
+    endYear,
+    selectedMake,
+    selectedModel,
+    selectedVariant,
+    selectedYear,
+    setSelectedYear,
+    setSelectedMake,
+    setSelectedModel,
+    setSelectedTrim,
+    resetForm,
+  } = useContext(CalculatorContext)
+
   const handleYear = useCallback(
-    ({ target }) => onChangeYear(target.value),
-    [onChangeYear]
+    ({ target }) => setSelectedYear(target.value),
+    [setSelectedYear]
   )
 
   const handleMake = useCallback(
-    e => {
-      const id = e.nativeEvent.target.selectedIndex
-      const textValue = e.nativeEvent.target[id].text
-      onChangeMake(e.target.value, textValue)
-    },
-    [onChangeMake]
+    ({ target }) => setSelectedMake(target.value),
+    [setSelectedMake]
   )
 
   const handleCategory = useCallback(
-    ({ target }) => onChangeModelCat(target.value),
-    [onChangeModelCat]
+    ({ target }) => setSelectedModel(target.value),
+    [setSelectedModel]
   )
 
   const handleTrimChange = useCallback(
-    ({ target }) => onChangeTrim(target.value),
-    [onChangeTrim]
+    ({ target }) => setSelectedTrim(target.value),
+    [setSelectedTrim]
   )
 
   return (
@@ -45,31 +52,18 @@ const HeroForm = ({
         <hr />
         <div className="form">
           <div className="form-group">
-            <label htmlFor="year">Select year</label>
-            <select
-              id="year"
-              className="form-select"
-              aria-label="Default select year"
-              required
-              value={year}
-              onChange={handleYear}
-            >
-              <option value="">Select year</option>
-              {years}
-            </select>
-          </div>
-          <div className="form-group">
             <label htmlFor="make">Select make</label>
             <select
               id="make"
               className="form-select"
               aria-label="Default select make"
               required
-              disabled={!makes}
+              disabled={isLoadingMake}
+              value={selectedMake}
               onChange={handleMake}
             >
               <option value="">Select make</option>
-              {makes}
+              {makeOptions}
             </select>
           </div>
           <div className="form-group">
@@ -79,36 +73,72 @@ const HeroForm = ({
               className="form-select"
               aria-label="Default select model"
               required
-              disabled={!models}
+              disabled={!selectedMake}
+              value={selectedModel}
               onChange={handleCategory}
             >
               <option value="">Select model</option>
-              {models}
+              {modelOptions}
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="year">Select trim</label>
+            <label htmlFor="year">Select year</label>
             <select
-              id="trim"
+              id="year"
               className="form-select"
-              aria-label="Default select trim"
+              aria-label="Default select year"
               required
-              disabled={!trims}
-              onChange={handleTrimChange}
+              disabled={
+                !selectedMake && !selectedModel && !startYear && !endYear
+              }
+              value={selectedYear}
+              onChange={handleYear}
             >
-              <option value="">Select trim</option>
-              {trims}
+              <option value="">Select year</option>
+              {yearOptions}
             </select>
           </div>
+          {variantOptions?.length > 0 && (
+            <div className="form-group">
+              <label htmlFor="year">Select variant</label>
+              <select
+                id="variant"
+                className="form-select"
+                aria-label="Default select variant"
+                required
+                disabled={!variantOptions.length > 0}
+                onChange={handleTrimChange}
+              >
+                <option value="">Select trim</option>
+                {variantOptions}
+              </select>
+            </div>
+          )}
+          {trimOptions?.length > 0 && (
+            <div className="form-group">
+              <label htmlFor="year">Select trim</label>
+              <select
+                id="trim"
+                className="form-select"
+                aria-label="Default select trim"
+                required
+                disabled={!selectedVariant}
+                onChange={handleTrimChange}
+              >
+                <option value="">Select trim</option>
+                {trimOptions}
+              </select>
+            </div>
+          )}
           <hr className="m-0" />
           <div className="action-buttons">
-            <button type="reset" className="btn-reset" onClick={onReset}>
+            <button type="reset" className="btn-reset" onClick={resetForm}>
               Reset Selections
             </button>
             <button
               type="button"
               className="btn-estimate"
-              disabled={!models}
+              disabled={!selectedMake && selectedModel && selectedYear}
               onClick={onEstimate}
             >
               Get Estimate

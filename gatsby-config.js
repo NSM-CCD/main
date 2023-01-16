@@ -36,6 +36,16 @@ module.exports = {
         icon: `src/images/acc-calculator-logo.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "gatsby-plugin-apollo",
+      options: {
+        uri: "https://graphql-prod.classic.com",
+        headers: {
+          Authorization:
+            "License aC9tZXRacS8wZ25VbldvVnNycVNHa2ZhZ3JEVnl3dk1PTE1QbmdaMEdQcz0=", // @TODO move to env variable
+        },
+      },
+    },
     `gatsby-plugin-gatsby-cloud`,
     `gatsby-plugin-styled-components`,
   ],

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { navigate } from "gatsby"
 
-const Valuation = ({ carName, model }) => {
+const Valuation = ({ carName, model, hashId }) => {
   const handleBack = useCallback(() => navigate("/"), [])
 
   return (
@@ -51,15 +51,17 @@ const Valuation = ({ carName, model }) => {
           {model && <p className="m-0 model">{model}</p>}
         </div>
       </div>
-      <div className="chart-wrapper" id="valuation">
-        <iframe
-          title="Valuation Chart"
-          src="https://www.classic.com/widget/GZOqi1GRoCr5m/"
-          width="100%"
-          height="480"
-          style={{ border: 0 }}
-        />
-      </div>
+      {hashId && (
+        <div className="chart-wrapper" id="valuation">
+          <iframe
+            title="Valuation Chart"
+            src={`https://www.classic.com/widget/${hashId}/`}
+            width="100%"
+            height="480"
+            style={{ border: 0 }}
+          />
+        </div>
+      )}
     </>
   )
 }

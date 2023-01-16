@@ -27,6 +27,8 @@ const ResultsPage = props => {
       <ResultsMain
         carName={props?.location?.state?.carName}
         model={props?.location?.state?.model}
+        makeName={props?.location?.state?.makeName}
+        modelName={props?.location?.state?.modelName}
       />
       <ConversionPanel ctaButtonColor="bg-red" />
       <ConversionIntegration />

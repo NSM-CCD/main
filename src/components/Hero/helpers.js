@@ -20,11 +20,11 @@ export const trustBarLogos = {
 export const mobileLogos = ["nada", "oldCars", "vmr", "classicCom"]
 export const desktopLogos = ["nada", "vmr", "oldCars", "classicCom"]
 
-export const getYears = startYear => {
-  const currentYear = new Date().getFullYear(),
-    years = []
-  startYear = startYear || 1980
-  while (startYear <= currentYear) {
+export const getYears = (startYear, endYear) => {
+  if (!startYear || !endYear) return []
+
+  const years = []
+  while (startYear <= endYear) {
     years.push(startYear++)
   }
   return years
