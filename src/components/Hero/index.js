@@ -27,13 +27,11 @@ const Hero = () => {
     classicMakes,
     selectedMake,
     selectedModel,
-    startYear,
-    endYear,
     setParentChartUrl,
     selectedGeneration,
+    setIsLoadingMake,
     setMakes,
     setClassicMakes,
-    setDescription,
     resetForm,
   } = useContext(CalculatorContext)
 
@@ -43,10 +41,17 @@ const Hero = () => {
     useMutation(MARKET_WIDGET)
 
   useEffect(() => {
+    if (makeModel?.loading) {
+      setIsLoadingMake(true)
+    } else {
+      setIsLoadingMake(false)
+    }
+  }, [makeModel?.loading, setIsLoadingMake])
+
+  useEffect(() => {
     if (makeModel?.data) {
       setMakes(makeModel?.data?.makes?.map(make => make.name).sort())
       setClassicMakes(makeModel?.data?.makes)
-      console.log(makeModel?.data?.makes)
     }
   }, [makeModel, setMakes, setClassicMakes])
 
@@ -116,7 +121,31 @@ const Hero = () => {
         No available model generation!
       </option>
     )
-  }, [classicMakes, selectedMake, selectedModel, filteredMake])
+  }, [availableModelData, selectedModel])
+
+  const availableVariant = useMemo(() => {
+    if (availableModelData?.length > 0) {
+      return availableModelData.map(i => {
+        if (i?.name === selectedModel && i?.modelVariant?.length > 0) {
+          const toSortData = []
+            .concat(i?.modelVariant)
+            .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+
+          return toSortData.map(m => (
+            <option key={m.name} value={m.name}>
+              {m.name}
+            </option>
+          ))
+        }
+      })
+    }
+
+    return (
+      <option key="no-model-variant" value="">
+        No available model variant!
+      </option>
+    )
+  }, [availableModelData, selectedModel])
 
   const years = useMemo(() => {
     if (selectedGeneration && availableModelData?.length > 0) {
@@ -159,13 +188,9 @@ const Hero = () => {
   useEffect(async () => {
     if (data) {
       const parentChartUrl = data?.createMarketWidgetFromTaxonomyName?.data?.url
-      const description =
-        data?.createMarketWidgetFromTaxonomyName?.data?.description
-
       setParentChartUrl(parentChartUrl)
-      setDescription(description)
     }
-  }, [data, setParentChartUrl, setDescription])
+  }, [data, setParentChartUrl])
 
   const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
 
@@ -219,6 +244,7 @@ const Hero = () => {
               modelOptions={availableModels}
               generationOptions={availableGeneration}
               yearOptions={years}
+              variantOptions={availableVariant}
               onReset={resetForm}
               onEstimate={handleOpenModalForm}
             />

@@ -46,7 +46,6 @@ export const MAKE_MODEL = gql`
           name
           make_id
           model_id
-          search_phrases
           modelTrim {
             id
             name

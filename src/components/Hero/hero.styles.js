@@ -94,7 +94,7 @@ export const HeroContent = styled.div`
 
     @media (min-width: 768px) {
       display: block;
-      padding: 0;
+      padding: 0 0 24px;
     }
 
     .trustbar-logos {
