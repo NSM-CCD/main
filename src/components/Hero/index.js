@@ -32,7 +32,6 @@ const Hero = () => {
     setIsLoadingMake,
     setMakes,
     setClassicMakes,
-    relatedVehicles,
     setRelatedVehicles,
     resetForm,
   } = useContext(CalculatorContext)
@@ -43,31 +42,8 @@ const Hero = () => {
 
   const relatedVehicleData = []
 
-  useEffect(() => {
-    if (makeModel?.loading) {
-      setIsLoadingMake(true)
-    } else {
-      setIsLoadingMake(false)
-    }
-  }, [makeModel?.loading, setIsLoadingMake])
-
-  useEffect(() => {
-    if (makeModel?.data) {
-      setMakes(makeModel?.data?.makes?.map(make => make.name).sort())
-      setClassicMakes(makeModel?.data?.makes)
-    }
-  }, [makeModel, setMakes, setClassicMakes])
-
-  const availableMakes = useMemo(
-    () =>
-      makes.length > 0 &&
-      makes.map(make => (
-        <option key={make} value={make} data-val={make}>
-          {make}
-        </option>
-      )),
-    [makes]
-  )
+  const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
+  const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
 
   const filteredMake = useMemo(
     () => classicMakes.filter(m => m.name === selectedMake),
@@ -136,6 +112,8 @@ const Hero = () => {
             .concat(i?.modelVariant)
             .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
 
+          toSortData.map(d => relatedVehicleData.push(d.name))
+
           return toSortData.map(m => (
             <option key={m.name} value={m.name}>
               {m.name}
@@ -179,6 +157,32 @@ const Hero = () => {
   }, [selectedGeneration, availableModelData])
 
   useEffect(() => {
+    if (makeModel?.loading) {
+      setIsLoadingMake(true)
+    } else {
+      setIsLoadingMake(false)
+    }
+  }, [makeModel?.loading, setIsLoadingMake])
+
+  useEffect(() => {
+    if (makeModel?.data) {
+      setMakes(makeModel?.data?.makes?.map(make => make.name).sort())
+      setClassicMakes(makeModel?.data?.makes)
+    }
+  }, [makeModel, setMakes, setClassicMakes])
+
+  const availableMakes = useMemo(
+    () =>
+      makes.length > 0 &&
+      makes.map(make => (
+        <option key={make} value={make} data-val={make}>
+          {make}
+        </option>
+      )),
+    [makes]
+  )
+
+  useEffect(() => {
     if (selectedMake && selectedModel) {
       createMarketWidgetFromTaxonomyName({
         variables: {
@@ -199,15 +203,9 @@ const Hero = () => {
 
   useEffect(() => {
     if (relatedVehicleData?.length > 0) {
-      const filteredRelatedVehicles = relatedVehicleData.filter(
-        r => r !== selectedGeneration
-      )
-      setRelatedVehicles(filteredRelatedVehicles)
+      setRelatedVehicles(relatedVehicleData)
     }
-  }, [relatedVehicleData, selectedGeneration])
-
-  const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
-  const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
+  }, [relatedVehicleData])
 
   return (
     <HeroSection>
