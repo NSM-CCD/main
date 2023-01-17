@@ -7,7 +7,7 @@ const ConversionIntegration = () => (
     <div className="container p-0">
       <div className="integration-wrapper">
         <div className="cp-integration-heading">
-          <h2 className="heading">Wan this tool on your website?</h2>
+          <h2 className="heading">Want this tool on your website?</h2>
         </div>
         <div className="cta-content">
           <p className="m-0 subtitle">

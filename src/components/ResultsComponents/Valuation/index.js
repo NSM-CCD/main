@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react"
 import { navigate } from "gatsby"
 import { CalculatorContext } from "../../../contexts/Calculator"
 
-const Valuation = ({ carName, model, chartUrl }) => {
+const Valuation = ({ carName, model }) => {
   const { resetForm } = useContext(CalculatorContext)
 
   const handleBack = useCallback(() => {
@@ -12,10 +12,7 @@ const Valuation = ({ carName, model, chartUrl }) => {
 
   return (
     <>
-      <div
-        className="heading-and-actions"
-        id={!chartUrl ? "valuation" : "heading-valuation"}
-      >
+      <div className="heading-and-actions">
         <div className="back-share">
           <button className="btn btn-back" onClick={handleBack}>
             <svg
@@ -55,18 +52,11 @@ const Valuation = ({ carName, model, chartUrl }) => {
             </svg>
           </button>
         </div>
-        <div className="valuation-heading">
+        <div className="valuation-heading" id="valuation">
           {carName && <h2 className="m-0 car-name">{carName}</h2>}
           {model && <p className="m-0 model">{model}</p>}
         </div>
       </div>
-      {chartUrl && (
-        <div
-          className="chart-wrapper"
-          id="valuation"
-          dangerouslySetInnerHTML={{ __html: chartUrl }}
-        />
-      )}
     </>
   )
 }

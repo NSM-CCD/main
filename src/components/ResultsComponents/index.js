@@ -2,7 +2,6 @@ import React, { useCallback, useContext } from "react"
 import Valuation from "./Valuation"
 import SalesHistory from "./SalesHistory"
 import ModelOverview from "./ModelOverview"
-import Features from "./Features"
 import RelatedVehicles from "./RelatedVehicles"
 
 import { ResultsWrapper } from "./results.styled"
@@ -34,7 +33,7 @@ const ResultsMain = () => {
             spy
             smooth
             duration={250}
-            offset={-280}
+            offset={-200}
             activeClass="active"
             to="valuation"
             className="side-item"
@@ -85,11 +84,12 @@ const ResultsMain = () => {
           <Valuation
             carName={`${selectedYear} ${selectedMake} ${selectedModel}`}
             model={`${selectedGeneration || selectedVariant}`}
-            chartUrl={chartUrl}
           />
           {/*@TODO: enable when data is available*/}
           {/*<Features />*/}
-          {parentChartUrl && <SalesHistory parentChartUrl={parentChartUrl} />}
+          {(chartUrl || parentChartUrl) && (
+            <SalesHistory chartUrl={chartUrl ? chartUrl : parentChartUrl} />
+          )}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>

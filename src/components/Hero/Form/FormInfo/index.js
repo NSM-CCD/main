@@ -50,32 +50,40 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
       fd.append(key, value)
     })
 
-    await axios
-      .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd)
-      .then(() => {
-        toast.success("Success!", {
-          autoClose: 2000,
-          onClose: () => {
-            setSubmitting(false)
-            navigate("/results", {
-              state: { carName, model, makeName, modelName },
-            })
-          },
+    if (email) {
+      await axios
+        .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd)
+        .then(() => {
+          toast.success("Success! Generating report...", {
+            autoClose: 2000,
+            onClose: () => {
+              setSubmitting(false)
+              navigate("/results", {
+                state: { carName, model, makeName, modelName },
+              })
+            },
+          })
         })
-      })
-      .catch(err => {
-        console.log(err)
-        toast.info("Oops, something went wrong!", {
-          autoClose: 1500,
-          onClose: () => {
-            setSubmitting(false)
-            navigate("/results", {
-              state: { carName, model, makeName, modelName },
-            })
-          },
+        .catch(err => {
+          console.log(err)
+          toast.info("Oops, something went wrong!", {
+            autoClose: 1500,
+            onClose: () => {
+              setSubmitting(false)
+              navigate("/results")
+            },
+          })
         })
+    } else {
+      toast.info("Generating reports...", {
+        autoClose: 1500,
+        onClose: () => {
+          setSubmitting(false)
+          navigate("/results")
+        },
       })
-  }, [carName, model, formObj])
+    }
+  }, [formObj, email])
 
   return (
     <FormInfoWrapper>
