@@ -76,7 +76,7 @@ const Hero = () => {
         No available model!
       </option>
     )
-  }, [classicMakes, selectedMake, filteredMake])
+  }, [availableModelData])
 
   const availableGeneration = useMemo(() => {
     const selectedModelData =
@@ -152,7 +152,7 @@ const Hero = () => {
         No available year!
       </option>
     )
-  }, [selectedGeneration, availableModelData])
+  }, [selectedGeneration, availableModelData, selectedModel])
 
   useEffect(() => {
     if (makeModel?.loading) {

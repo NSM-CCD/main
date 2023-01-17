@@ -87,7 +87,8 @@ const ResultsMain = () => {
             model={`${selectedGeneration || selectedVariant}`}
             chartUrl={chartUrl}
           />
-          <Features />
+          {/*@TODO: enable when data is available*/}
+          {/*<Features />*/}
           {parentChartUrl && <SalesHistory parentChartUrl={parentChartUrl} />}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length > 0 && <RelatedVehicles />}
