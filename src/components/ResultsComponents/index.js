@@ -20,6 +20,7 @@ const ResultsMain = () => {
     description,
     chartUrl,
     parentChartUrl,
+    relatedVehicles,
     resetForm,
   } = useContext(CalculatorContext)
 
@@ -66,17 +67,19 @@ const ResultsMain = () => {
               Model Overview
             </ScrollLink>
           )}
-          <ScrollLink
-            spy
-            smooth
-            duration={250}
-            offset={-250}
-            activeClass="active"
-            to="relatedVehicles"
-            className="side-item"
-          >
-            Related Vehicles
-          </ScrollLink>
+          {relatedVehicles?.length > 0 && (
+            <ScrollLink
+              spy
+              smooth
+              duration={250}
+              offset={-250}
+              activeClass="active"
+              to="relatedVehicles"
+              className="side-item"
+            >
+              Related Vehicles
+            </ScrollLink>
+          )}
         </div>
         <div className="content-wrapper">
           <Valuation
@@ -87,7 +90,7 @@ const ResultsMain = () => {
           <Features />
           {parentChartUrl && <SalesHistory parentChartUrl={parentChartUrl} />}
           {description && <ModelOverview description={description} />}
-          <RelatedVehicles />
+          {relatedVehicles?.length > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>
             <span>
               Looking to get the valuation of another car? Restart calculation
