@@ -213,15 +213,16 @@ const Hero = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="heading-block">
                 <span className="hero-kicker">
-                  Welcome to Classic Car Value
+                  Classic car valuations made simple.
                 </span>
                 <h1 className="hero-title">
-                  Classic car valuations <span>made simple</span>.
+                  How much is your classic car worth?
                 </h1>
                 <p className="hero-subtitle">
-                  How much is your classic car worth? No single valuation tool
-                  or price estimator can precisely determine how much your
-                  classic car is worth.
+                  No single valuation tool or price estimator can precisely
+                  determine how much your classic car is worth. So, we partnered
+                  with experienced valuation experts to create a better classic
+                  car valuation tool.
                 </p>
               </div>
 

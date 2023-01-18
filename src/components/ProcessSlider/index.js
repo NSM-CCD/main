@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react"
 import SlidesContent from "./Slides"
 import ArrowButtons from "./ArrowButtons"
 import { Content, HeadingBlock, ProcessSliderSection } from "./slider.styles"
+import { processObj } from "../Hero/helpers"
 
 const ProcessSlider = () => {
   const [isFirst, setFirst] = useState(true)
@@ -14,7 +15,7 @@ const ProcessSlider = () => {
 
   const handleBeforeChange = useCallback((prev, next) => {
     setFirst(next === 0)
-    setLast(next === 2)
+    setLast(next === processObj.length - 1)
   }, [])
 
   return (
@@ -26,7 +27,8 @@ const ProcessSlider = () => {
               <span className="kicker">Our Process</span>
               <div className="wrapper">
                 <p className="heading">
-                  From consultation to <span>insured</span>.
+                  From Valuation to Protection with&nbsp;
+                  <span>Top-Rated Customer Service</span>.
                 </p>
 
                 <div className="arrows">

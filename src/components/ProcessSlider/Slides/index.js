@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react"
 import Slider from "react-slick"
-import carImage from "../../../images/car-road.webp"
-import dummyCarImage from "../../../images/cadillac.png"
 import { Slides } from "../slider.styles"
+import { processObj } from "../../Hero/helpers"
 
 const SlidesContent = forwardRef(({ beforeChange, ...props }, ref) => {
   const settings = {
@@ -18,62 +17,26 @@ const SlidesContent = forwardRef(({ beforeChange, ...props }, ref) => {
   return (
     <Slides {...props}>
       <Slider ref={ref} {...settings}>
-        <div className="slide-item">
-          <div className="slide-number">
-            <span className="number">1</span>
-          </div>
-          <div className="slide-content">
-            <div className="details">
-              <p className="title">Enter your car's details</p>
-              <p className="description">
-                Let’s get specific and know everything about your vehicle so we
-                can do the most accurate assessment possible.
-              </p>
+        {processObj.map(process => (
+          <div key={process.key} className="slide-item">
+            <div className="slide-number">
+              <span className="number">{process.key}</span>
             </div>
+            <div className="slide-content">
+              <div className="details">
+                <p className="title">{process.title}</p>
+                <p className="description">{process.description}</p>
+              </div>
 
-            <div className="slider-image">
-              <img src={dummyCarImage} alt="Slider Featured" />
+              <div className="slider-image">
+                <img
+                  src={process.image}
+                  alt={`Slider Featured - ${process.title}`}
+                />
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="slide-item">
-          <div className="slide-number">
-            <span className="number">2</span>
-          </div>
-          <div className="slide-content">
-            <div className="details">
-              <p className="title">Enter your car's details</p>
-              <p className="description">
-                Let’s get specific and know everything about your vehicle so we
-                can do the most accurate assessment possible.
-              </p>
-            </div>
-
-            <div className="slider-image">
-              <img src={carImage} alt="Slider Featured" />
-            </div>
-          </div>
-        </div>
-
-        <div className="slide-item">
-          <div className="slide-number">
-            <span className="number">3</span>
-          </div>
-          <div className="slide-content">
-            <div className="details">
-              <p className="title">Enter your car's details</p>
-              <p className="description">
-                Let’s get specific and know everything about your vehicle so we
-                can do the most accurate assessment possible.
-              </p>
-            </div>
-
-            <div className="slider-image">
-              <img src={carImage} alt="Slider Featured" />
-            </div>
-          </div>
-        </div>
+        ))}
       </Slider>
     </Slides>
   )

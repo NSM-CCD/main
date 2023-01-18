@@ -108,6 +108,7 @@ export const HeadingBlock = styled.div`
     line-height: 32px;
     color: #101828;
     margin: 0;
+    max-width: 670px;
 
     span {
       color: #5e8ab4;
