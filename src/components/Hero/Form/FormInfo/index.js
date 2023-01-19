@@ -52,7 +52,10 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
 
     if (email) {
       await axios
-        .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd)
+        .post(
+          "https://justcors.com/l_42d5nkpzh3g/https://analytics.clickdimensions.com/forms/?visitor=lead",
+          fd
+        )
         .then(() => {
           toast.success("Success! Generating report...", {
             autoClose: 2000,
