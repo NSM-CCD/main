@@ -3,7 +3,6 @@ import nada from "../../images/logos/nada.svg"
 import vmr from "../../images/logos/vmr.svg"
 import oldCars from "../../images/logos/old-cars.svg"
 
-import carImage from "../../images/car-road.webp"
 import dummyCarImage from "../../images/cadillac.png"
 import streetRod from "../../images/carousel/street-rod.jpg"
 import corvette from "../../images/carousel/corvette.jpg"
@@ -50,7 +49,7 @@ export const processObj = [
     title: "Receive valuation and more",
     description:
       "See your vehicle's pricing, sales history, and related vehicles.",
-    image: streetRod,
+    image: fordPickup,
   },
   {
     key: 3,
@@ -63,7 +62,7 @@ export const processObj = [
     title: "Discuss coverage options",
     description:
       "A dedicated collector insurance specialist will assist to tailor options to fit your needs.",
-    image: fordPickup,
+    image: streetRod,
   },
   {
     key: 5,

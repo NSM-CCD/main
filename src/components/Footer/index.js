@@ -23,6 +23,7 @@ const Footer = () => (
           <Menus>
             <div className="footer-menu">
               <p className="menu-title">Partners</p>
+              <a href="#">Classic.com</a>
               <a href="#">Classiccars.com</a>
               <a href="#">Hemmings</a>
               <a href="#">Auto Trader - Classics</a>
