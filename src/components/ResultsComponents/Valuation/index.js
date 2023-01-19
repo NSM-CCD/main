@@ -4,11 +4,16 @@ import { CalculatorContext } from "../../../contexts/Calculator"
 
 const Valuation = ({ carName, model }) => {
   const { resetForm } = useContext(CalculatorContext)
+  const url = typeof window !== "undefined" ? window.location.href : ""
 
   const handleBack = useCallback(() => {
     resetForm()
     navigate("/")
   }, [resetForm])
+
+  const handleCopyLink = useCallback(() => {
+    navigator.clipboard.writeText(url)
+  }, [url])
 
   return (
     <>
@@ -33,7 +38,7 @@ const Valuation = ({ carName, model }) => {
             Back to Car Selection
           </button>
 
-          <button className="btn btn-share">
+          <button className="btn btn-share" onClick={handleCopyLink}>
             Copy Link
             <svg
               width="20"
