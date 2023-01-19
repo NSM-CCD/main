@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import Link from "../../../../utils/link"
 import { FormInfoWrapper } from "./forminfo.styles"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
+import { getVisitorKey } from "../../../../utils/getVisitorKey"
 
 const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
   const [submitting, setSubmitting] = useState(false)
@@ -18,7 +19,9 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
       cd_accountkey: "ayxPofCEvkuQt4gtmoabMQ",
       cd_domain: "classiccarvalues.com",
       cd_visitorkey:
-        typeof window !== "undefined" ? window?.clickDimensionsVisitorKey : "",
+        typeof window !== "undefined"
+          ? window?.clickDimensionsVisitorKey
+          : getVisitorKey(),
       cd_visitoremail: email,
       cd_timezone: new Date().getTimezoneOffset() / -60,
       cd_domainalias: "",
@@ -61,9 +64,7 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
             autoClose: 2000,
             onClose: () => {
               setSubmitting(false)
-              navigate("/results", {
-                state: { carName, model, makeName, modelName },
-              })
+              navigate("/results")
             },
           })
         })

@@ -52,6 +52,21 @@ export const FormInfoWrapper = styled.form`
       display: flex;
       flex-direction: column;
       gap: 6px;
+      position: relative;
+
+      .invalid {
+        color: var(--bs-danger);
+        position: absolute;
+        bottom: -18px;
+        font-size: 12px;
+        font-family: inherit;
+      }
+
+      .fade {
+        &.show {
+          opacity: 1;
+        }
+      }
 
       label {
         font-family: "Raleway", sans-serif;
