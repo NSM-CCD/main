@@ -44,7 +44,8 @@ export const processObj = [
   {
     key: 2,
     title: "Receive valuation and more",
-    description: "pricing and sales history.",
+    description:
+      "See your vehicle's pricing, sales history, and related vehicles.",
     image: carImage,
   },
   {
