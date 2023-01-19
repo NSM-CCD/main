@@ -60,6 +60,9 @@ export const CISection = styled.section`
         align-items: center;
         gap: 12px;
 
+        background-color: transparent;
+        border: none;
+
         text-decoration: none;
         font-family: "Raleway", sans-serif;
         font-style: normal;

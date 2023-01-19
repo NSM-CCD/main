@@ -214,14 +214,21 @@ export const Slides = styled.div`
 
       .slider-image {
         img {
+          width: 100%;
           max-width: 320px;
+          max-height: 179.83px;
+          border-radius: 12px;
 
           @media (min-width: 768px) {
             max-width: 370px;
+            max-height: 207.94px;
           }
 
           @media (min-width: 992px) {
+            object-fit: cover;
+            width: 500px;
             max-width: 500px;
+            max-height: 280px;
           }
         }
       }

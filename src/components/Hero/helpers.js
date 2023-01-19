@@ -5,6 +5,10 @@ import oldCars from "../../images/logos/old-cars.svg"
 
 import carImage from "../../images/car-road.webp"
 import dummyCarImage from "../../images/cadillac.png"
+import streetRod from "../../images/carousel/street-rod.jpg"
+import corvette from "../../images/carousel/corvette.jpg"
+import fordPickup from "../../images/carousel/ford-pickup.jpg"
+import belAir from "../../images/carousel/belair-interior.jpg"
 
 import classicCom from "../../images/logos/classic-com.svg"
 
@@ -46,26 +50,26 @@ export const processObj = [
     title: "Receive valuation and more",
     description:
       "See your vehicle's pricing, sales history, and related vehicles.",
-    image: carImage,
+    image: streetRod,
   },
   {
     key: 3,
     title: "Get a free quote",
     description: "Save up to 40% with our Agreed Value coverage*",
-    image: carImage,
+    image: corvette,
   },
   {
     key: 4,
     title: "Discuss coverage options",
     description:
       "A dedicated collector insurance specialist will assist to tailor options to fit your needs.",
-    image: carImage,
+    image: fordPickup,
   },
   {
     key: 5,
     title: "Enjoy your passion with peace of mind",
     description:
       "Agreed Value coverage. Top-rated customer service. Exceptional savings.",
-    image: carImage,
+    image: belAir,
   },
 ]

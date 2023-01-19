@@ -100,7 +100,7 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
       </div>
       <div className="form">
         <div className="form-group">
-          <label htmlFor="year">First name</label>
+          <label htmlFor="first-name">First name</label>
           <input
             type="text"
             className="form-control"
@@ -110,7 +110,7 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="year">Last name</label>
+          <label htmlFor="last-name">Last name</label>
           <input
             type="text"
             className="form-control"
@@ -120,7 +120,7 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="year">Email address</label>
+          <label htmlFor="email">Email address</label>
           <input
             type="email"
             className="form-control"

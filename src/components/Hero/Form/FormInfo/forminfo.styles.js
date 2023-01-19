@@ -140,6 +140,16 @@ export const FormInfoWrapper = styled.form`
         color: #fff;
       }
 
+      .btn-inquire {
+        background: #93272c;
+        border: 1px solid #93272c;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 8px;
+        padding: 10px 16px;
+
+        color: #fff;
+      }
+
       @media (min-width: 768px) {
         flex-direction: row;
       }
