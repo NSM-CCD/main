@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useCallback, useContext, useMemo, useState } from "react"
 import { navigate } from "gatsby"
 import axios from "axios"
 import { toast } from "react-toastify"
@@ -7,12 +7,22 @@ import Link from "../../../../utils/link"
 import { FormInfoWrapper } from "./forminfo.styles"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
 import { getVisitorKey } from "../../../../utils/getVisitorKey"
+import { CalculatorContext } from "../../../../contexts/Calculator"
 
-const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
+const FormInfo = ({ onClose }) => {
   const [submitting, setSubmitting] = useState(false)
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
+
+  const {
+    selectedMake,
+    selectedModel,
+    selectedYear,
+    selectedGeneration,
+    selectedVariant,
+    relatedVehicles,
+  } = useContext(CalculatorContext)
 
   const formObj = useMemo(
     () => ({
@@ -53,6 +63,26 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
       fd.append(key, value)
     })
 
+    const reportObj = {
+      make: selectedMake,
+      model: selectedModel,
+      year: selectedYear,
+    }
+
+    if (selectedGeneration) {
+      reportObj["generation"] = selectedGeneration
+    }
+
+    if (selectedVariant) {
+      reportObj["variant"] = selectedVariant
+    }
+
+    if (relatedVehicles?.length > 0) {
+      reportObj["relatedVehicles"] = relatedVehicles
+    }
+
+    const params = JSON.stringify(reportObj)
+
     if (email) {
       await axios
         .post(
@@ -64,7 +94,7 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
             autoClose: 2000,
             onClose: () => {
               setSubmitting(false)
-              navigate("/results")
+              navigate(`/results?rdata=${btoa(params)}`)
             },
           })
         })
@@ -74,7 +104,7 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
             autoClose: 1500,
             onClose: () => {
               setSubmitting(false)
-              navigate("/results")
+              navigate(`/results?rdata=${btoa(params)}`)
             },
           })
         })
@@ -83,11 +113,19 @@ const FormInfo = ({ carName, model, makeName, modelName, onClose }) => {
         autoClose: 1500,
         onClose: () => {
           setSubmitting(false)
-          navigate("/results")
+          navigate(`/results?rdata=${btoa(params)}`)
         },
       })
     }
-  }, [formObj, email])
+  }, [
+    formObj,
+    email,
+    selectedMake,
+    selectedModel,
+    selectedYear,
+    selectedGeneration,
+    selectedVariant,
+  ])
 
   return (
     <FormInfoWrapper>
