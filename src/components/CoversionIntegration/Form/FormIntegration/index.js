@@ -72,6 +72,7 @@ const FormIntegration = ({ onClose }) => {
       setHasError(false)
       await axios
         .post(
+          //@TODO: update link before launch - remove cors bypass
           "https://justcors.com/l_42d5nkpzh3g/https://analytics.clickdimensions.com/forms/?visitor=contact",
           fd
         )

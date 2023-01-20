@@ -86,6 +86,7 @@ const FormInfo = ({ onClose }) => {
     if (email) {
       await axios
         .post(
+          //@TODO: update link before launch - remove cors bypass
           "https://justcors.com/l_42d5nkpzh3g/https://analytics.clickdimensions.com/forms/?visitor=lead",
           fd
         )
