@@ -34,7 +34,7 @@ export const MARKET_WIDGET = gql`
 
 export const MAKE_MODEL = gql`
   query MakesQuery {
-    makes {
+    makes(options: { type: Automobile }) {
       id
       name
       models {
