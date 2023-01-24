@@ -45,7 +45,7 @@ const ResultsMain = () => {
               spy
               smooth
               duration={250}
-              offset={-250}
+              offset={-125}
               activeClass="active"
               to="salesHistory"
               className="side-item"

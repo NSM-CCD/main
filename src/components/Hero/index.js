@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react"
+import { navigate } from "gatsby"
 
 import ModalMain from "../Modal"
 import HeroForm from "./Form"
@@ -29,11 +30,13 @@ const Hero = () => {
     selectedModel,
     setParentChartUrl,
     selectedGeneration,
+    isFormSubmitted,
     setIsLoadingMake,
     setMakes,
     setClassicMakes,
     setRelatedVehicles,
     resetForm,
+    slugParams,
   } = useContext(CalculatorContext)
 
   const makeModel = useQuery(MAKE_MODEL)
@@ -42,7 +45,14 @@ const Hero = () => {
 
   const relatedVehicleData = []
 
-  const handleOpenModalForm = useCallback(() => setOpenModalForm(true), [])
+  const handleOpenModalForm = useCallback(() => {
+    if (!isFormSubmitted) {
+      setOpenModalForm(true)
+    } else {
+      navigate(`/results?rdata=${btoa(slugParams)}`).then()
+    }
+  }, [isFormSubmitted, slugParams])
+
   const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
 
   const filteredMake = useMemo(

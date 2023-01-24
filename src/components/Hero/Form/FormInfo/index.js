@@ -15,14 +15,7 @@ const FormInfo = ({ onClose }) => {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
 
-  const {
-    selectedMake,
-    selectedModel,
-    selectedYear,
-    selectedGeneration,
-    selectedVariant,
-    relatedVehicles,
-  } = useContext(CalculatorContext)
+  const { setIsFormSubmitted, slugParams } = useContext(CalculatorContext)
 
   const formObj = useMemo(
     () => ({
@@ -57,31 +50,13 @@ const FormInfo = ({ onClose }) => {
 
   const handleSubmit = useCallback(async () => {
     setSubmitting(true)
+    setIsFormSubmitted(true)
+
     const fd = new FormData()
 
     Object.entries(formObj).forEach(([key, value]) => {
       fd.append(key, value)
     })
-
-    const reportObj = {
-      make: selectedMake,
-      model: selectedModel,
-      year: selectedYear,
-    }
-
-    if (selectedGeneration) {
-      reportObj["generation"] = selectedGeneration
-    }
-
-    if (selectedVariant) {
-      reportObj["variant"] = selectedVariant
-    }
-
-    if (relatedVehicles?.length > 0) {
-      reportObj["relatedVehicles"] = relatedVehicles
-    }
-
-    const params = JSON.stringify(reportObj)
 
     if (email) {
       await axios
@@ -95,7 +70,7 @@ const FormInfo = ({ onClose }) => {
             autoClose: 2000,
             onClose: () => {
               setSubmitting(false)
-              navigate(`/results?rdata=${btoa(params)}`)
+              navigate(`/results?rdata=${btoa(slugParams)}`)
             },
           })
         })
@@ -105,7 +80,7 @@ const FormInfo = ({ onClose }) => {
             autoClose: 1500,
             onClose: () => {
               setSubmitting(false)
-              navigate(`/results?rdata=${btoa(params)}`)
+              navigate(`/results?rdata=${btoa(slugParams)}`)
             },
           })
         })
@@ -114,19 +89,11 @@ const FormInfo = ({ onClose }) => {
         autoClose: 1500,
         onClose: () => {
           setSubmitting(false)
-          navigate(`/results?rdata=${btoa(params)}`)
+          navigate(`/results?rdata=${btoa(slugParams)}`)
         },
       })
     }
-  }, [
-    formObj,
-    email,
-    selectedMake,
-    selectedModel,
-    selectedYear,
-    selectedGeneration,
-    selectedVariant,
-  ])
+  }, [formObj, email, slugParams, setIsFormSubmitted])
 
   return (
     <FormInfoWrapper>

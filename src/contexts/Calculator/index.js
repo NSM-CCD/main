@@ -1,6 +1,7 @@
 import { createContext } from "react"
 
 export const CalculatorContext = createContext({
+  isFormSubmitted: false,
   isLoadingMake: false,
   selectedMake: "",
   selectedModel: "",
@@ -10,10 +11,12 @@ export const CalculatorContext = createContext({
   selectedTrim: "",
   classicMakes: [],
   makes: [],
+  slugParams: "",
   relatedVehicles: [],
   chartUrl: "",
   parentChartUrl: "",
   description: "",
+  setIsFormSubmitted: () => null,
   setIsLoadingMake: () => null,
   setSelectedYear: () => null,
   setSelectedMake: () => null,

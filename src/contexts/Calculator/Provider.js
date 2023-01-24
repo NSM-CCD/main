@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client"
 import { MARKET_WIDGET } from "../../graphqlQueries/queries"
 
 const CalculatorProvider = ({ children }) => {
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
   const [isLoadingMake, setIsLoadingMake] = useState(false)
 
   const [selectedYear, setSelectedYear] = useState("")
@@ -65,6 +66,35 @@ const CalculatorProvider = ({ children }) => {
     }
   }, [data, error])
 
+  const slugParams = useMemo(() => {
+    const reportObj = {
+      make: selectedMake,
+      model: selectedModel,
+      year: selectedYear,
+    }
+
+    if (selectedGeneration) {
+      reportObj["generation"] = selectedGeneration
+    }
+
+    if (selectedVariant) {
+      reportObj["variant"] = selectedVariant
+    }
+
+    if (relatedVehicles?.length > 0) {
+      reportObj["relatedVehicles"] = relatedVehicles
+    }
+
+    return JSON.stringify(reportObj)
+  }, [
+    selectedMake,
+    selectedModel,
+    selectedYear,
+    selectedGeneration,
+    selectedVariant,
+    relatedVehicles,
+  ])
+
   const resetForm = useCallback(() => {
     setSelectedMake("")
     setSelectedModel("")
@@ -80,6 +110,7 @@ const CalculatorProvider = ({ children }) => {
 
   const contextValue = useMemo(
     () => ({
+      isFormSubmitted,
       isLoadingMake,
       selectedMake,
       selectedModel,
@@ -93,6 +124,8 @@ const CalculatorProvider = ({ children }) => {
       description,
       classicMakes,
       makes,
+      slugParams,
+      setIsFormSubmitted,
       setIsLoadingMake,
       setSelectedYear,
       setSelectedMake,
@@ -109,6 +142,7 @@ const CalculatorProvider = ({ children }) => {
       resetForm,
     }),
     [
+      isFormSubmitted,
       isLoadingMake,
       selectedMake,
       selectedModel,
@@ -122,6 +156,8 @@ const CalculatorProvider = ({ children }) => {
       description,
       classicMakes,
       makes,
+      slugParams,
+      setIsFormSubmitted,
       setIsLoadingMake,
       setSelectedYear,
       setSelectedMake,
