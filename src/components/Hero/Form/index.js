@@ -87,7 +87,7 @@ const HeroForm = ({
               className="form-select"
               aria-label="Default select model"
               required
-              disabled={!selectedMake}
+              disabled={!selectedMake || isLoadingMake}
               value={selectedModel}
               onChange={handleCategory}
             >
@@ -106,7 +106,7 @@ const HeroForm = ({
                   className="form-select"
                   aria-label="Default select generation"
                   required
-                  disabled={!selectedModel}
+                  disabled={!selectedModel || isLoadingMake}
                   value={selectedGeneration}
                   onChange={handleGenerationChange}
                 >
@@ -121,7 +121,7 @@ const HeroForm = ({
                   className="form-select"
                   aria-label="Default select year"
                   required
-                  disabled={!selectedGeneration}
+                  disabled={!selectedGeneration || isLoadingMake}
                   value={selectedYear}
                   onChange={handleYear}
                 >
@@ -140,7 +140,7 @@ const HeroForm = ({
                 className="form-select"
                 aria-label="Default select variant"
                 required
-                disabled={!selectedModel}
+                disabled={!selectedModel || isLoadingMake}
                 value={selectedVariant}
                 onChange={handleVariantChange}
               >
@@ -158,7 +158,7 @@ const HeroForm = ({
                 className="form-select"
                 aria-label="Default select trim"
                 required
-                disabled={!selectedVariant}
+                disabled={!selectedVariant || isLoadingMake}
                 onChange={handleTrimChange}
               >
                 <option value="">Select trim</option>
