@@ -14,7 +14,13 @@ import FormInfo from "./Form/FormInfo"
 import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
 import { useMediaQuery } from "../../utils/useMediaQuery"
 import heroBg from "../../images/hero-bg.webp"
-import { desktopLogos, getYears, mobileLogos, trustBarLogos } from "./helpers"
+import {
+  desktopLogos,
+  getYears,
+  mobileLogos,
+  trustBarLinks,
+  trustBarLogos,
+} from "./helpers"
 import { useMutation, useQuery } from "@apollo/client"
 import { MAKE_MODEL, MARKET_WIDGET } from "../../graphqlQueries/queries"
 import { CalculatorContext } from "../../contexts/Calculator"
@@ -241,20 +247,24 @@ const Hero = () => {
                 <div className="trustbar-logos">
                   {!isWiderScreen
                     ? mobileLogos.map((logo, idx) => (
-                        <img
-                          key={`image-${idx}`}
-                          src={trustBarLogos[`${logo}Logo`]}
-                          alt={logo}
-                          className="img-fluid"
-                        />
+                        <a href={trustBarLinks[logo]} target="_blank">
+                          <img
+                            key={`image-${idx}`}
+                            src={trustBarLogos[`${logo}Logo`]}
+                            alt={logo}
+                            className="img-fluid"
+                          />
+                        </a>
                       ))
                     : desktopLogos.map((logo, idx) => (
-                        <img
-                          key={`image-${idx}`}
-                          src={trustBarLogos[`${logo}Logo`]}
-                          alt={logo}
-                          className="img-fluid"
-                        />
+                        <a href={trustBarLinks[logo]} target="_blank">
+                          <img
+                            key={`image-${idx}`}
+                            src={trustBarLogos[`${logo}Logo`]}
+                            alt={logo}
+                            className="img-fluid"
+                          />
+                        </a>
                       ))}
                 </div>
               </div>
