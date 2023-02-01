@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from "react"
 import Link from "../../../../utils/link"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
-import { FormInfoWrapper } from "../../../Hero/Form/FormInfo/forminfo.styles"
+import { FormInfoWrapper } from "../../../HeroNew/Form/FormInfo/forminfo.styles"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { getVisitorKey } from "../../../../utils/getVisitorKey"

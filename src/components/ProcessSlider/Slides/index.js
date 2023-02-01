@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react"
 import Slider from "react-slick"
 import { Slides } from "../slider.styles"
-import { processObj } from "../../Hero/helpers"
+import { processObj } from "../../HeroNew/helpers"
 
 const SlidesContent = forwardRef(({ beforeChange, ...props }, ref) => {
   const settings = {

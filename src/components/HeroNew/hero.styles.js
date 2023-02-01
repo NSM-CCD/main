@@ -193,6 +193,25 @@ export const HeroContent = styled.div`
         flex-flow: column nowrap;
         gap: 20px;
 
+        .selector {
+          display: flex;
+          align-items: center;
+
+          button {
+            font-family: "Raleway", sans-serif;
+            text-transform: uppercase;
+            width: 100%;
+            background-color: transparent;
+            border: thin solid #5e8ab4;
+
+            &.is-year,
+            &.is-make {
+              background-color: #5e8ab4;
+              color: #fff;
+            }
+          }
+        }
+
         .form-group {
           label {
             font-family: "Raleway", sans-serif;

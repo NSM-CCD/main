@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react"
 import SlidesContent from "./Slides"
 import ArrowButtons from "./ArrowButtons"
 import { Content, HeadingBlock, ProcessSliderSection } from "./slider.styles"
-import { processObj } from "../Hero/helpers"
+import { processObj } from "../HeroNew/helpers"
 
 const ProcessSlider = () => {
   const [isFirst, setFirst] = useState(true)
