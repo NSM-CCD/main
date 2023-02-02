@@ -7,21 +7,19 @@ import RelatedVehicles from "./RelatedVehicles"
 import { ResultsWrapper } from "./results.styled"
 import Link from "../../utils/link"
 import { Link as ScrollLink } from "react-scroll"
-import { CalculatorContext } from "../../contexts/Calculator"
+import { ACIContext } from "../../contexts/ACIContext"
 
 const ResultsMain = () => {
   const {
-    selectedMake,
-    selectedModel,
-    selectedGeneration,
-    selectedVariant,
-    selectedYear,
+    makeLabel,
+    model,
+    year,
+    trim,
     description,
     chartUrl,
-    parentChartUrl,
     relatedVehicles,
     resetForm,
-  } = useContext(CalculatorContext)
+  } = useContext(ACIContext)
 
   const handleReset = useCallback(() => resetForm(), [resetForm])
 
@@ -58,7 +56,7 @@ const ResultsMain = () => {
               spy
               smooth
               duration={250}
-              offset={-250}
+              offset={-150}
               activeClass="active"
               to="modelOverview"
               className="side-item"
@@ -71,7 +69,7 @@ const ResultsMain = () => {
               spy
               smooth
               duration={250}
-              offset={-250}
+              offset={-150}
               activeClass="active"
               to="relatedVehicles"
               className="side-item"
@@ -82,14 +80,12 @@ const ResultsMain = () => {
         </div>
         <div className="content-wrapper">
           <Valuation
-            carName={`${selectedYear} ${selectedMake} ${selectedModel}`}
-            model={`${selectedGeneration || selectedVariant}`}
+            carName={`${year} ${makeLabel} ${model}`}
+            trim={`${trim}`}
           />
           {/*@TODO: enable when data is available*/}
           {/*<Features />*/}
-          {(chartUrl || parentChartUrl) && (
-            <SalesHistory chartUrl={chartUrl ? chartUrl : parentChartUrl} />
-          )}
+          {<SalesHistory noChart={!chartUrl} chartUrl={chartUrl} />}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>

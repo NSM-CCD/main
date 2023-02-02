@@ -1,34 +1,15 @@
 import React, { useCallback, useContext } from "react"
-import { CalculatorContext } from "../../../contexts/Calculator"
 import { navigate } from "gatsby"
+import { ACIContext } from "../../../contexts/ACIContext"
 
 const RelatedVehicles = () => {
-  const {
-    relatedVehicles,
-    selectedMake,
-    selectedModel,
-    selectedGeneration,
-    selectedVariant,
-    setSelectedGeneration,
-    setSelectedVariant,
-  } = useContext(CalculatorContext)
+  const { relatedVehicles, trim, makeLabel, model, setTrim } =
+    useContext(ACIContext)
 
-  const handleLoadRelatedVehicle = useCallback(
-    related => {
-      if (selectedGeneration) {
-        setSelectedGeneration(related)
-      } else if (selectedVariant) {
-        setSelectedVariant(related)
-      }
-      navigate("/")
-    },
-    [
-      selectedGeneration,
-      selectedVariant,
-      setSelectedGeneration,
-      setSelectedVariant,
-    ]
-  )
+  const handleLoadRelatedVehicle = useCallback(related => {
+    setTrim(related)
+    navigate("/")
+  }, [])
 
   return (
     <div className="related-vehicles" id="relatedVehicles">
@@ -38,17 +19,17 @@ const RelatedVehicles = () => {
           ? relatedVehicles.slice(0, 4)
           : relatedVehicles
         )
-          .filter(r => r !== selectedGeneration && r !== selectedVariant)
-          .map(i => (
+          .filter(r => r !== trim)
+          .map(relatedVehicle => (
             <a
-              key={i}
+              key={relatedVehicle}
               href="#"
               className="vehicle-details"
-              onClick={() => handleLoadRelatedVehicle(i)}
+              onClick={() => handleLoadRelatedVehicle(relatedVehicle)}
             >
               <p className="details m-0">
-                <span className="name">{`${selectedMake} ${selectedModel}`}</span>
-                <span className="model">{i}</span>
+                <span className="name">{`${makeLabel} ${model}`}</span>
+                <span className="model">{relatedVehicle}</span>
               </p>
               <svg
                 width="24"

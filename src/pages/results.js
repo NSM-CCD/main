@@ -7,22 +7,22 @@ import ConversionIntegration from "../components/CoversionIntegration"
 import ResultsMain from "../components/ResultsComponents"
 import { useMediaQuery } from "../utils/useMediaQuery"
 import { useContext, useEffect } from "react"
-import { CalculatorContext } from "../contexts/Calculator"
+import { ACIContext } from "../contexts/ACIContext"
 
 const ResultsPage = props => {
   const isTablet = useMediaQuery("(min-width: 768px)")
   const isDesktop = useMediaQuery("(min-width: 992px)")
 
   const {
-    selectedMake,
-    selectedModel,
-    setSelectedMake,
-    setSelectedModel,
-    setSelectedYear,
-    setSelectedGeneration,
-    setSelectedVariant,
-    setRelatedVehicles,
-  } = useContext(CalculatorContext)
+    make,
+    model,
+    year,
+    setMake,
+    setMakeLabel,
+    setModel,
+    setTrim,
+    setYear,
+  } = useContext(ACIContext)
 
   let ctaColor
 
@@ -38,46 +38,30 @@ const ResultsPage = props => {
     const params = new URLSearchParams(props?.location?.search)
     const reportsData = params.get("rdata")
 
-    if (reportsData && !selectedMake && !selectedModel) {
+    if (reportsData && !make && !model && !year) {
       const rData = JSON.parse(atob(reportsData))
 
-      setSelectedMake(rData?.make)
-      setSelectedModel(rData?.model)
-      setSelectedYear(parseInt(rData?.year))
-
-      if (rData?.generation) {
-        setSelectedGeneration(rData.generation)
-      }
-
-      if (rData?.variant) {
-        setSelectedVariant(rData.variant)
-      }
-
-      if (rData?.relatedVehicles) {
-        setRelatedVehicles(rData.relatedVehicles)
-      }
+      setMake(rData?.make)
+      setMakeLabel(rData?.makeLabel)
+      setModel(rData?.model)
+      setYear(parseInt(rData?.year))
+      setTrim(rData?.trim)
     }
   }, [
-    selectedMake,
-    selectedModel,
+    make,
+    model,
+    year,
     props?.location?.search,
-    setSelectedMake,
-    setSelectedModel,
-    setSelectedYear,
-    setSelectedGeneration,
-    setSelectedVariant,
-    setRelatedVehicles,
+    setMake,
+    setMakeLabel,
+    setModel,
+    setYear,
   ])
 
   return (
     <Layout ctaBackgroundColor={ctaColor}>
       <Seo title="Home" />
-      <ResultsMain
-        carName={props?.location?.state?.carName}
-        model={props?.location?.state?.model}
-        makeName={props?.location?.state?.makeName}
-        modelName={props?.location?.state?.modelName}
-      />
+      <ResultsMain />
       <ConversionPanel ctaButtonColor="bg-red" />
       <ConversionIntegration />
     </Layout>

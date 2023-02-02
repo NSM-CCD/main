@@ -1,11 +1,23 @@
-import React, { useCallback, useMemo, useReducer } from "react"
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from "react"
+import { useMutation } from "@apollo/client"
 import { ACIContext } from "."
 import aciClient from "../../utils/aciClient"
 import { reducer, initialState } from "./reducer"
+import { MARKET_WIDGET } from "../../graphqlQueries/queries"
 import { getYears, makesDB } from "../../components/HeroNew/helpers"
 
 const ACIProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
+
+  const [createMarketWidgetFromTaxonomyName, { error }] =
+    useMutation(MARKET_WIDGET)
 
   const setYear = useCallback(year => dispatch({ type: "set_year", year }), [])
   const setMake = useCallback(make => dispatch({ type: "set_make", make }), [])
@@ -13,7 +25,17 @@ const ACIProvider = ({ children }) => {
     model => dispatch({ type: "set_model", model }),
     []
   )
+  const setMakeLabel = useCallback(
+    makeLabel => dispatch({ type: "set_label", makeLabel }),
+    []
+  )
+
   const setTrim = useCallback(trim => dispatch({ type: "set_trim", trim }), [])
+
+  const setRelatedVehicles = useCallback(
+    relatedVehicles => dispatch({ type: "set_related", relatedVehicles }),
+    []
+  )
 
   const yearOptions = useMemo(() => {
     if (!state.isYear && state.make) {
@@ -37,17 +59,18 @@ const ACIProvider = ({ children }) => {
   }, [state.modelList])
 
   const trimOptions = useMemo(() => {
-    if (state.model && state.modelObjArr) {
-      let trimList = []
-      state.modelObjArr.forEach(trim => {
+    if (state.trimsList.length > 0) {
+      let trims = []
+      state.trimsList.forEach(trim => {
         if (trim.entryId === 1 || trim.entryId === 5) {
-          if (!trimList.includes(trim.model)) trimList.push(trim.model)
+          if (!trims.includes(trim.model)) trims.push(trim.model)
         }
       })
-      return trimList
+      setRelatedVehicles(trims)
+      return trims
     }
     return []
-  }, [state.model, state.modelObjArr])
+  }, [state.trimsList, setRelatedVehicles])
 
   const getMakesByYear = useMemo(async () => {
     if (state.year) {
@@ -79,7 +102,10 @@ const ACIProvider = ({ children }) => {
       let modelOptions = []
       if (data?.length > 0) {
         // save original model obj
-        dispatch({ type: "set_model_obj", modelObjArr: data })
+        dispatch({
+          type: "set_model_obj",
+          modelObjArr: data.filter(m => m.entryId === 1 || m.entryId === 5),
+        })
         data.forEach(model => {
           if (model?.entryId === 1 || model?.entryId === 5) {
             if (!modelOptions.includes(model?.modelcat))
@@ -92,13 +118,16 @@ const ACIProvider = ({ children }) => {
     }
   }, [state.make, state.year])
 
-  const getTrimsByMakeYearModel = useCallback(
-    async (companyNum, year, modelCat) =>
-      await aciClient.get(
-        `/api/standard_table/${companyNum}/${year}/${modelCat}`
-      ),
-    []
-  )
+  const getTrimsByMakeYearModel = useMemo(async () => {
+    if (state.make && state.model && state.year) {
+      const { data } = await aciClient.get(
+        `/api/standard_table/${state.make}/${state.year}/${state.model}`
+      )
+      if (data) {
+        dispatch({ type: "set_trims", trimsList: data })
+      }
+    }
+  }, [state.make, state.model, state.year])
 
   const getOptionPricingMods = useCallback(
     async (companyNum, year) =>
@@ -106,27 +135,69 @@ const ACIProvider = ({ children }) => {
     []
   )
 
+  const setSlugParameters = useMemo(() => {
+    const reportObj = {
+      make: state.make,
+      makeLabel: state.makeLabel,
+      model: state.model,
+      year: state.year,
+      trim: state.trim,
+    }
+
+    dispatch({ type: "set_params", slugParams: JSON.stringify(reportObj) })
+  }, [state.make, state.makeLabel, state.model, state.year, state.trim])
+
   const setIsYear = useCallback(
     isYear => {
       setYear("")
       setMake("")
+      setMakeLabel("")
       setModel("")
       setTrim("")
       dispatch({ type: "set_is_year", isYear })
     },
-    [setYear, setMake, setModel, setTrim]
+    [setYear, setMake, setMakeLabel, setModel, setTrim]
   )
 
   const resetForm = useCallback(() => {
     setYear("")
     setMake("")
+    setMakeLabel("")
     setModel("")
     setTrim("")
-  }, [setYear, setMake, setModel, setTrim])
+  }, [setYear, setMake, setMakeLabel, setModel, setTrim])
+
+  useEffect(() => {
+    if (state.makeLabel && state.model && state.year) {
+      createMarketWidgetFromTaxonomyName({
+        variables: {
+          makeName: state.makeLabel,
+          modelName: state.model,
+          domain: "classiccarvalue.com",
+          marketYear: parseInt(state.year),
+        },
+      }).then(({ data }) => {
+        const res = data?.createMarketWidgetFromTaxonomyName?.data
+
+        const chartUrl = res?.url
+        const description = res?.market?.description
+
+        dispatch({ type: "set_description", description })
+        dispatch({ type: "set_chart", chartUrl })
+      })
+    }
+  }, [state.makeLabel, state.model, state.year])
+
+  useEffect(() => {
+    if (error) {
+      console.log(error, "provider")
+    }
+  }, [error])
 
   const contextValue = useMemo(
     () => ({
       ...state,
+      isFormSubmitted,
       yearOptions,
       makeOptions,
       modelOptions,
@@ -134,8 +205,12 @@ const ACIProvider = ({ children }) => {
       setIsYear,
       setYear,
       setMake,
+      setMakeLabel,
       setModel,
       setTrim,
+      setSlugParameters,
+      setIsFormSubmitted,
+      setRelatedVehicles,
       resetForm,
       getMakesByYear,
       getYearsByMake,
@@ -145,6 +220,7 @@ const ACIProvider = ({ children }) => {
     }),
     [
       state,
+      isFormSubmitted,
       yearOptions,
       makeOptions,
       modelOptions,
@@ -152,8 +228,12 @@ const ACIProvider = ({ children }) => {
       setIsYear,
       setYear,
       setMake,
+      setMakeLabel,
       setModel,
       setTrim,
+      setSlugParameters,
+      setIsFormSubmitted,
+      setRelatedVehicles,
       resetForm,
       getMakesByYear,
       getYearsByMake,

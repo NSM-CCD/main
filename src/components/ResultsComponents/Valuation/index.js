@@ -1,9 +1,9 @@
 import React, { useCallback, useContext } from "react"
 import { navigate } from "gatsby"
-import { CalculatorContext } from "../../../contexts/Calculator"
+import { ACIContext } from "../../../contexts/ACIContext"
 
-const Valuation = ({ carName, model }) => {
-  const { resetForm } = useContext(CalculatorContext)
+const Valuation = ({ carName, trim }) => {
+  const { resetForm } = useContext(ACIContext)
   const url = typeof window !== "undefined" ? window.location.href : ""
 
   const handleBack = useCallback(() => {
@@ -59,7 +59,7 @@ const Valuation = ({ carName, model }) => {
         </div>
         <div className="valuation-heading" id="valuation">
           {carName && <h2 className="m-0 car-name">{carName}</h2>}
-          {model && <p className="m-0 model">{model}</p>}
+          {trim && <p className="m-0 model">{trim}</p>}
         </div>
       </div>
     </>

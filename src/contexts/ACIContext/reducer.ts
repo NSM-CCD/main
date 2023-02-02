@@ -1,5 +1,4 @@
 export const initialState = {
-  isLoadingMake: false,
   isFormSubmitted: false,
   isYear: true,
   make: "",
@@ -7,10 +6,15 @@ export const initialState = {
   year: "",
   trim: "",
   slugParams: "",
+  chartUrl: "",
+  description: "",
+  makeLabel: "",
   makesList: [],
   yearsList: [],
   modelList: [],
+  trimsList: [],
   modelsObjArr: [],
+  relatedVehicles: [],
 }
 
 export const reducer = (state, action) => {
@@ -21,6 +25,8 @@ export const reducer = (state, action) => {
       return { ...state, year: action.year }
     case "set_make":
       return { ...state, make: action.make }
+    case "set_label":
+      return { ...state, makeLabel: action.makeLabel }
     case "set_model":
       return { ...state, model: action.model }
     case "set_models":
@@ -31,8 +37,18 @@ export const reducer = (state, action) => {
       return { ...state, yearsList: action.yearsList }
     case "set_trim":
       return { ...state, trim: action.trim }
+    case "set_trims":
+      return { ...state, trimsList: action.trimsList }
     case "set_model_obj":
       return { ...state, modelObjArr: action.modelObjArr }
+    case "set_params":
+      return { ...state, slugParams: action.slugParams }
+    case "set_related":
+      return { ...state, relatedVehicles: action.relatedVehicles }
+    case "set_chart":
+      return { ...state, chartUrl: action.chartUrl }
+    case "set_description":
+      return { ...state, description: action.description }
     default:
       return state
   }

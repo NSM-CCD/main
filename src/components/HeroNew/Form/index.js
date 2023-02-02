@@ -17,6 +17,7 @@ const HeroForm = ({
     setIsYear,
     setYear,
     setMake,
+    setMakeLabel,
     setModel,
     setTrim,
     resetForm,
@@ -33,13 +34,19 @@ const HeroForm = ({
   )
 
   const handleMake = useCallback(
-    ({ target }) => setMake(target.value),
-    [setMake]
+    ({ target }) => {
+      setMake(target.value)
+      setMakeLabel(target.options[target.selectedIndex].text)
+    },
+    [setMake, setMakeLabel]
   )
 
   const handleModel = useCallback(
-    ({ target }) => setModel(target.value),
-    [setModel]
+    ({ target }) => {
+      setTrim("")
+      setModel(target.value)
+    },
+    [setModel, setTrim]
   )
 
   const handleTrim = useCallback(
@@ -109,7 +116,11 @@ const HeroForm = ({
               className="form-select"
               aria-label="Default select model"
               required
-              disabled={isYear ? !make : !year || modelOptions.length <= 0}
+              disabled={
+                isYear
+                  ? !make || modelOptions.length <= 0
+                  : !year || yearOptions.length <= 0
+              }
               value={model}
               onChange={handleModel}
             >
@@ -125,7 +136,7 @@ const HeroForm = ({
               className="form-select"
               aria-label="Default select trim"
               required
-              disabled={!model}
+              disabled={!model || trimOptions?.length <= 0}
               value={trim}
               onChange={handleTrim}
             >
