@@ -34,8 +34,8 @@ const Hero = () => {
     classicMakes,
     selectedMake,
     selectedModel,
+    selectedYear,
     setParentChartUrl,
-    selectedGeneration,
     isFormSubmitted,
     setIsLoadingMake,
     setMakes,
@@ -49,7 +49,7 @@ const Hero = () => {
   const [createMarketWidgetFromTaxonomyName, { data }] =
     useMutation(MARKET_WIDGET)
 
-  const relatedVehicleData = []
+  let relatedVehicleData = []
 
   const handleOpenModalForm = useCallback(() => {
     if (!isFormSubmitted) {
@@ -60,6 +60,17 @@ const Hero = () => {
   }, [isFormSubmitted, slugParams])
 
   const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
+
+  const availableMakes = useMemo(
+    () =>
+      makes.length > 0 &&
+      makes.map(make => (
+        <option key={make} value={make} data-val={make}>
+          {make}
+        </option>
+      )),
+    [makes]
+  )
 
   const filteredMake = useMemo(
     () => classicMakes.filter(m => m.name === selectedMake),
@@ -75,16 +86,54 @@ const Hero = () => {
     return []
   }, [filteredMake])
 
+  const availableYears = useMemo(() => {
+    let years = []
+    if (availableModelData?.length > 0) {
+      availableModelData.forEach(model => {
+        if (model?.year_start && !years.includes(model.year_start))
+          years.push(model?.year_start)
+        if (model?.year_end && !years.includes(model.year_end))
+          years.push(model?.year_end)
+      })
+
+      return years.sort((a, b) => a - b)
+    }
+  }, [availableModelData])
+
+  const years = useMemo(() => {
+    if (availableYears?.length > 0) {
+      return getYears(
+        availableYears[0],
+        availableYears[availableYears.length - 1]
+      ).map(year => (
+        <option key={year} value={year}>
+          {year}
+        </option>
+      ))
+    }
+
+    return (
+      <option key="no-year" value="">
+        No available year!
+      </option>
+    )
+  }, [availableYears, selectedModel])
+
   const availableModels = useMemo(() => {
     if (availableModelData?.length > 0) {
-      return availableModelData.map(
-        i =>
-          i?.name && (
-            <option key={i.name} value={i.name}>
-              {i.name}
-            </option>
-          )
-      )
+      return availableModelData
+        .filter(
+          model =>
+            selectedYear > model?.year_start && selectedYear < model?.year_end
+        )
+        .map(
+          i =>
+            i?.name && (
+              <option key={i.name} value={i.name}>
+                {i.name}
+              </option>
+            )
+        )
     }
 
     return (
@@ -92,32 +141,7 @@ const Hero = () => {
         No available model!
       </option>
     )
-  }, [availableModelData])
-
-  const availableGeneration = useMemo(() => {
-    const selectedModelData =
-      availableModelData?.length > 0 &&
-      availableModelData.filter(a => a.name === selectedModel)[0]
-    if (selectedModelData?.modelGeneration?.length > 0) {
-      const toSortData = []
-        .concat(selectedModelData?.modelGeneration)
-        .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
-
-      toSortData.map(d => relatedVehicleData.push(d.name))
-
-      return toSortData.map(m => (
-        <option key={m.name} value={m.name}>
-          {m.name}
-        </option>
-      ))
-    }
-
-    return (
-      <option key="no-model-generation" value="">
-        No available model generation!
-      </option>
-    )
-  }, [availableModelData, selectedModel])
+  }, [availableModelData, selectedYear])
 
   const availableVariant = useMemo(() => {
     const selectedModelData =
@@ -144,32 +168,6 @@ const Hero = () => {
     )
   }, [availableModelData, selectedModel])
 
-  const years = useMemo(() => {
-    if (selectedGeneration && availableModelData?.length > 0) {
-      const selectedModelData = availableModelData.filter(
-        m => m.name === selectedModel
-      )
-      const filteredGenData = selectedModelData[0]?.modelGeneration.filter(
-        g => g.name === selectedGeneration
-      )
-
-      return getYears(
-        filteredGenData[0]?.year_start,
-        filteredGenData[0]?.year_end
-      ).map(year => (
-        <option key={year} value={year}>
-          {year}
-        </option>
-      ))
-    }
-
-    return (
-      <option key="no-year" value="">
-        No available year!
-      </option>
-    )
-  }, [selectedGeneration, availableModelData, selectedModel])
-
   useEffect(() => {
     if (makeModel?.loading) {
       setIsLoadingMake(true)
@@ -180,21 +178,13 @@ const Hero = () => {
 
   useEffect(() => {
     if (makeModel?.data) {
-      setMakes(makeModel?.data?.makes?.map(make => make.name).sort())
-      setClassicMakes(makeModel?.data?.makes)
+      const filteredData = makeModel?.data?.makes?.filter(
+        make => make?.models?.length > 1
+      )
+      setMakes(filteredData?.map(make => make.name).sort())
+      setClassicMakes(filteredData)
     }
   }, [makeModel, setMakes, setClassicMakes])
-
-  const availableMakes = useMemo(
-    () =>
-      makes.length > 0 &&
-      makes.map(make => (
-        <option key={make} value={make} data-val={make}>
-          {make}
-        </option>
-      )),
-    [makes]
-  )
 
   useEffect(() => {
     if (selectedMake && selectedModel) {
@@ -204,13 +194,14 @@ const Hero = () => {
           modelName: selectedModel,
           domain: "classiccarvalue.com",
         },
-      }).then()
+      })
     }
   }, [createMarketWidgetFromTaxonomyName, selectedMake, selectedModel])
 
-  useEffect(async () => {
+  useEffect(() => {
     if (data) {
       const parentChartUrl = data?.createMarketWidgetFromTaxonomyName?.data?.url
+      console.log(parentChartUrl)
       setParentChartUrl(parentChartUrl)
     }
   }, [data, setParentChartUrl])
@@ -272,11 +263,10 @@ const Hero = () => {
             <HeroForm
               makeOptions={availableMakes}
               modelOptions={availableModels}
-              generationOptions={availableGeneration}
               yearOptions={years}
               variantOptions={availableVariant}
-              onReset={resetForm}
               onEstimate={handleOpenModalForm}
+              onReset={resetForm}
             />
           </div>
         </div>

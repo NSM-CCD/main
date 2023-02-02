@@ -19,7 +19,6 @@ const ResultsPage = props => {
     setSelectedMake,
     setSelectedModel,
     setSelectedYear,
-    setSelectedGeneration,
     setSelectedVariant,
     setRelatedVehicles,
   } = useContext(CalculatorContext)
@@ -45,10 +44,6 @@ const ResultsPage = props => {
       setSelectedModel(rData?.model)
       setSelectedYear(parseInt(rData?.year))
 
-      if (rData?.generation) {
-        setSelectedGeneration(rData.generation)
-      }
-
       if (rData?.variant) {
         setSelectedVariant(rData.variant)
       }
@@ -64,7 +59,6 @@ const ResultsPage = props => {
     setSelectedMake,
     setSelectedModel,
     setSelectedYear,
-    setSelectedGeneration,
     setSelectedVariant,
     setRelatedVehicles,
   ])
@@ -72,12 +66,7 @@ const ResultsPage = props => {
   return (
     <Layout ctaBackgroundColor={ctaColor}>
       <Seo title="Home" />
-      <ResultsMain
-        carName={props?.location?.state?.carName}
-        model={props?.location?.state?.model}
-        makeName={props?.location?.state?.makeName}
-        modelName={props?.location?.state?.modelName}
-      />
+      <ResultsMain />
       <ConversionPanel ctaButtonColor="bg-red" />
       <ConversionIntegration />
     </Layout>

@@ -45,12 +45,14 @@ const Footer = () => (
             <a
               href="https://americancollectors.com/privacy-policy/"
               className="privacy-policy"
+              target="_blank"
             >
               Privacy Policy
             </a>
             <a
               href="https://americancollectors.com/terms-of-use/"
               className="terms-conditions"
+              target="_blank"
             >
               Terms & Conditions
             </a>

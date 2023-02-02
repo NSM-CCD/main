@@ -12,7 +12,6 @@ const CalculatorProvider = ({ children }) => {
   const [selectedMake, setSelectedMake] = useState("")
   const [selectedModel, setSelectedModel] = useState("")
   const [selectedVariant, setSelectedVariant] = useState("")
-  const [selectedGeneration, setSelectedGeneration] = useState("")
   const [selectedTrim, setSelectedTrim] = useState("")
   const [chartUrl, setChartUrl] = useState("")
   const [parentChartUrl, setParentChartUrl] = useState("")
@@ -26,29 +25,18 @@ const CalculatorProvider = ({ children }) => {
     useMutation(MARKET_WIDGET)
 
   useEffect(() => {
-    if (
-      selectedMake &&
-      selectedModel &&
-      (selectedGeneration || selectedVariant)
-    ) {
+    if (selectedMake && selectedModel && selectedVariant) {
       createMarketWidgetFromTaxonomyName({
         variables: {
           makeName: selectedMake,
           modelName: selectedModel,
           domain: "classiccarvalue.com",
-          modelGenerationName: selectedGeneration,
           modelVariantName: selectedVariant,
           marketYear: parseInt(selectedYear),
         },
       }).then()
     }
-  }, [
-    selectedMake,
-    selectedModel,
-    selectedGeneration,
-    selectedVariant,
-    selectedYear,
-  ])
+  }, [selectedMake, selectedModel, selectedVariant, selectedYear])
 
   useEffect(() => {
     if (data) {
@@ -73,10 +61,6 @@ const CalculatorProvider = ({ children }) => {
       year: selectedYear,
     }
 
-    if (selectedGeneration) {
-      reportObj["generation"] = selectedGeneration
-    }
-
     if (selectedVariant) {
       reportObj["variant"] = selectedVariant
     }
@@ -90,7 +74,6 @@ const CalculatorProvider = ({ children }) => {
     selectedMake,
     selectedModel,
     selectedYear,
-    selectedGeneration,
     selectedVariant,
     relatedVehicles,
   ])
@@ -100,7 +83,6 @@ const CalculatorProvider = ({ children }) => {
     setSelectedModel("")
     setSelectedYear("")
     setSelectedVariant("")
-    setSelectedGeneration("")
     setSelectedTrim("")
     setRelatedVehicles([])
     setChartUrl("")
@@ -115,7 +97,6 @@ const CalculatorProvider = ({ children }) => {
       selectedMake,
       selectedModel,
       selectedVariant,
-      selectedGeneration,
       selectedTrim,
       selectedYear,
       relatedVehicles,
@@ -131,7 +112,6 @@ const CalculatorProvider = ({ children }) => {
       setSelectedMake,
       setSelectedModel,
       setSelectedVariant,
-      setSelectedGeneration,
       setSelectedTrim,
       setChartUrl,
       setParentChartUrl,
@@ -147,7 +127,6 @@ const CalculatorProvider = ({ children }) => {
       selectedMake,
       selectedModel,
       selectedVariant,
-      selectedGeneration,
       selectedTrim,
       selectedYear,
       relatedVehicles,
@@ -163,7 +142,6 @@ const CalculatorProvider = ({ children }) => {
       setSelectedMake,
       setSelectedModel,
       setSelectedVariant,
-      setSelectedGeneration,
       setSelectedTrim,
       setChartUrl,
       setParentChartUrl,

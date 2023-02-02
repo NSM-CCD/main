@@ -5,7 +5,6 @@ export const MARKET_WIDGET = gql`
     $makeName: String!
     $modelName: String!
     $domain: String!
-    $modelGenerationName: String
     $modelVariantName: String
     $marketYear: Int
   ) {
@@ -14,7 +13,6 @@ export const MARKET_WIDGET = gql`
         makeName: $makeName
         modelName: $modelName
         domain: $domain
-        modelGenerationName: $modelGenerationName
         modelVariantName: $modelVariantName
         marketYear: $marketYear
       }
@@ -41,27 +39,15 @@ export const MAKE_MODEL = gql`
         id
         name
         make_id
+        year_start
+        year_end
         modelVariant {
           id
           name
           make_id
           model_id
-          modelTrim {
-            id
-            name
-          }
-        }
-        modelGeneration {
-          id
-          name
-          year_start
-          year_end
         }
       }
-    }
-    getMarketList {
-      id
-      name
     }
   }
 `

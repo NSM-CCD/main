@@ -3,7 +3,6 @@ import { navigate } from "gatsby"
 import axios from "axios"
 import { toast } from "react-toastify"
 
-import Link from "../../../../utils/link"
 import { FormInfoWrapper } from "./forminfo.styles"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
 import { getVisitorKey } from "../../../../utils/getVisitorKey"
@@ -141,13 +140,19 @@ const FormInfo = ({ onClose }) => {
         <p className="agreement m-0">
           Your personal Information will never be shared and is Optional. By
           clicking "Get Estimate" You agree to the&nbsp;
-          <Link to="/terms" openInNewTab>
+          <a
+            href="https://americancollectors.com/terms-of-use/"
+            target="_blank"
+          >
             Terms
-          </Link>
+          </a>
           &nbsp;and&nbsp;
-          <Link to="/privacy" openInNewTab>
+          <a
+            href="https://americancollectors.com/privacy-policy/"
+            target="_blank"
+          >
             Privacy Policy
-          </Link>
+          </a>
           .
         </p>
       </div>

@@ -13,7 +13,6 @@ const ResultsMain = () => {
   const {
     selectedMake,
     selectedModel,
-    selectedGeneration,
     selectedVariant,
     selectedYear,
     description,
@@ -58,7 +57,7 @@ const ResultsMain = () => {
               spy
               smooth
               duration={250}
-              offset={-250}
+              offset={-150}
               activeClass="active"
               to="modelOverview"
               className="side-item"
@@ -71,7 +70,7 @@ const ResultsMain = () => {
               spy
               smooth
               duration={250}
-              offset={-250}
+              offset={-150}
               activeClass="active"
               to="relatedVehicles"
               className="side-item"
@@ -83,7 +82,7 @@ const ResultsMain = () => {
         <div className="content-wrapper">
           <Valuation
             carName={`${selectedYear} ${selectedMake} ${selectedModel}`}
-            model={`${selectedGeneration || selectedVariant}`}
+            model={`${selectedVariant}`}
           />
           {/*@TODO: enable when data is available*/}
           {/*<Features />*/}
