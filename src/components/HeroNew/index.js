@@ -7,7 +7,12 @@ import FormInfo from "./Form/FormInfo"
 
 import { ACIContext } from "../../contexts/ACIContext"
 import { useMediaQuery } from "../../utils/useMediaQuery"
-import { desktopLogos, mobileLogos, trustBarLogos } from "./helpers"
+import {
+  desktopLogos,
+  mobileLogos,
+  trustBarLogos,
+  trustBarLinks,
+} from "./helpers"
 import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
 import heroBg from "../../images/hero-bg.webp"
 
@@ -118,20 +123,24 @@ const Hero = () => {
                 <div className="trustbar-logos">
                   {!isWiderScreen
                     ? mobileLogos.map((logo, idx) => (
-                        <img
-                          key={`image-${idx}`}
-                          src={trustBarLogos[`${logo}Logo`]}
-                          alt={logo}
-                          className="img-fluid"
-                        />
+                        <a href={trustBarLinks[logo]} target="_blank">
+                          <img
+                            key={`image-${idx}`}
+                            src={trustBarLogos[`${logo}Logo`]}
+                            alt={logo}
+                            className="img-fluid"
+                          />
+                        </a>
                       ))
                     : desktopLogos.map((logo, idx) => (
-                        <img
-                          key={`image-${idx}`}
-                          src={trustBarLogos[`${logo}Logo`]}
-                          alt={logo}
-                          className="img-fluid"
-                        />
+                        <a href={trustBarLinks[logo]} target="_blank">
+                          <img
+                            key={`image-${idx}`}
+                            src={trustBarLogos[`${logo}Logo`]}
+                            alt={logo}
+                            className="img-fluid"
+                          />
+                        </a>
                       ))}
                 </div>
               </div>

@@ -17,6 +17,13 @@ export const trustBarLogos = {
   classicComLogo: classicCom,
 }
 
+export const trustBarLinks = {
+  nada: "https://www.nada.org/nada/consumer-vehicle-values",
+  vmr: "http://www.vmrintl.com/",
+  oldCars: "https://report.oldcarsweekly.com/",
+  classicCom: "https://www.classic.com/",
+}
+
 export const mobileLogos = ["nada", "oldCars", "vmr", "classicCom"]
 export const desktopLogos = ["nada", "vmr", "oldCars", "classicCom"]
 
