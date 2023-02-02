@@ -50,7 +50,7 @@ const CalculatorProvider = ({ children }) => {
     }
 
     if (error) {
-      console.log(error, "provider")
+      console.log(error)
     }
   }, [data, error])
 
@@ -88,7 +88,16 @@ const CalculatorProvider = ({ children }) => {
     setChartUrl("")
     setParentChartUrl("")
     setDescription("")
-  }, [])
+  }, [
+    setSelectedMake,
+    setSelectedModel,
+    setSelectedYear,
+    setSelectedVariant,
+    setRelatedVehicles,
+    setChartUrl,
+    setDescription,
+    setParentChartUrl,
+  ])
 
   const contextValue = useMemo(
     () => ({

@@ -41,6 +41,7 @@ const Hero = () => {
     setMakes,
     setClassicMakes,
     setRelatedVehicles,
+    setDescription,
     resetForm,
     slugParams,
   } = useContext(CalculatorContext)
@@ -201,10 +202,13 @@ const Hero = () => {
   useEffect(() => {
     if (data) {
       const parentChartUrl = data?.createMarketWidgetFromTaxonomyName?.data?.url
-      console.log(parentChartUrl)
+      const description =
+        data?.createMarketWidgetFromTaxonomyName?.data?.market?.description
+
+      setDescription(description)
       setParentChartUrl(parentChartUrl)
     }
-  }, [data, setParentChartUrl])
+  }, [data, setParentChartUrl, setDescription])
 
   useEffect(() => {
     if (relatedVehicleData?.length > 0) {
