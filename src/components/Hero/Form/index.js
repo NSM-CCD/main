@@ -13,25 +13,31 @@ const HeroForm = ({
     selectedMake,
     selectedModel,
     selectedVariant,
-    selectedGeneration,
     selectedYear,
     setSelectedYear,
     setSelectedMake,
     setSelectedModel,
-    setSelectedTrim,
-    setSelectedGeneration,
     setSelectedVariant,
     resetForm,
   } = useContext(CalculatorContext)
 
   const handleYear = useCallback(
-    ({ target }) => setSelectedYear(target.value),
-    [setSelectedYear]
+    ({ target }) => {
+      setSelectedModel("")
+      setSelectedVariant("")
+      setSelectedYear(target.value)
+    },
+    [setSelectedYear, setSelectedModel, setSelectedVariant]
   )
 
   const handleMake = useCallback(
-    ({ target }) => setSelectedMake(target.value),
-    [setSelectedMake]
+    ({ target }) => {
+      setSelectedYear("")
+      setSelectedModel("")
+      setSelectedVariant("")
+      setSelectedMake(target.value)
+    },
+    [setSelectedMake, setSelectedYear, setSelectedModel, setSelectedVariant]
   )
 
   const handleCategory = useCallback(

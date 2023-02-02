@@ -39,7 +39,7 @@ const ResultsMain = () => {
           >
             Valuation
           </ScrollLink>
-          {chartUrl && (
+          {(chartUrl || parentChartUrl) && (
             <ScrollLink
               spy
               smooth

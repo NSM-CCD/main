@@ -122,19 +122,22 @@ const Hero = () => {
 
   const availableModels = useMemo(() => {
     if (availableModelData?.length > 0) {
-      return availableModelData
-        .filter(
-          model =>
-            selectedYear > model?.year_start && selectedYear < model?.year_end
-        )
-        .map(
-          i =>
-            i?.name && (
-              <option key={i.name} value={i.name}>
-                {i.name}
-              </option>
-            )
-        )
+      const models = availableModelData.filter(
+        model =>
+          model?.year_start &&
+          model?.year_end &&
+          selectedYear >= model?.year_start &&
+          selectedYear <= model?.year_end
+      )
+
+      return models.map(
+        i =>
+          i?.name && (
+            <option key={i.name} value={i.name}>
+              {i.name}
+            </option>
+          )
+      )
     }
 
     return (
