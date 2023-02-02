@@ -49,9 +49,7 @@ const CalculatorProvider = ({ children }) => {
       setChartUrl(chartUrl)
     }
 
-    if (error) {
-      console.log(error)
-    }
+    if (error) console.log(error)
   }, [data, error])
 
   const slugParams = useMemo(() => {
