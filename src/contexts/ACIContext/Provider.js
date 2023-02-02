@@ -172,7 +172,7 @@ const ACIProvider = ({ children }) => {
       createMarketWidgetFromTaxonomyName({
         variables: {
           makeName: state.makeLabel,
-          modelName: state.model,
+          modelName: state.model.split(" ")[0],
           domain: "classiccarvalue.com",
           marketYear: parseInt(state.year),
         },

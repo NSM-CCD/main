@@ -56,6 +56,7 @@ const ResultsPage = props => {
     setMakeLabel,
     setModel,
     setYear,
+    setTrim,
   ])
 
   return (
