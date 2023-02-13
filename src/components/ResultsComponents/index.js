@@ -8,6 +8,7 @@ import { ResultsWrapper } from "./results.styled"
 import Link from "../../utils/link"
 import { Link as ScrollLink } from "react-scroll"
 import { ACIContext } from "../../contexts/ACIContext"
+import Features from "./Features"
 
 const ResultsMain = () => {
   const {
@@ -84,7 +85,7 @@ const ResultsMain = () => {
             trim={`${trim}`}
           />
           {/*@TODO: enable when data is available*/}
-          {/*<Features />*/}
+          <Features />
           {<SalesHistory noChart={!chartUrl} chartUrl={chartUrl} />}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length > 0 && <RelatedVehicles />}

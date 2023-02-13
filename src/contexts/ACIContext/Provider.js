@@ -124,15 +124,40 @@ const ACIProvider = ({ children }) => {
         `/api/standard_table/${state.make}/${state.year}/${state.model}`
       )
       if (data) {
+        console.log(data, "model data")
         dispatch({ type: "set_trims", trimsList: data })
       }
     }
   }, [state.make, state.model, state.year])
 
-  const getOptionPricingMods = useCallback(
-    async (companyNum, year) =>
-      await aciClient.get(`/api/nada_raw_options/${companyNum}/${year}`),
-    []
+  const getOptionPricingMods = useMemo(async () => {
+    if (state.make && state.year) {
+      const { data } = await aciClient.get(
+        `/api/nada_raw_options/${state.make}/${state.year}`
+      )
+
+      console.log(data, "options")
+      dispatch({ type: "set_options", optionsList: data })
+    }
+  }, [state.make, state.year])
+
+  const setSelectedOptions = useCallback(
+    optionId => {
+      const selected = state.selectedOptions.includes(optionId)
+
+      if (selected) {
+        dispatch({
+          type: "set_selected_options",
+          selectedOptions: state.selectedOptions.filter(s => s !== optionId),
+        })
+      } else {
+        dispatch({
+          type: "set_selected_options",
+          selectedOptions: [...state.selectedOptions, optionId],
+        })
+      }
+    },
+    [state.selectedOptions]
   )
 
   const setSlugParameters = useMemo(() => {
@@ -217,6 +242,7 @@ const ACIProvider = ({ children }) => {
       getModelsByCompNumYear,
       getTrimsByMakeYearModel,
       getOptionPricingMods,
+      setSelectedOptions,
     }),
     [
       state,
@@ -240,6 +266,7 @@ const ACIProvider = ({ children }) => {
       getModelsByCompNumYear,
       getTrimsByMakeYearModel,
       getOptionPricingMods,
+      setSelectedOptions,
     ]
   )
 

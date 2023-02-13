@@ -13,6 +13,9 @@ export const initialState = {
   yearsList: [],
   modelList: [],
   trimsList: [],
+  optionsList: [],
+  selectedOptions: [],
+  standardPrice: [],
   modelsObjArr: [],
   relatedVehicles: [],
 }
@@ -39,6 +42,10 @@ export const reducer = (state, action) => {
       return { ...state, trim: action.trim }
     case "set_trims":
       return { ...state, trimsList: action.trimsList }
+    case "set_options":
+      return { ...state, optionsList: action.optionsList }
+    case "set_selected_options":
+      return { ...state, selectedOptions: action.selectedOptions }
     case "set_model_obj":
       return { ...state, modelObjArr: action.modelObjArr }
     case "set_params":

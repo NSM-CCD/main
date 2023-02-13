@@ -1,11 +1,39 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useContext, useMemo, useState } from "react"
 import CircleIcon from "./CircleIcon"
 import CircleActive from "./CircleActive"
+import { ACIContext } from "../../../contexts/ACIContext"
 
 const Features = () => {
-  const [active, setActive] = useState(2)
+  const { optionsList, selectedOptions, setSelectedOptions } =
+    useContext(ACIContext)
 
-  const handleActive = useCallback(item => setActive(item), [])
+  const handleActive = useCallback(
+    item => setSelectedOptions(item),
+    [setSelectedOptions]
+  )
+
+  const list = useMemo(
+    () =>
+      optionsList?.length > 0 &&
+      optionsList.map(option => {
+        const selected = selectedOptions.includes(option.id)
+
+        return (
+          <div
+            key={option.id}
+            className={`features-items ${selected ? "active" : ""}`}
+            onClick={() => handleActive(option.id)}
+          >
+            <div className="content">
+              <p className="item-title">{option.description}</p>
+              {/*<span className="item-description">Basic Package</span>*/}
+            </div>
+            {selected ? <CircleActive /> : <CircleIcon />}
+          </div>
+        )
+      }),
+    [optionsList, selectedOptions, handleActive]
+  )
 
   return (
     <div className="features-block">
@@ -13,51 +41,7 @@ const Features = () => {
         Does your vehicle contain any non-standard features?
       </p>
 
-      <div className="items-wrapper">
-        <div
-          className={`features-items ${active === 1 ? "active" : ""}`}
-          onClick={() => handleActive(1)}
-        >
-          <div className="content">
-            <p className="item-title">Standard Features</p>
-            <span className="item-description">Basic Package</span>
-          </div>
-          {active === 1 ? <CircleActive /> : <CircleIcon />}
-        </div>
-
-        <div
-          className={`features-items ${active === 2 ? "active" : ""}`}
-          onClick={() => handleActive(2)}
-        >
-          <div className="content">
-            <p className="item-title">Fleetwood 75 Pace Model</p>
-            <span className="item-description">Upgraded Package</span>
-          </div>
-          {active === 2 ? <CircleActive /> : <CircleIcon />}
-        </div>
-
-        <div
-          className={`features-items ${active === 3 ? "active" : ""}`}
-          onClick={() => handleActive(3)}
-        >
-          <div className="content">
-            <p className="item-title">Rear-wheel Racing Package</p>
-            <span className="item-description">Upgraded Package</span>
-          </div>
-          {active === 3 ? <CircleActive /> : <CircleIcon />}
-        </div>
-
-        <div
-          className={`features-items ${active === 4 ? "active" : ""}`}
-          onClick={() => handleActive(4)}
-        >
-          <div className="content">
-            <p className="item-title">Basic Autodrive</p>
-            <span className="item-description">Upgraded Package</span>
-          </div>
-          {active === 4 ? <CircleActive /> : <CircleIcon />}
-        </div>
-      </div>
+      <div className="items-wrapper">{list}</div>
     </div>
   )
 }

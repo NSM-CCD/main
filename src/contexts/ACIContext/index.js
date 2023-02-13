@@ -31,6 +31,9 @@ export const ACIContext = createContext({
   setRelatedVehicles: () => {
     throw new Error("Not implemented!")
   },
+  setSelectedOptions: () => {
+    throw new Error("Not implemented!")
+  },
   resetForm: () => {
     throw new Error("Not implemented!")
   },
