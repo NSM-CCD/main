@@ -20,6 +20,7 @@ const ResultsMain = () => {
     chartUrl,
     relatedVehicles,
     resetForm,
+    optionsList,
   } = useContext(ACIContext)
 
   const handleReset = useCallback(() => resetForm(), [resetForm])
@@ -85,7 +86,7 @@ const ResultsMain = () => {
             trim={`${trim}`}
           />
           {/*@TODO: enable when data is available*/}
-          <Features />
+          {optionsList?.length > 0 && <Features />}
           {<SalesHistory noChart={!chartUrl} chartUrl={chartUrl} />}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length > 0 && <RelatedVehicles />}

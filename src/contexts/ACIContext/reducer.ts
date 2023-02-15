@@ -15,9 +15,20 @@ export const initialState = {
   trimsList: [],
   optionsList: [],
   selectedOptions: [],
-  standardPrice: [],
   modelsObjArr: [],
   relatedVehicles: [],
+  standardPrice: [],
+  standardPriceArr: [],
+  listPrice: null,
+  ocwStandardPrice: [],
+  ocwStandardPriceArr: [],
+  ocwListPrice: null,
+  vmrStandardPrice: [],
+  vmrStandardPriceArr: [],
+  vmrListPrice: null,
+  standardNADA: [],
+  standardOCW: [],
+  standardVMR: [],
 }
 
 export const reducer = (state, action) => {
@@ -56,6 +67,18 @@ export const reducer = (state, action) => {
       return { ...state, chartUrl: action.chartUrl }
     case "set_description":
       return { ...state, description: action.description }
+    case "set_list_price":
+      return { ...state, listPrice: action.listPrice }
+    case "set_standard_price":
+      return { ...state, standardPrice: action.standardPrice }
+    case "set_standard_price_array":
+      return { ...state, standardPriceArr: action.standardPriceArr }
+    case "set_ocw_list_price":
+      return { ...state, ocwListPrice: action.ocwListPrice }
+    case "set_ocw_standard_price":
+      return { ...state, ocwStandardPrice: action.ocwStandardPrice }
+    case "set_ocw_standard_price_array":
+      return { ...state, ocwStandardPriceArr: action.ocwStandardPriceArr }
     default:
       return state
   }

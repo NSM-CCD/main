@@ -7,6 +7,7 @@ export const ACIContext = createContext({
   makeOptions: [],
   modelOptions: [],
   trimOptions: [],
+  listOptions: [],
   setIsFormSubmitted: () => {
     throw new Error("Not implemented!")
   },
@@ -28,13 +29,16 @@ export const ACIContext = createContext({
   setTrim: () => {
     throw new Error("Not implemented!")
   },
+  setList: () => {
+    throw new Error("Not implemented")
+  },
   setRelatedVehicles: () => {
     throw new Error("Not implemented!")
   },
-  setSelectedOptions: () => {
+  resetForm: () => {
     throw new Error("Not implemented!")
   },
-  resetForm: () => {
+  setSelectedOptions: () => {
     throw new Error("Not implemented!")
   },
 })

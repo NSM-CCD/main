@@ -104,7 +104,7 @@ const ACIProvider = ({ children }) => {
         // save original model obj
         dispatch({
           type: "set_model_obj",
-          modelObjArr: data, // modelPayload
+          modelObjArr: data.filter(m => m.entryId === 1 || m.entryId === 5),
         })
         data.forEach(model => {
           if (model?.entryId === 1 || model?.entryId === 5) {
@@ -113,6 +113,7 @@ const ACIProvider = ({ children }) => {
           }
         })
       }
+      // model options "Select model"
       dispatch({ type: "set_models", modelList: modelOptions })
     }
   }, [state.make, state.year])
@@ -128,34 +129,225 @@ const ACIProvider = ({ children }) => {
     }
   }, [state.make, state.model, state.year])
 
+  const getStandardDataByMakeYearModelTrim = useMemo(async () => {
+    if (state.make && state.model && state.year && state.trim) {
+      try {
+        console.log("Fetching data...")
+        const { data } = await aciClient.get(
+          `/api/standard_table/${state.make}/${state.year}`
+        )
+
+        // NADA Pricing
+        let standardPrice = []
+        let standardPriceArr = []
+        let listPrice = null
+        const standardData = data
+          .filter(m => m?.entryId === 1 || m?.entryId === 5)
+          .filter(
+            m =>
+              m?.companynum === state.make &&
+              m?.modelyear === state.year &&
+              m?.modelcat === state.model &&
+              m?.model === state.trim
+          )
+          .map(m => {
+            const low = m?.valuelow
+            const avg = m?.valueavg
+            const high = m?.valuehigh
+
+            // Sets standard price array for math in graph and table
+            standardPrice.push(low, avg, high)
+
+            const standardPriceObj = {
+              low: low
+                ? low.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              avg: avg
+                ? avg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              high: high
+                ? high.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+            }
+
+            // standardPriceArr: Sets values for the table by pushing the above Object to an array
+            standardPriceArr.push(standardPriceObj)
+
+            // listPrice: Sets list price for a users final selection - display only, no math
+            if (m?.valuelist === 0 || m?.valuelist === null) {
+              listPrice = "n/a"
+            } else {
+              let num = m?.valuelist
+              listPrice = num
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            }
+
+            return standardPriceObj
+          })
+
+        // @Todo remove before deploy - for testing purpose
+        console.log(standardPrice, "standard Price")
+        console.log(standardPriceArr, "standard Price array")
+        console.log(listPrice)
+
+        dispatch({ type: "set_standard_price", standardPrice })
+        dispatch({ type: "set_standard_price_array", standardPriceArr })
+        dispatch({ type: "set_list_price", listPrice })
+
+        // OCW
+        let ocwStandardPrice = []
+        let ocwStandardPriceArr = []
+        let ocwListPrice = null
+
+        const ocwData = data
+          .filter(m => m?.entryId === 2)
+          .filter(
+            m =>
+              m?.companynum === state.make &&
+              m?.modelyear === state.year &&
+              m?.modelcat === state.model &&
+              m?.model === state.trim
+          )
+          .map(m => {
+            const low = m?.valuelow
+            const lowavg = m?.valuelowavg
+            const avg = m?.valueavg
+            const highavg = m?.valuehighavg
+            const high = m?.valuehigh
+
+            // Sets OCW - standard price array for math in graph and table
+            ocwStandardPrice.push(low, lowavg, avg, highavg, high)
+
+            const ocwStandardPriceObj = {
+              low: low
+                ? low.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              midavg: lowavg
+                ? lowavg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              avg: avg
+                ? avg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              midhavg: highavg
+                ? highavg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              high: high
+                ? high.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+            }
+
+            // standardPriceArr: Sets values for the table by pushing the above Object to an array
+            ocwStandardPriceArr.push(ocwStandardPriceObj)
+
+            // listPrice: Sets list price for a users final selection - display only, no math
+            if (m?.valuelist === 0 || m?.valuelist == null) {
+              ocwListPrice = "n/a"
+            } else {
+              let num = m?.valuelist
+              ocwListPrice = num
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            }
+
+            return ocwStandardPriceObj
+          })
+
+        // @Todo remove before deploy - for testing purpose
+        console.log(ocwStandardPrice, "standard Price")
+        console.log(ocwStandardPriceArr, "standard Price array")
+        console.log(ocwListPrice)
+
+        dispatch({ type: "set_ocw_standard_price", ocwStandardPrice })
+        dispatch({ type: "set_ocw-standard_price_array", ocwStandardPriceArr })
+        dispatch({ type: "set_ocw_list_price", ocwListPrice })
+
+        // VMR
+        let vmrStandardPrice = []
+        let vmrStandardPriceArr = []
+        let vmrListPrice = null
+
+        const vmrData = data
+          .filter(m => m?.entryId === 3 || m?.entryId === 4)
+          .filter(
+            m =>
+              m?.companynum === state.make &&
+              m?.modelyear === state.year &&
+              m?.modelcat === state.model &&
+              m?.model === state.trim
+          )
+          .map(m => {
+            const low = m?.valuelow
+            const lowavg = m?.valuelowavg
+            const avg = m?.valueavg
+            const highavg = m?.valuehighavg
+            const high = m?.valuehigh
+
+            // Sets VMR - standard price array for math in graph and table
+            if (m?.entryId === 3) {
+              vmrStandardPrice.push(low, lowavg, highavg, high)
+            } else if (m?.entryId === 4) {
+              vmrStandardPrice.push(low, lowavg, avg, highavg, high)
+            }
+
+            const vmrStandardPriceObj = {
+              low: low
+                ? low.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              midavg: lowavg
+                ? lowavg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              midhavg: highavg
+                ? highavg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+              high: high
+                ? high.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                : "N/A",
+            }
+
+            if (m?.entryId === 3) {
+              vmrStandardPriceObj.avg = null
+            } else if (m?.entryId === 4) {
+              vmrStandardPriceObj.avg = avg
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            }
+
+            // standardPriceArr: Sets values for the table by pushing the above Object to an array
+            vmrStandardPriceArr.push(vmrStandardPriceObj)
+
+            // listPrice: Sets list price for a users final selection - display only, no math
+            if (m?.valuelist === 0 || m?.valuelist === null) {
+              vmrListPrice = "n/a"
+            } else {
+              let num = x["valuelist"]
+              vmrListPrice = num
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            }
+
+            return vmrStandardPriceObj
+          })
+
+        dispatch({ type: "set_nada", standardNADA: standardData })
+        dispatch({ type: "set_ocw", standardOCW: ocwData })
+        dispatch({ type: "set_vmr", standardVMR: vmrData })
+
+        dispatch({
+          type: "set_standard",
+          priceList: [...standardData, ...ocwData, ...vmrData],
+        })
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+  }, [state.make, state.model, state.year, state.trim])
+
   const getOptionPricingMods = useMemo(async () => {
     if (state.make && state.year) {
       const { data } = await aciClient.get(
         `/api/nada_raw_options/${state.make}/${state.year}`
       )
-
-      let arr = []
-      for (let i in data) {
-        let x = data[i]
-        let objA = {
-          id: x["id"],
-          optionnum: x["optionnum"],
-          desc: x["description"],
-          // math values
-          valuelow: x["valuelow"],
-          valueavg: x["valueavg"],
-          valuehigh: x["valuehigh"],
-          valuepercent: x["valuepercent"],
-          // display values
-          vLd: null,
-          vAd: null,
-          vHd: null,
-          vP: null,
-        }
-        arr.push(objA)
-      }
-
-      console.log(arr, "arr")
 
       dispatch({ type: "set_options", optionsList: data })
     }
@@ -190,7 +382,6 @@ const ACIProvider = ({ children }) => {
       year: state.year,
       trim: state.trim,
     }
-
     dispatch({ type: "set_params", slugParams: JSON.stringify(reportObj) })
   }, [state.make, state.makeLabel, state.model, state.year, state.trim])
 
@@ -264,6 +455,8 @@ const ACIProvider = ({ children }) => {
       getModelsByCompNumYear,
       getTrimsByMakeYearModel,
       getOptionPricingMods,
+      //listOptions,
+      getStandardDataByMakeYearModelTrim,
       setSelectedOptions,
     }),
     [
@@ -288,6 +481,8 @@ const ACIProvider = ({ children }) => {
       getModelsByCompNumYear,
       getTrimsByMakeYearModel,
       getOptionPricingMods,
+      //listOptions,
+      getStandardDataByMakeYearModelTrim,
       setSelectedOptions,
     ]
   )
