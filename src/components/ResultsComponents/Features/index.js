@@ -7,8 +7,10 @@ const Features = () => {
   const { optionsList, selectedOptions, setSelectedOptions } =
     useContext(ACIContext)
 
+  console.log(selectedOptions, "yes")
+
   const handleActive = useCallback(
-    item => setSelectedOptions(item),
+    option => setSelectedOptions(option),
     [setSelectedOptions]
   )
 
@@ -16,13 +18,13 @@ const Features = () => {
     () =>
       optionsList?.length > 0 &&
       optionsList.map(option => {
-        const selected = selectedOptions.includes(option.id)
+        const selected = selectedOptions.find(s => s.id === option.id)
 
         return (
           <div
             key={option.id}
             className={`features-items ${selected ? "active" : ""}`}
-            onClick={() => handleActive(option.id)}
+            onClick={() => handleActive(option)}
           >
             <div className="content">
               <p className="item-title">{option.description}</p>

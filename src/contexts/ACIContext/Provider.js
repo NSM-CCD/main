@@ -104,7 +104,7 @@ const ACIProvider = ({ children }) => {
         // save original model obj
         dispatch({
           type: "set_model_obj",
-          modelObjArr: data.filter(m => m.entryId === 1 || m.entryId === 5),
+          modelObjArr: data, // modelPayload
         })
         data.forEach(model => {
           if (model?.entryId === 1 || model?.entryId === 5) {
@@ -113,7 +113,6 @@ const ACIProvider = ({ children }) => {
           }
         })
       }
-      // model options "Select model"
       dispatch({ type: "set_models", modelList: modelOptions })
     }
   }, [state.make, state.year])
@@ -124,7 +123,6 @@ const ACIProvider = ({ children }) => {
         `/api/standard_table/${state.make}/${state.year}/${state.model}`
       )
       if (data) {
-        console.log(data, "model data")
         dispatch({ type: "set_trims", trimsList: data })
       }
     }
@@ -136,24 +134,48 @@ const ACIProvider = ({ children }) => {
         `/api/nada_raw_options/${state.make}/${state.year}`
       )
 
-      console.log(data, "options")
+      let arr = []
+      for (let i in data) {
+        let x = data[i]
+        let objA = {
+          id: x["id"],
+          optionnum: x["optionnum"],
+          desc: x["description"],
+          // math values
+          valuelow: x["valuelow"],
+          valueavg: x["valueavg"],
+          valuehigh: x["valuehigh"],
+          valuepercent: x["valuepercent"],
+          // display values
+          vLd: null,
+          vAd: null,
+          vHd: null,
+          vP: null,
+        }
+        arr.push(objA)
+      }
+
+      console.log(arr, "arr")
+
       dispatch({ type: "set_options", optionsList: data })
     }
   }, [state.make, state.year])
 
   const setSelectedOptions = useCallback(
-    optionId => {
-      const selected = state.selectedOptions.includes(optionId)
+    option => {
+      const selected = state.selectedOptions.find(s => s.id === option.id)
 
       if (selected) {
         dispatch({
           type: "set_selected_options",
-          selectedOptions: state.selectedOptions.filter(s => s !== optionId),
+          selectedOptions: state.selectedOptions.filter(
+            s => s.id !== option.id
+          ),
         })
       } else {
         dispatch({
           type: "set_selected_options",
-          selectedOptions: [...state.selectedOptions, optionId],
+          selectedOptions: [...state.selectedOptions, option],
         })
       }
     },

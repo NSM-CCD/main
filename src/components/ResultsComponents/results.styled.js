@@ -160,6 +160,11 @@ export const ResultsWrapper = styled.div`
               font-size: 16px;
               line-height: 24px;
               color: #3a576f;
+
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              width: 305px;
             }
 
             .item-description {
