@@ -9,6 +9,7 @@ import Link from "../../utils/link"
 import { Link as ScrollLink } from "react-scroll"
 import { ACIContext } from "../../contexts/ACIContext"
 import Features from "./Features"
+import ValuationTable from "./ValuationTable"
 
 const ResultsMain = () => {
   const {
@@ -85,6 +86,7 @@ const ResultsMain = () => {
             carName={`${year} ${makeLabel} ${model}`}
             trim={`${trim}`}
           />
+          <ValuationTable />
           {/*@TODO: enable when data is available*/}
           {optionsList?.length > 0 && <Features />}
           {<SalesHistory noChart={!chartUrl} chartUrl={chartUrl} />}

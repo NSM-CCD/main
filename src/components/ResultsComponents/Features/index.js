@@ -7,8 +7,6 @@ const Features = () => {
   const { optionsList, selectedOptions, setSelectedOptions } =
     useContext(ACIContext)
 
-  console.log(selectedOptions, "yes")
-
   const handleActive = useCallback(
     option => setSelectedOptions(option),
     [setSelectedOptions]

@@ -29,6 +29,9 @@ export const initialState = {
   standardNADA: [],
   standardOCW: [],
   standardVMR: [],
+  optionMods: [],
+  modifiedPriceArr: [],
+  modifiedPrice: [],
 }
 
 export const reducer = (state, action) => {
@@ -91,6 +94,12 @@ export const reducer = (state, action) => {
       return { ...state, standardOCW: action.standardOCW }
     case "set_vmr":
       return { ...state, standardVMR: action.standardVMR }
+    case "set_option_mods":
+      return { ...state, optionMods: action.optionMods }
+    case "set_modified_price_array":
+      return { ...state, modifiedPriceArr: action.modifiedPriceArr }
+    case "set_modified_price":
+      return { ...state, modifiedPrice: action.modifiedPrice }
     default:
       return state
   }

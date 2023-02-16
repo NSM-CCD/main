@@ -141,6 +141,7 @@ const ACIProvider = ({ children }) => {
         let standardPrice = []
         let standardPriceArr = []
         let listPrice = null
+
         const standardData = data
           .filter(m => m?.entryId === 1 || m?.entryId === 5)
           .filter(
@@ -185,11 +186,6 @@ const ACIProvider = ({ children }) => {
 
             return standardPriceObj
           })
-
-        // @Todo remove before deploy - for testing purpose
-        console.log(standardPrice, "standard Price")
-        console.log(standardPriceArr, "standard Price array")
-        console.log(listPrice)
 
         dispatch({ type: "set_standard_price", standardPrice })
         dispatch({ type: "set_standard_price_array", standardPriceArr })
@@ -253,13 +249,8 @@ const ACIProvider = ({ children }) => {
             return ocwStandardPriceObj
           })
 
-        // @Todo remove before deploy - for testing purpose
-        console.log(ocwStandardPrice, "standard Price")
-        console.log(ocwStandardPriceArr, "standard Price array")
-        console.log(ocwListPrice)
-
         dispatch({ type: "set_ocw_standard_price", ocwStandardPrice })
-        dispatch({ type: "set_ocw-standard_price_array", ocwStandardPriceArr })
+        dispatch({ type: "set_ocw_standard_price_array", ocwStandardPriceArr })
         dispatch({ type: "set_ocw_list_price", ocwListPrice })
 
         // VMR
@@ -326,14 +317,9 @@ const ACIProvider = ({ children }) => {
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
             }
 
-            // @Todo remove before deploy - for testing purpose
-            console.log(vmrStandardPrice, "standard Price")
-            console.log(vmrStandardPriceArr, "standard Price array")
-            console.log(vmrListPrice)
-
             dispatch({ type: "set_vmr_standard_price", vmrStandardPrice })
             dispatch({
-              type: "set_vmr-standard_price_array",
+              type: "set_vmr_standard_price_array",
               vmrStandardPriceArr,
             })
             dispatch({ type: "set_vmr_list_price", vmrListPrice })
@@ -380,6 +366,147 @@ const ACIProvider = ({ children }) => {
     },
     [state.selectedOptions]
   )
+
+  const setModOptionsModifiedPriceArr = useMemo(() => {
+    let optionMods = []
+    let standardPrice = state.standardPrice
+    let optionsSelected = state.selectedOptions
+
+    for (let i in optionsSelected) {
+      let thisOption = optionsSelected[i]
+
+      if (!(thisOption["valuepercent"] === 0)) {
+        let perc = thisOption["valuepercent"] / 100
+        thisOption["valuelow"] = Math.ceil(standardPrice[0] * perc)
+        thisOption["valueavg"] = Math.ceil(standardPrice[1] * perc)
+        thisOption["valuehigh"] = Math.ceil(standardPrice[2] * perc)
+        thisOption["vP"] = thisOption["valuepercent"] + "%"
+        optionMods.push(thisOption)
+      } else if (thisOption["valuepercent"] === 0) {
+        thisOption["vP"] = "n/a"
+        optionMods.push(thisOption)
+      }
+    }
+    // Set the options needed by the table to display the math/addition per column
+    // this is the array of objects needed by the table
+    console.log(optionMods, "initial")
+    dispatch({ type: "set_option_mods", optionMods })
+
+    // This section is for calculating the amount by which we'll modify the final price
+    let priceChanges = []
+    for (let i in optionMods) {
+      let thisOption = optionMods[i]
+      let s = state.standardPrice
+
+      // If percent val, and not flat val
+      if (!(thisOption["valuepercent"] === 0)) {
+        if (priceChanges.length === 0) {
+          let l = Math.ceil(s[0] * (thisOption["valuepercent"] / 100))
+          let a = Math.ceil(s[1] * (thisOption["valuepercent"] / 100))
+          let h = Math.ceil(s[2] * (thisOption["valuepercent"] / 100))
+          priceChanges.push(l, a, h)
+        } else if (priceChanges.length > 0) {
+          priceChanges[0] =
+            priceChanges[0] +
+            Math.ceil(s[0] * (thisOption["valuepercent"] / 100))
+          priceChanges[1] =
+            priceChanges[1] +
+            Math.ceil(s[1] * (thisOption["valuepercent"] / 100))
+          priceChanges[2] =
+            priceChanges[2] +
+            Math.ceil(s[2] * (thisOption["valuepercent"] / 100))
+        }
+      } else if (thisOption["valuepercent"] === 0) {
+        if (priceChanges.length === 0) {
+          priceChanges.push(
+            thisOption["valuelow"],
+            thisOption["valueavg"],
+            thisOption["valuehigh"]
+          )
+        } else {
+          priceChanges[0] = priceChanges[0] + thisOption["valuelow"]
+          priceChanges[1] = priceChanges[1] + thisOption["valueavg"]
+          priceChanges[2] = priceChanges[2] + thisOption["valuehigh"]
+        }
+      }
+    }
+
+    // Mapping failed due to nesting variables inside arrow-function
+    // let modifiedPriceFinal = modifiedPrice.map(x => x + 10000);
+    let modifiedPriceFinal = []
+    if (!(priceChanges.length === 0)) {
+      // FLAG: this if could be where the logic deviates, trace it origin
+      for (let i in priceChanges) {
+        modifiedPriceFinal.push(standardPrice[i] + priceChanges[i])
+      }
+      // This is the array needed by the graph //if mPF[0] == 0 (MP = )
+      dispatch({
+        type: "set_modified_price",
+        modifiedPrice: modifiedPriceFinal,
+      })
+      // This is the Obj needed by the array for the table's final price
+      let modifiedPriceArr = []
+      let low = modifiedPriceFinal[0]
+      let avg = modifiedPriceFinal[1]
+      let high = modifiedPriceFinal[2]
+      let modifiedPriceObj = {
+        desc: "NADA total",
+        l: low.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
+        a: avg.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
+        h: high.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
+      }
+
+      modifiedPriceArr.push(modifiedPriceObj)
+      dispatch({ type: "set_modified_price_array", modifiedPriceArr })
+    } else {
+      dispatch({
+        type: "set_modified_price",
+        modifiedPrice: state.standardPrice,
+      })
+      dispatch({ type: "set_modified_price_array", modifiedPriceArr: [] })
+    }
+
+    // OptionsMods formatted for display
+    for (let i in optionMods) {
+      let thisOption = optionMods[i]
+
+      // adding + symbol if the int is pos.
+      if (Math.sign(thisOption["valuelow"]) === 1) {
+        let num = thisOption["valuelow"]
+        thisOption["vLd"] =
+          "+" + num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+      if (Math.sign(thisOption["valueavg"]) === 1) {
+        let num = thisOption["valueavg"]
+        thisOption["vAd"] =
+          "+" + num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+      if (Math.sign(thisOption["valuehigh"]) === 1) {
+        let num = thisOption["valuehigh"]
+        thisOption["vHd"] =
+          "+" + num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+      // adding space if the int is neg
+      if (Math.sign(thisOption["valuelow"]) === -1) {
+        let num = thisOption["valuelow"]
+        thisOption["vLd"] = num
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+      if (Math.sign(thisOption["valueavg"]) === -1) {
+        let num = thisOption["valueavg"]
+        thisOption["vAd"] = num
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+      if (Math.sign(thisOption["valuehigh"]) === -1) {
+        let num = thisOption["valuehigh"]
+        thisOption["vHd"] = num
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+      }
+    }
+  }, [state.selectedOptions, state.standardPrice])
 
   const setSlugParameters = useMemo(() => {
     const reportObj = {
@@ -462,9 +589,9 @@ const ACIProvider = ({ children }) => {
       getModelsByCompNumYear,
       getTrimsByMakeYearModel,
       getOptionPricingMods,
-      //listOptions,
       getStandardDataByMakeYearModelTrim,
       setSelectedOptions,
+      setModOptionsModifiedPriceArr,
     }),
     [
       state,
@@ -488,9 +615,9 @@ const ACIProvider = ({ children }) => {
       getModelsByCompNumYear,
       getTrimsByMakeYearModel,
       getOptionPricingMods,
-      //listOptions,
       getStandardDataByMakeYearModelTrim,
       setSelectedOptions,
+      setModOptionsModifiedPriceArr,
     ]
   )
 
