@@ -92,8 +92,10 @@ const ValuationTable = () => {
           <thead>
             <tr>
               <th>Source</th>
-              <th>5: Low</th>
-              <th>4: Mid-low</th>
+              <th>{vmrStandardPriceArr[0]?.avg !== null ? "5" : "4"}: Low</th>
+              <th>
+                {vmrStandardPriceArr[0]?.avg !== null ? "4" : "3"}: Mid-low
+              </th>
               {vmrStandardPriceArr[0]?.avg !== null && <th>3: Avg</th>}
               <th>2: Mid-high</th>
               <th>1: High</th>

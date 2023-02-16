@@ -144,8 +144,8 @@ export const ResultsWrapper = styled.div`
             width: 100%;
 
             @media (min-width: 768px) {
-              flex: 1;
-              flex-basis: 100%;
+              flex: 0 48%;
+              max-width: 437px;
             }
 
             &.active {
