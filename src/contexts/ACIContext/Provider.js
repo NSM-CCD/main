@@ -320,11 +320,23 @@ const ACIProvider = ({ children }) => {
             if (m?.valuelist === 0 || m?.valuelist === null) {
               vmrListPrice = "n/a"
             } else {
-              let num = x["valuelist"]
+              let num = m?.valuelist
               vmrListPrice = num
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
             }
+
+            // @Todo remove before deploy - for testing purpose
+            console.log(vmrStandardPrice, "standard Price")
+            console.log(vmrStandardPriceArr, "standard Price array")
+            console.log(vmrListPrice)
+
+            dispatch({ type: "set_vmr_standard_price", vmrStandardPrice })
+            dispatch({
+              type: "set_vmr-standard_price_array",
+              vmrStandardPriceArr,
+            })
+            dispatch({ type: "set_vmr_list_price", vmrListPrice })
 
             return vmrStandardPriceObj
           })
@@ -332,11 +344,6 @@ const ACIProvider = ({ children }) => {
         dispatch({ type: "set_nada", standardNADA: standardData })
         dispatch({ type: "set_ocw", standardOCW: ocwData })
         dispatch({ type: "set_vmr", standardVMR: vmrData })
-
-        dispatch({
-          type: "set_standard",
-          priceList: [...standardData, ...ocwData, ...vmrData],
-        })
       } catch (error) {
         console.error("Error fetching data:", error)
       }

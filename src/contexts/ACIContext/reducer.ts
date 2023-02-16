@@ -79,6 +79,18 @@ export const reducer = (state, action) => {
       return { ...state, ocwStandardPrice: action.ocwStandardPrice }
     case "set_ocw_standard_price_array":
       return { ...state, ocwStandardPriceArr: action.ocwStandardPriceArr }
+    case "set_vmr_list_price":
+      return { ...state, vmrListPrice: action.vmrListPrice }
+    case "set_vmr_standard_price":
+      return { ...state, vmrStandardPrice: action.vmrStandardPrice }
+    case "set_vmr_standard_price_array":
+      return { ...state, vmrStandardPriceArr: action.vmrStandardPriceArr }
+    case "set_nada":
+      return { ...state, standardNADA: action.standardNADA }
+    case "set_ocw":
+      return { ...state, standardOCW: action.standardOCW }
+    case "set_vmr":
+      return { ...state, standardVMR: action.standardVMR }
     default:
       return state
   }
