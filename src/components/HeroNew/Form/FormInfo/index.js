@@ -143,6 +143,7 @@ const FormInfo = ({ onClose }) => {
           <a
             href="https://americancollectors.com/terms-of-use/"
             target="_blank"
+            rel="noreferrer"
           >
             Terms
           </a>
@@ -150,6 +151,7 @@ const FormInfo = ({ onClose }) => {
           <a
             href="https://americancollectors.com/privacy-policy/"
             target="_blank"
+            rel="noreferrer"
           >
             Privacy Policy
           </a>

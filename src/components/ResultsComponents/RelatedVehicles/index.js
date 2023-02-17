@@ -6,10 +6,13 @@ const RelatedVehicles = () => {
   const { relatedVehicles, trim, makeLabel, model, setTrim } =
     useContext(ACIContext)
 
-  const handleLoadRelatedVehicle = useCallback(related => {
-    setTrim(related)
-    navigate("/")
-  }, [])
+  const handleLoadRelatedVehicle = useCallback(
+    related => {
+      setTrim(related)
+      navigate("/")
+    },
+    [setTrim]
+  )
 
   return (
     <div className="related-vehicles" id="relatedVehicles">

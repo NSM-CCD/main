@@ -33,8 +33,8 @@ const ValuationTable = () => {
               <td>${standardPriceArr[0]?.avg}</td>
               <td>${standardPriceArr[0]?.high}</td>
             </tr>
-            {optionMods?.map(item => (
-              <tr key={item?.id}>
+            {optionMods?.map((item, idx) => (
+              <tr key={item?.id + idx}>
                 <td></td>
                 {optionMods?.length > 0 && <td>{item.description}</td>}
                 <td>{item.vLd}</td>

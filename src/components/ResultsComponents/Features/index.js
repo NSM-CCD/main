@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react"
+import React, { useCallback, useContext, useMemo } from "react"
 import CircleIcon from "./CircleIcon"
 import CircleActive from "./CircleActive"
 import { ACIContext } from "../../../contexts/ACIContext"

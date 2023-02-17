@@ -123,7 +123,11 @@ const Hero = () => {
                 <div className="trustbar-logos">
                   {!isWiderScreen
                     ? mobileLogos.map((logo, idx) => (
-                        <a href={trustBarLinks[logo]} target="_blank">
+                        <a
+                          href={trustBarLinks[logo]}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           <img
                             key={`image-${idx}`}
                             src={trustBarLogos[`${logo}Logo`]}
@@ -133,7 +137,11 @@ const Hero = () => {
                         </a>
                       ))
                     : desktopLogos.map((logo, idx) => (
-                        <a href={trustBarLinks[logo]} target="_blank">
+                        <a
+                          href={trustBarLinks[logo]}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           <img
                             key={`image-${idx}`}
                             src={trustBarLogos[`${logo}Logo`]}

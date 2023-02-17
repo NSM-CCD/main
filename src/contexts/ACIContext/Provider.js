@@ -393,7 +393,6 @@ const ACIProvider = ({ children }) => {
     }
     // Set the options needed by the table to display the math/addition per column
     // this is the array of objects needed by the table
-    console.log(optionMods, "initial")
     dispatch({ type: "set_option_mods", optionMods })
 
     // This section is for calculating the amount by which we'll modify the final price
