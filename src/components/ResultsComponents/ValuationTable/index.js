@@ -12,13 +12,6 @@ const ValuationTable = () => {
     modifiedPriceArr,
   } = useContext(ACIContext)
 
-  console.log(standardPriceArr, "nada")
-  console.log(ocwStandardPriceArr, "ocw")
-  console.log(vmrStandardPriceArr, "vmr")
-  console.log(optionMods, "option mods")
-  console.log(modifiedPriceArr, "modified price array")
-  console.log(selectedOptions, "selected options")
-
   return (
     <TableMain>
       {standardPriceArr?.length > 0 && (

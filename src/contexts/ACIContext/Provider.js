@@ -187,6 +187,10 @@ const ACIProvider = ({ children }) => {
             return standardPriceObj
           })
 
+        dispatch({
+          type: "set_modified_price",
+          modifiedPrice: standardPrice,
+        })
         dispatch({ type: "set_standard_price", standardPrice })
         dispatch({ type: "set_standard_price_array", standardPriceArr })
         dispatch({ type: "set_list_price", listPrice })
