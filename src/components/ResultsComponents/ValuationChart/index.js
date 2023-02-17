@@ -6,10 +6,6 @@ const ValuationChart = () => {
   const { modifiedPrice, ocwStandardPrice, vmrStandardPrice } =
     useContext(ACIContext)
 
-  console.log(modifiedPrice, "modified")
-  console.log(ocwStandardPrice, "ocw")
-  console.log(vmrStandardPrice, "vmr")
-
   const options = useMemo(
     () => ({
       chart: {
@@ -113,9 +109,9 @@ const ValuationChart = () => {
         rotate: -45,
         offsetX: 5,
         formatter: function (val) {
-          if (val == 2) {
+          if (val === 2) {
             return "NADA"
-          } else if (val == 1) {
+          } else if (val === 1) {
             return "OCRPG"
           } else {
             return ""
@@ -136,9 +132,9 @@ const ValuationChart = () => {
         rotate: -45,
         offsetX: 5,
         formatter: function (val) {
-          if (val == 2) {
+          if (val === 2) {
             return "NADA"
-          } else if (val == 1) {
+          } else if (val === 1) {
             return "VMR"
           } else {
             return ""
@@ -159,11 +155,11 @@ const ValuationChart = () => {
         rotate: -45,
         offsetX: 5,
         formatter: function (val) {
-          if (val == 3) {
+          if (val === 3) {
             return "NADA"
-          } else if (val == 2) {
+          } else if (val === 2) {
             return "OCRPG"
-          } else if (val == 1) {
+          } else if (val === 1) {
             return "VMR"
           } else {
             return ""
@@ -285,25 +281,24 @@ const ValuationChart = () => {
     vmrStandardPrice,
   ])
 
-  console.log(series, "updated")
-
-  const chartSizer = () => {
+  const chartSizer = useCallback(() => {
     if (window.screen.width > 1000) {
       return 700
     } else {
       return window.screen.width * 0.75
     }
-  }
+  }, [])
+
+  const chartRenderer = useMemo(
+    () => <Chart options={options} series={series} width={chartSizer()} />,
+    [options, series, chartSizer]
+  )
 
   useEffect(() => {
     fillData()
   }, [fillData, modifiedPrice])
 
-  return (
-    <div className="d-flex justify-content-center">
-      <Chart options={options} series={series} width={chartSizer()} />
-    </div>
-  )
+  return <div className="d-flex justify-content-center">{chartRenderer}</div>
 }
 
 export default ValuationChart
