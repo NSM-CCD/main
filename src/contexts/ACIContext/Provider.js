@@ -157,7 +157,7 @@ const ACIProvider = ({ children }) => {
           .filter(
             m =>
               m?.companynum === state.make &&
-              parseInt(m?.modelyear) === state.year &&
+              m?.modelyear == state.year &&
               m?.modelcat === state.model &&
               m?.model === state.trim
           )
@@ -215,7 +215,7 @@ const ACIProvider = ({ children }) => {
           .filter(
             m =>
               m?.companynum === state.make &&
-              parseInt(m?.modelyear) === state.year &&
+              m?.modelyear == state.year &&
               m?.modelcat === state.model &&
               m?.model === state.trim
           )
@@ -277,7 +277,7 @@ const ACIProvider = ({ children }) => {
           .filter(
             m =>
               m?.companynum === state.make &&
-              parseInt(m?.modelyear) === state.year &&
+              m?.modelyear == state.year &&
               m?.modelcat === state.model &&
               m?.model === state.trim
           )
