@@ -19,12 +19,23 @@ const ACIProvider = ({ children }) => {
   const [createMarketWidgetFromTaxonomyName, { error }] =
     useMutation(MARKET_WIDGET)
 
-  const setYear = useCallback(year => dispatch({ type: "set_year", year }), [])
-  const setMake = useCallback(make => dispatch({ type: "set_make", make }), [])
+  const setYear = useCallback(year => {
+    dispatch({ type: "set_year", year })
+    dispatch({ type: "set_description", description: "" })
+    dispatch({ type: "set_chart", chartUrl: "" })
+  }, [])
+
+  const setMake = useCallback(make => {
+    dispatch({ type: "set_make", make })
+    dispatch({ type: "set_description", description: "" })
+    dispatch({ type: "set_chart", chartUrl: "" })
+  }, [])
+
   const setModel = useCallback(
     model => dispatch({ type: "set_model", model }),
     []
   )
+
   const setMakeLabel = useCallback(
     makeLabel => dispatch({ type: "set_label", makeLabel }),
     []
@@ -132,7 +143,6 @@ const ACIProvider = ({ children }) => {
   const getStandardDataByMakeYearModelTrim = useMemo(async () => {
     if (state.make && state.model && state.year && state.trim) {
       try {
-        console.log("Fetching data...")
         const { data } = await aciClient.get(
           `/api/standard_table/${state.make}/${state.year}`
         )
@@ -147,7 +157,7 @@ const ACIProvider = ({ children }) => {
           .filter(
             m =>
               m?.companynum === state.make &&
-              m?.modelyear === state.year &&
+              parseInt(m?.modelyear) === state.year &&
               m?.modelcat === state.model &&
               m?.model === state.trim
           )
@@ -205,7 +215,7 @@ const ACIProvider = ({ children }) => {
           .filter(
             m =>
               m?.companynum === state.make &&
-              m?.modelyear === state.year &&
+              parseInt(m?.modelyear) === state.year &&
               m?.modelcat === state.model &&
               m?.model === state.trim
           )
@@ -267,7 +277,7 @@ const ACIProvider = ({ children }) => {
           .filter(
             m =>
               m?.companynum === state.make &&
-              m?.modelyear === state.year &&
+              parseInt(m?.modelyear) === state.year &&
               m?.modelcat === state.model &&
               m?.model === state.trim
           )
@@ -530,6 +540,8 @@ const ACIProvider = ({ children }) => {
       setModel("")
       setTrim("")
       dispatch({ type: "set_is_year", isYear })
+      dispatch({ type: "set_description", description: "" })
+      dispatch({ type: "set_chart", chartUrl: "" })
     },
     [setYear, setMake, setMakeLabel, setModel, setTrim]
   )
@@ -540,6 +552,8 @@ const ACIProvider = ({ children }) => {
     setMakeLabel("")
     setModel("")
     setTrim("")
+    dispatch({ type: "set_description", description: "" })
+    dispatch({ type: "set_chart", chartUrl: "" })
   }, [setYear, setMake, setMakeLabel, setModel, setTrim])
 
   useEffect(() => {

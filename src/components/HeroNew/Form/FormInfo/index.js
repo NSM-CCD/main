@@ -66,7 +66,7 @@ const FormInfo = ({ onClose }) => {
         )
         .then(() => {
           toast.success("Success! Generating report...", {
-            autoClose: 2000,
+            autoClose: 1500,
             onClose: () => {
               setSubmitting(false)
               navigate(`/results?rdata=${btoa(slugParams)}`)
