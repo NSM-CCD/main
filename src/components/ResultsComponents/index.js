@@ -68,7 +68,7 @@ const ResultsMain = () => {
               Model Overview
             </ScrollLink>
           )}
-          {relatedVehicles?.length > 0 && (
+          {relatedVehicles?.length - 1 > 0 && (
             <ScrollLink
               spy
               smooth
@@ -93,7 +93,7 @@ const ResultsMain = () => {
           <ValuationTable />
           {<SalesHistory noChart={!chartUrl} chartUrl={chartUrl} />}
           {description && <ModelOverview description={description} />}
-          {relatedVehicles?.length > 0 && <RelatedVehicles />}
+          {relatedVehicles?.length - 1 > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>
             <span>
               Looking to get the valuation of another car? Restart calculation
