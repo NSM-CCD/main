@@ -23,12 +23,20 @@ const ACIProvider = ({ children }) => {
     dispatch({ type: "set_year", year })
     dispatch({ type: "set_description", description: "" })
     dispatch({ type: "set_chart", chartUrl: "" })
+    dispatch({
+      type: "set_selected_options",
+      selectedOptions: [],
+    })
   }, [])
 
   const setMake = useCallback(make => {
     dispatch({ type: "set_make", make })
     dispatch({ type: "set_description", description: "" })
     dispatch({ type: "set_chart", chartUrl: "" })
+    dispatch({
+      type: "set_selected_options",
+      selectedOptions: [],
+    })
   }, [])
 
   const setModel = useCallback(
@@ -542,6 +550,10 @@ const ACIProvider = ({ children }) => {
       dispatch({ type: "set_is_year", isYear })
       dispatch({ type: "set_description", description: "" })
       dispatch({ type: "set_chart", chartUrl: "" })
+      dispatch({
+        type: "set_selected_options",
+        selectedOptions: [],
+      })
     },
     [setYear, setMake, setMakeLabel, setModel, setTrim]
   )
@@ -554,6 +566,10 @@ const ACIProvider = ({ children }) => {
     setTrim("")
     dispatch({ type: "set_description", description: "" })
     dispatch({ type: "set_chart", chartUrl: "" })
+    dispatch({
+      type: "set_selected_options",
+      selectedOptions: [],
+    })
   }, [setYear, setMake, setMakeLabel, setModel, setTrim])
 
   useEffect(() => {
