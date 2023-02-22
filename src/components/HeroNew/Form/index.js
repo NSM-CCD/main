@@ -152,7 +152,9 @@ const HeroForm = ({
             <button
               type="button"
               className="btn-estimate"
-              disabled={!year || !model || !make}
+              disabled={
+                !year || !model || !make || (trimOptions?.length > 0 && !trim)
+              }
               onClick={onEstimate}
             >
               Get Estimate
