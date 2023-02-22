@@ -34,7 +34,7 @@ const Hero = () => {
     if (!isFormSubmitted) {
       setOpenModalForm(true)
     } else {
-      navigate(`/results?rdata=${btoa(slugParams)}`).then()
+      navigate(`/results?rdata=${btoa(slugParams)}`)
     }
   }, [isFormSubmitted, slugParams])
 
