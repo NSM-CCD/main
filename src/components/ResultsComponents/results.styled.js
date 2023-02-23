@@ -1,12 +1,11 @@
 import styled from "styled-components"
 
 export const ResultsWrapper = styled.div`
-  background-color: #fff;
+  background: linear-gradient(180deg, #f1f5f8 0%, #f9fafb 100%);
   padding: 40px 12px 0;
 
   @media (min-width: 768px) {
     padding: 56px 96px 0;
-    background: linear-gradient(180deg, #f1f5f8 0%, #f9fafb 100%);
   }
 
   & .container.results-container {
@@ -106,7 +105,7 @@ export const ResultsWrapper = styled.div`
         background: #f1f8fc;
         border: 1px solid #c5deec;
         border-radius: 12px;
-        padding: 12px;
+        padding: 24px;
 
         display: flex;
         flex-direction: column;
@@ -186,6 +185,7 @@ export const ResultsWrapper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 32px;
+        padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
@@ -228,6 +228,7 @@ export const ResultsWrapper = styled.div`
       .chart-wrapper {
         background-color: #fff;
         border-radius: 12px;
+        padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
@@ -237,6 +238,7 @@ export const ResultsWrapper = styled.div`
       .sales-history {
         background-color: #fff;
         border-radius: 12px;
+        padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
@@ -250,6 +252,15 @@ export const ResultsWrapper = styled.div`
           line-height: 38px;
           color: #163750;
           margin-bottom: 24px;
+        }
+      }
+
+      .valuation-chart {
+        border-radius: 12px;
+        padding: 24px;
+
+        @media (min-width: 768px) {
+          padding: 48px;
         }
       }
 
@@ -292,7 +303,7 @@ export const ResultsWrapper = styled.div`
 
           color: #163750;
 
-          padding: 12px 12px 0;
+          padding: 24px 24px 0;
 
           @media (min-width: 768px) {
             font-size: 30px;
@@ -309,7 +320,7 @@ export const ResultsWrapper = styled.div`
             text-decoration: none;
             border-top: 1px solid #eaecf0;
 
-            padding: 12px;
+            padding: 24px;
 
             &:hover {
               background-color: #f1f8fc;

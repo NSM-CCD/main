@@ -82,7 +82,11 @@ const CarValuesChart = () => {
     ]
   )
 
-  return <Bar options={options} data={data} />
+  return (
+    <div className="container valuation-chart bg-white">
+      <Bar options={options} data={data} />
+    </div>
+  )
 }
 
 export default CarValuesChart
