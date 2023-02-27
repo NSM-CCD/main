@@ -236,12 +236,35 @@ export const ResultsWrapper = styled.div`
       }
 
       .sales-history {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
         background-color: #fff;
         border-radius: 12px;
         padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
+        }
+
+        .switch-buttons {
+          .btn-switch {
+            border: none;
+            background-color: #fff;
+            border-radius: 6px;
+
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            color: #101828;
+            padding: 8px 12px;
+
+            &.active {
+              background: #f1f8fc;
+            }
+          }
         }
 
         .sales-history-title {

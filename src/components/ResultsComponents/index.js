@@ -1,6 +1,5 @@
-import React, { useCallback, useContext } from "react"
+import React, { useCallback, useContext, useState } from "react"
 import Valuation from "./Valuation"
-import SalesHistory from "./SalesHistory"
 import ModelOverview from "./ModelOverview"
 import RelatedVehicles from "./RelatedVehicles"
 
@@ -9,8 +8,7 @@ import Link from "../../utils/link"
 import { Link as ScrollLink } from "react-scroll"
 import { ACIContext } from "../../contexts/ACIContext"
 import Features from "./Features"
-import ValuationTable from "./ValuationTable"
-import CarValuesChart from "./ValuationChart"
+import SalesHistoryCharts from "./SalesHistoryCharts"
 
 const ResultsMain = () => {
   const {
@@ -25,7 +23,10 @@ const ResultsMain = () => {
     optionsList,
   } = useContext(ACIContext)
 
+  const [activeChart, setActiveChart] = useState("Classic")
   const handleReset = useCallback(() => resetForm(), [resetForm])
+
+  const handleActiveChart = useCallback(chart => setActiveChart(chart), [])
 
   return (
     <ResultsWrapper>
@@ -88,10 +89,14 @@ const ResultsMain = () => {
             trim={`${trim}`}
           />
 
-          <CarValuesChart />
-          {optionsList?.length > 0 && <Features />}
-          <ValuationTable />
-          {<SalesHistory noChart={!chartUrl} chartUrl={chartUrl} />}
+          <SalesHistoryCharts
+            noChart={!chartUrl}
+            chartUrl={chartUrl}
+            activeChart={activeChart}
+            onChangeActiveChart={handleActiveChart}
+          />
+
+          {optionsList?.length > 0 && activeChart === "NADA" && <Features />}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length - 1 > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>

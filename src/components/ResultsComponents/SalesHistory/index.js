@@ -1,7 +1,7 @@
 import React from "react"
 
 const SalesHistory = ({ noChart, chartUrl }) => (
-  <div className="container sales-history" id="salesHistory">
+  <div>
     <h2 className="sales-history-title">Sales History</h2>
     {!noChart ? (
       <div dangerouslySetInnerHTML={{ __html: chartUrl }} />
