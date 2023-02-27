@@ -238,7 +238,7 @@ export const ResultsWrapper = styled.div`
       .sales-history {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
 
         background-color: #fff;
         border-radius: 12px;
@@ -274,7 +274,6 @@ export const ResultsWrapper = styled.div`
           font-size: 30px;
           line-height: 38px;
           color: #163750;
-          margin-bottom: 24px;
         }
       }
 

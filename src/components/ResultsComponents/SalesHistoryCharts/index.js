@@ -28,6 +28,7 @@ const SalesHistoryCharts = ({
 
   return (
     <ChartContainer>
+      <h2 className="sales-history-title">Sales History</h2>
       {charts}
 
       <div className="switch-buttons">
