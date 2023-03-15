@@ -1,6 +1,7 @@
 export const initialState = {
   isFormSubmitted: false,
   isYear: true,
+  noClassic: false,
   make: "",
   model: "",
   year: "",
@@ -100,6 +101,8 @@ export const reducer = (state, action) => {
       return { ...state, modifiedPriceArr: action.modifiedPriceArr }
     case "set_modified_price":
       return { ...state, modifiedPrice: action.modifiedPrice }
+    case "set_no_classic":
+      return { ...state, noClassic: action.noClassic }
     default:
       return state
   }

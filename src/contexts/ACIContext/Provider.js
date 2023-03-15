@@ -587,6 +587,7 @@ const ACIProvider = ({ children }) => {
         const chartUrl = res?.url
         const description = res?.market?.description
 
+        dispatch({ type: "set_no_classic", noClassic: false })
         dispatch({ type: "set_description", description })
         dispatch({ type: "set_chart", chartUrl })
       })
@@ -595,6 +596,7 @@ const ACIProvider = ({ children }) => {
 
   useEffect(() => {
     if (error) {
+      dispatch({ type: "set_no_classic", noClassic: true })
       console.log(error, "provider")
     }
   }, [error])
