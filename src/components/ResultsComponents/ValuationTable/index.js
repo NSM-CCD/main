@@ -17,7 +17,7 @@ const ValuationTable = ({ isNada = false }) => {
       {isNada ? (
         <>
           {standardPriceArr?.length > 0 && (
-            <table id="nada" className="table table-hover table-bordered">
+            <table id="nada" className="table table-bordered">
               <thead>
                 <tr>
                   <th>Source</th>
@@ -59,7 +59,7 @@ const ValuationTable = ({ isNada = false }) => {
         </>
       ) : (
         vmrStandardPriceArr?.length > 0 && (
-          <table id="vmr" className="table table-hover table-bordered">
+          <table id="vmr" className="table table-bordered">
             <thead>
               <tr>
                 <th>Source</th>
@@ -89,7 +89,7 @@ const ValuationTable = ({ isNada = false }) => {
       )}
 
       {ocwStandardPriceArr?.length > 0 && (
-        <table id="ocw" className="table table-hover table-bordered">
+        <table id="ocw" className="table table-bordered">
           <thead>
             <tr>
               <th>Source</th>
