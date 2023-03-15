@@ -11,7 +11,7 @@ const SalesHistoryCharts = ({
   activeChart,
   onChangeActiveChart,
 }) => {
-  const { standardPriceArr, vmrStandardPriceArr } = useContext(ACIContext)
+  const { standardPriceArr } = useContext(ACIContext)
 
   const charts = useMemo(() => {
     switch (activeChart) {
@@ -34,22 +34,6 @@ const SalesHistoryCharts = ({
             <div className="h-divider" />
             <h5 className="sales-title">Sales history</h5>
             <ValuationChart />
-            <ValuationTable isNada />
-          </>
-        )
-      case "VMR":
-        return (
-          <>
-            {vmrStandardPriceArr?.length &&
-              vmrStandardPriceArr[0]?.avg !== null && (
-                <div className="price">
-                  <h5 className="avg-title">Average Price</h5>
-                  <p className="avg-value">${vmrStandardPriceArr[0]?.avg}</p>
-                </div>
-              )}
-            <div className="h-divider" />
-            <h5 className="sales-title">Sales history</h5>
-            <ValuationChart />
             <ValuationTable />
           </>
         )
@@ -61,7 +45,7 @@ const SalesHistoryCharts = ({
   return (
     <div className="chart-tabs">
       <div className="switch-buttons">
-        {["NADA", "Classic", "VMR"].map(i => (
+        {["NADA", "Classic"].map(i => (
           <button
             key={i}
             className={`btn-switch ${activeChart === i ? "active" : ""}`}
