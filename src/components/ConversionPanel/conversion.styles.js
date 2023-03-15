@@ -132,8 +132,8 @@ export const TextBlock = styled.div`
 
     &.bg-red {
       color: #fff;
-      background: #93272c;
-      border: 1px solid #93272c;
+      background: #bc2f2c;
+      border: 1px solid #bc2f2c;
 
       svg path {
         stroke: #fff;

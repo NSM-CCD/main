@@ -235,36 +235,71 @@ export const ResultsWrapper = styled.div`
         }
       }
 
+      .switch-buttons {
+        .btn-switch {
+          background-color: #f9fafb;
+          border-width: 1px 1px 0 1px;
+          border-style: solid;
+          border-color: #eaecf0;
+          border-radius: 6px 6px 0 0;
+
+          font-family: "Raleway", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          color: #101828;
+          padding: 8px 12px;
+
+          &.active {
+            background: #fff;
+            border: none;
+          }
+        }
+      }
+
+      .price {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .avg-title {
+          font-family: "Raleway", sans-serif;
+          font-weight: 600;
+          font-size: 20px;
+          color: #163750;
+        }
+
+        .avg-value {
+          font-family: "Raleway", sans-serif;
+          font-weight: 600;
+          font-size: 36px;
+          color: #163750;
+          margin-bottom: 0;
+        }
+      }
+
+      .h-divider {
+        border-bottom: 1.5px solid #f2f4f7;
+      }
+
+      .sales-title {
+        font-family: "Raleway", sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        color: #163750;
+      }
+
       .sales-history {
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 32px;
 
         background-color: #fff;
-        border-radius: 12px;
+        border-radius: 0 0 12px 12px;
         padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
-        }
-
-        .switch-buttons {
-          .btn-switch {
-            border: none;
-            background-color: #fff;
-            border-radius: 6px;
-
-            font-family: "Raleway", sans-serif;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
-            color: #101828;
-            padding: 8px 12px;
-
-            &.active {
-              background: #f1f8fc;
-            }
-          }
         }
 
         .sales-history-title {

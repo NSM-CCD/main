@@ -23,7 +23,7 @@ const ResultsMain = () => {
     optionsList,
   } = useContext(ACIContext)
 
-  const [activeChart, setActiveChart] = useState("Classic")
+  const [activeChart, setActiveChart] = useState("NADA")
   const handleReset = useCallback(() => resetForm(), [resetForm])
 
   const handleActiveChart = useCallback(chart => setActiveChart(chart), [])

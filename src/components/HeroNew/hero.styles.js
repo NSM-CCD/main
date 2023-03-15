@@ -278,8 +278,8 @@ export const HeroContent = styled.div`
         }
 
         .btn-estimate {
-          background: #93272c;
-          border: 1px solid #93272c;
+          background: #bc2f2c;
+          border: 1px solid #bc2f2c;
           box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
           border-radius: 8px;
           padding: 10px 16px;

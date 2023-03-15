@@ -146,8 +146,8 @@ export const FormInfoWrapper = styled.form`
       }
 
       .btn-estimate {
-        background: #bd5658;
-        border: 1px solid #bd5658;
+        background: #bc2f2c;
+        border: 1px solid #bc2f2c;
         box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
         border-radius: 8px;
         padding: 10px 16px;
