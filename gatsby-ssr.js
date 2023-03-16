@@ -31,8 +31,10 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
     <script
       type="text/javascript"
       dangerouslySetInnerHTML={{
-        __html: `var optOut = true;
-      var optOutHostId = 'a3um9k34VbEO6VAHukn6t6';`,
+        __html: `
+          var optOut = true;
+          var optOutHostId = 'a3um9k34VbEO6VAHukn6t6';
+        `,
       }}
     />,
   ])
@@ -85,6 +87,8 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
         cdAnalytics.setDomain('clickdimensions.com');
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
+        
+        cdAnalytics.trackPage();
         cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);`,
       }}
     />,
