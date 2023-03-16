@@ -18,3 +18,11 @@ $primary: #663399;
 
   --font-family-raleway: "Raleway", Helvetica;
 }
+
+#modal-overlay {
+  pointer-events: none;
+}
+
+#modalMain {
+  pointer-events: all;
+}
