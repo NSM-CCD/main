@@ -37,6 +37,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
         `,
       }}
     />,
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" />,
   ])
 
   setPostBodyComponents([
@@ -84,7 +85,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `var cdAnalytics = new clickdimensions.Analytics('analytics.clickdimensions.com');
-        cdAnalytics.setDomain('clickdimensions.com');
+        cdAnalytics.setDomain('acccalculatormain-refactorcalc.gatsbyjs.io');
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
         
