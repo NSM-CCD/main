@@ -50,15 +50,17 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `
-      function onDocumentReady() {
-        clickd_pageType = 'Form';
-        clickd_handlersLocation = "https://analytics.clickdimensions.com";
-        clickd_directory = "https://cdn-us.clickdimensions.com/web/v10";
-      }
-      
-      clickd_jquery(function() {
-        onDocumentReady()
-      })`,
+        function onDocumentReady() {
+          clickd_pageType = 'Form';
+          clickd_handlersLocation = "https://analytics.clickdimensions.com";
+          clickd_directory = "https://cdn-us.clickdimensions.com/web/v10";
+        }
+        
+        clickd_jquery(function() {
+          console.log('success!')
+          onDocumentReady()
+        })
+      `,
       }}
     />,
     <script
@@ -80,7 +82,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `var cdAnalytics = new clickdimensions.Analytics('analytics.clickdimensions.com');
-        cdAnalytics.setDomain('https://acccalculatormain-refactorcalc.gatsbyjs.io/');
+        cdAnalytics.setDomain('clickdimensions.com');
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
         cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);`,

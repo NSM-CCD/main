@@ -124,6 +124,7 @@ const Hero = () => {
                   {!isWiderScreen
                     ? mobileLogos.map((logo, idx) => (
                         <a
+                          key={idx}
                           href={trustBarLinks[logo]}
                           target="_blank"
                           rel="noreferrer"
