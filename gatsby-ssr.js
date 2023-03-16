@@ -80,7 +80,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `var cdAnalytics = new clickdimensions.Analytics('analytics.clickdimensions.com');
-        cdAnalytics.setDomain('clickdimensions.com');
+        cdAnalytics.setDomain('https://acccalculatormain-refactorcalc.gatsbyjs.io/');
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
         cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);`,
