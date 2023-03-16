@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo, useState } from "react"
-import { navigate } from "gatsby"
+import { navigate, Script } from "gatsby"
 
 import ModalMain from "../Modal"
 import HeroForm from "./Form"
@@ -100,6 +100,86 @@ const Hero = () => {
   return (
     <HeroSection>
       <HeroContent>
+        <Script
+          src="https://cdn-us.clickdimensions.com/web/v10/cdform.jquery.js"
+          type="text/javascript"
+        />
+        <Script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5ZCKKD');`,
+          }}
+        />
+        <Script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `clickd_jquery = jQuery.noConflict(true);`,
+          }}
+          defer
+        />
+        <Script
+          src="https://cdn-us.clickdimensions.com/web/v10/cdform.min.noanalytics.js"
+          type="text/javascript"
+        />
+        <Script
+          src="https://cdn-us.clickdimensions.com/web/v10/xsscheck.js"
+          type="text/javascript"
+        />
+        <Script id="customjs" type="text/javascript" />
+        <Script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `var optOut = true;
+      var optOutHostId = 'a3um9k34VbEO6VAHukn6t6';`,
+          }}
+        />
+        <Script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+      function onDocumentReady() {
+        clickd_pageType = 'Form';
+        clickd_handlersLocation = "https://analytics.clickdimensions.com";
+        clickd_directory = "https://cdn-us.clickdimensions.com/web/v10";
+      }
+      
+      clickd_jquery(function() {
+        onDocumentReady()
+      })`,
+          }}
+        />
+
+        <Script
+          type="text/javascript"
+          src="https://analytics.clickdimensions.com/ts.js"
+        />
+
+        <Script
+          type="text/javascript"
+          src="https://analytics.clickdimensions.com/optout.js"
+        />
+
+        <Script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `cdDomainKey = 'db1dfe00705fed119562000d3a9bc7ff';
+        cdPageKey = '654d437f705fed119562000d3a9bc7ff';`,
+          }}
+        />
+
+        <Script
+          onLoad={() => console.log("success")}
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `var cdAnalytics = new clickdimensions.Analytics('analytics.clickdimensions.com');
+        cdAnalytics.setDomain('clickdimensions.com');
+        cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
+        cdAnalytics.setPageType("FORM");
+        cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
+        cdAnalytics.optOutTracking(typeof(optOut) != "undefined" && optOut);`,
+          }}
+        />
+
         <div className="container p-0">
           <div className="row px-0 mx-0">
             <div className="col-12 col-md-6 px-0">
@@ -124,6 +204,7 @@ const Hero = () => {
                   {!isWiderScreen
                     ? mobileLogos.map((logo, idx) => (
                         <a
+                          key={idx}
                           href={trustBarLinks[logo]}
                           target="_blank"
                           rel="noreferrer"
