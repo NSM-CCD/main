@@ -237,22 +237,22 @@ export const ResultsWrapper = styled.div`
 
       .switch-buttons {
         .btn-switch {
-          background-color: #f9fafb;
           border-width: 1px 1px 0 1px;
           border-style: solid;
-          border-color: #eaecf0;
           border-radius: 6px 6px 0 0;
+          background-color: #5b89b4;
+          border-color: #99bbda;
 
           font-family: "Raleway", sans-serif;
           font-style: normal;
           font-weight: 500;
           font-size: 14px;
-          color: #101828;
           padding: 8px 12px;
+          color: #fff;
 
           &.active {
-            background: #fff;
-            border: none;
+            background: #236092;
+            border: 1px solid #236092;
           }
         }
       }

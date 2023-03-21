@@ -15,19 +15,19 @@ const SalesHistoryCharts = ({
 
   const charts = useMemo(() => {
     switch (activeChart) {
-      case "Classic":
+      case "Sales History":
         return (
           <>
             <h5 className="sales-title">Sales history</h5>
             <SalesHistory noChart={noChart} chartUrl={chartUrl} />
           </>
         )
-      case "NADA":
+      case "Average Value":
         return (
           <>
             {standardPriceArr?.length && (
               <div className="price">
-                <h5 className="avg-title">Average Price</h5>
+                <h5 className="avg-title">Average Retail Value</h5>
                 <p className="avg-value">${standardPriceArr[0]?.avg}</p>
               </div>
             )}
@@ -45,7 +45,7 @@ const SalesHistoryCharts = ({
   return (
     <div className="chart-tabs">
       <div className="switch-buttons">
-        {["NADA", "Classic"].map(i => (
+        {["Average Value", "Sales History"].map(i => (
           <button
             key={i}
             className={`btn-switch ${activeChart === i ? "active" : ""}`}

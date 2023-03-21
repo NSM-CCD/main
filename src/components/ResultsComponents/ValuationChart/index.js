@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo } from "react"
-import { Chart, Tooltip, LinearScale, CategoryScale, Legend } from "chart.js"
+import { Chart, Tooltip, LinearScale, CategoryScale } from "chart.js"
 import {
   BoxPlotController,
   BoxAndWiskers,
@@ -12,8 +12,7 @@ Chart.register(
   BoxAndWiskers,
   LinearScale,
   CategoryScale,
-  Tooltip,
-  Legend
+  Tooltip
 )
 
 const ValuationChart = () => {
@@ -25,6 +24,7 @@ const ValuationChart = () => {
   } = useContext(ACIContext)
 
   const labels = useMemo(() => ["low", "midavg", "avg", "midhavg", "high"], [])
+  const legends = []
 
   const boxplotData = useMemo(
     () => ({

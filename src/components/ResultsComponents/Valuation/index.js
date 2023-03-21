@@ -39,7 +39,7 @@ const Valuation = ({ carName, trim }) => {
           </button>
 
           <button className="btn btn-share" onClick={handleCopyLink}>
-            Copy Link
+            Share Report
             <svg
               width="20"
               height="20"

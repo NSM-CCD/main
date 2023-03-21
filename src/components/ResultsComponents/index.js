@@ -23,7 +23,7 @@ const ResultsMain = () => {
     optionsList,
   } = useContext(ACIContext)
 
-  const [activeChart, setActiveChart] = useState("NADA")
+  const [activeChart, setActiveChart] = useState("Average Value")
   const handleReset = useCallback(() => resetForm(), [resetForm])
 
   const handleActiveChart = useCallback(chart => setActiveChart(chart), [])
@@ -96,7 +96,9 @@ const ResultsMain = () => {
             onChangeActiveChart={handleActiveChart}
           />
 
-          {optionsList?.length > 0 && activeChart === "NADA" && <Features />}
+          {optionsList?.length > 0 && activeChart === "Average Value" && (
+            <Features />
+          )}
           {description && <ModelOverview description={description} />}
           {relatedVehicles?.length - 1 > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>

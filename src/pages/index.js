@@ -8,7 +8,7 @@ import ConversionPanel from "../components/ConversionPanel"
 import ProcessSlider from "../components/ProcessSlider"
 
 const IndexPage = () => (
-  <Layout>
+  <Layout ctaBackgroundColor="bg-red">
     <Seo title="Home" />
     <Hero />
     <OffsetGrid />

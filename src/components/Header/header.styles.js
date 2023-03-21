@@ -2,6 +2,11 @@ import styled from "styled-components"
 
 export const HeaderMain = styled.header`
   border-bottom: 1px solid #eaecf0;
+  background-color: #fff;
+
+  position: sticky;
+  top: 0;
+  z-index: 3;
 
   nav {
     padding: 12px 24px;
