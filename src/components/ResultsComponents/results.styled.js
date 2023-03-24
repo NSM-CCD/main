@@ -135,8 +135,19 @@ export const ResultsWrapper = styled.div`
         .features-collapse-button {
           background-color: transparent;
           border: none;
-          width: 20px;
-          height: 20px;
+          width: 24px;
+          height: 24px;
+
+          svg {
+            transform: rotate(-360deg);
+            transition: transform 500ms;
+          }
+
+          &.active {
+            svg {
+              transform: rotate(-180deg);
+            }
+          }
         }
 
         .features-title {
@@ -154,6 +165,7 @@ export const ResultsWrapper = styled.div`
           display: flex;
           flex-flow: row wrap;
           gap: 16px;
+          justify-content: space-between;
 
           .features-items {
             display: flex;
@@ -226,8 +238,20 @@ export const ResultsWrapper = styled.div`
         .model-collapse-button {
           background-color: white;
           border: none;
-          width: 20px;
-          height: 20px;
+
+          width: 24px;
+          height: 24px;
+
+          svg {
+            transform: rotate(-360deg);
+            transition: transform 500ms;
+          }
+
+          &.active {
+            svg {
+              transform: rotate(-180deg);
+            }
+          }
         }
 
         .model-overview-title {
@@ -337,6 +361,20 @@ export const ResultsWrapper = styled.div`
         align-self: start;
         border: none;
         background-color: #fff;
+
+        width: 24px;
+        height: 24px;
+
+        svg {
+          transform: rotate(-360deg);
+          transition: transform 500ms;
+        }
+
+        &.active {
+          svg {
+            transform: rotate(-180deg);
+          }
+        }
       }
 
       .display-none {
@@ -444,6 +482,20 @@ export const ResultsWrapper = styled.div`
           .price-chart-button {
             border: none;
             background-color: #fff;
+
+            width: 24px;
+            height: 24px;
+
+            svg {
+              transform: rotate(-360deg);
+              transition: transform 500ms;
+            }
+
+            &.active {
+              svg {
+                transform: rotate(-180deg);
+              }
+            }
           }
         }
 
@@ -512,8 +564,20 @@ export const ResultsWrapper = styled.div`
         .relatedV-collapse-button {
           background-color: white;
           border: none;
-          width: 20px;
-          height: 20px;
+
+          width: 24px;
+          height: 24px;
+
+          svg {
+            transform: rotate(-360deg);
+            transition: transform 500ms;
+          }
+
+          &.active {
+            svg {
+              transform: rotate(-180deg);
+            }
+          }
         }
 
         .vehicles-list {

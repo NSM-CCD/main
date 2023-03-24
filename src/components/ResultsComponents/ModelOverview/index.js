@@ -1,16 +1,11 @@
-import React, { useCallback, useMemo, useState, useLayoutEffect } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 
 const ModelOverview = ({ description }) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [arrowTransform, setArrowTransform] = useState("rotate(270 0 0)")
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)
   }, [])
-
-  useLayoutEffect(() => {
-    setArrowTransform(isExpanded ? "rotate(90 0 0)" : "rotate(270 0 0)")
-  }, [isExpanded, setArrowTransform])
 
   const modelOverviewSection = useMemo(() => {
     if (!isExpanded) {
@@ -34,19 +29,21 @@ const ModelOverview = ({ description }) => {
     <div className="container model-overview" id="modelOverview">
       <div className="model-collapse">
         <h2 className="model-overview-title">Model overview</h2>
-        <button onClick={toggleExpand} className="model-collapse-button">
+        <button
+          onClick={toggleExpand}
+          className={`model-collapse-button ${isExpanded ? "active" : ""}`}
+        >
           <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            transform={arrowTransform}
           >
             <path
-              d="M7.5 15L12.5 10L7.5 5"
-              stroke="#344054"
-              strokeWidth="1.66667"
+              d="M18 15L12 9L6 15"
+              stroke="black"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
