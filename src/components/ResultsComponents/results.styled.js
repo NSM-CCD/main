@@ -32,7 +32,7 @@ export const ResultsWrapper = styled.div`
         display: flex;
       }
 
-      a.side-item {
+      & .side-item {
         text-decoration: none;
         border-radius: 6px;
         margin: 0;
@@ -50,6 +50,17 @@ export const ResultsWrapper = styled.div`
           background-color: #9bb8d3;
           color: #fff;
         }
+      }
+
+      & .beta-text {
+        font-family: "Raleway", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.235em;
+        color: #98a2b3;
+        padding: 8px 12px;
       }
     }
 
