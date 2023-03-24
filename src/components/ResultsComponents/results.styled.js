@@ -395,7 +395,6 @@ export const ResultsWrapper = styled.div`
         font-size: 20px;
         color: #163750;
 
-        padding-top: 32px;
         padding-bottom: 23px;
       }
 
