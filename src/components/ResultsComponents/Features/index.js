@@ -58,7 +58,7 @@ const Features = () => {
     }
 
     return <div className="items-wrapper">{list}</div>
-  }, [isExpanded])
+  }, [isExpanded, list])
 
   return (
     <div className="features-block">
