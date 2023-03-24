@@ -367,7 +367,7 @@ export const ResultsWrapper = styled.div`
         gap: 32px;
 
         background-color: #fff;
-        border-radius: 0 0 12px 12px;
+        border-radius: 0 12px 12px 12px;
         padding: 24px;
 
         @media (min-width: 768px) {
