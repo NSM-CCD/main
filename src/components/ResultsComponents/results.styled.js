@@ -140,7 +140,7 @@ export const ResultsWrapper = styled.div`
 
           svg {
             transform: rotate(-360deg);
-            transition: transform 500ms;
+            transition: transform 250ms;
           }
 
           &.active {
@@ -244,7 +244,7 @@ export const ResultsWrapper = styled.div`
 
           svg {
             transform: rotate(-360deg);
-            transition: transform 500ms;
+            transition: transform 250ms;
           }
 
           &.active {
@@ -367,7 +367,7 @@ export const ResultsWrapper = styled.div`
 
         svg {
           transform: rotate(-360deg);
-          transition: transform 500ms;
+          transition: transform 250ms;
         }
 
         &.active {
@@ -488,7 +488,7 @@ export const ResultsWrapper = styled.div`
 
             svg {
               transform: rotate(-360deg);
-              transition: transform 500ms;
+              transition: transform 250ms;
             }
 
             &.active {
@@ -570,7 +570,7 @@ export const ResultsWrapper = styled.div`
 
           svg {
             transform: rotate(-360deg);
-            transition: transform 500ms;
+            transition: transform 250ms;
           }
 
           &.active {
