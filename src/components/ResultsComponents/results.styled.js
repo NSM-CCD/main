@@ -561,7 +561,6 @@ export const ResultsWrapper = styled.div`
           @media (min-width: 768px) {
             font-size: 30px;
             line-height: 38px;
-            padding: 48px;
           }
         }
 
@@ -599,14 +598,14 @@ export const ResultsWrapper = styled.div`
             text-decoration: none;
             border-top: 1px solid #eaecf0;
 
-            padding: 24px;
+            padding: 24px 0;
 
             &:hover {
               background-color: #f1f8fc;
             }
 
             @media (min-width: 768px) {
-              padding: 24px 48px;
+              padding: 24px 0;
             }
 
             p.details {
