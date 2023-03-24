@@ -2,6 +2,10 @@ import nada from "../../images/logos/nada.svg"
 import vmr from "../../images/logos/vmr.svg"
 import oldCars from "../../images/logos/old-cars.svg"
 
+import nadaLogo from "../../images/logos/nada-logo.png"
+import vmrLogo from "../../images/logos/vmr-logo.png"
+import ocrLogo from "../../images/logos/ocr-logo.png"
+
 import dummyCarImage from "../../images/cadillac.png"
 import streetRod from "../../images/carousel/street-rod.jpg"
 import corvette from "../../images/carousel/corvette.jpg"
@@ -9,6 +13,13 @@ import fordPickup from "../../images/carousel/ford-pickup.jpg"
 import belAir from "../../images/carousel/belair-interior.jpg"
 
 import classicCom from "../../images/logos/classic-com.svg"
+
+export const chartLogos = { NADA: nadaLogo, OCRPG: ocrLogo, VMR: vmrLogo }
+export const chartLogosLink = {
+  NADA: "https://www.nada.org/nada/consumer-vehicle-values",
+  OCRPG: "https://report.oldcarsweekly.com/",
+  VMR: "http://www.vmrintl.com/",
+}
 
 export const trustBarLogos = {
   nadaLogo: nada,

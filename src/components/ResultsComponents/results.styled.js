@@ -400,6 +400,21 @@ export const ResultsWrapper = styled.div`
 
       .sales-history-chart-separator {
         padding-bottom: 64px;
+
+        .chart-logos-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          padding-left: 48px;
+
+          img {
+            width: 70%;
+
+            @media (min-width: 768px) {
+              width: 100%;
+            }
+          }
+        }
       }
 
       .sales-history {

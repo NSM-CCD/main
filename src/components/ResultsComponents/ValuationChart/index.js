@@ -6,7 +6,7 @@ import {
 } from "@sgratzl/chartjs-chart-boxplot"
 import { ACIContext } from "../../../contexts/ACIContext"
 
-import NadaIcon from "../icons/NadaIcon.svg"
+import { chartLogos, chartLogosLink } from "../../HeroNew/helpers"
 
 // register controller in chart.js and ensure the defaults are set
 Chart.register(
@@ -99,7 +99,6 @@ const ValuationChart = () => {
 
     if (standardPriceArr?.length) {
       arr.push({
-        label: "NADA",
         backgroundColor: "#A2312E",
         borderColor: "#b12327",
         borderWidth: 1,
@@ -110,7 +109,6 @@ const ValuationChart = () => {
     }
     if (ocwStandardPriceArr?.length) {
       arr.push({
-        label: "OCRPG",
         backgroundColor: "#6C90B3",
         borderColor: "#6291B6",
         borderWidth: 1,
@@ -121,7 +119,6 @@ const ValuationChart = () => {
     }
     if (vmrStandardPriceArr?.length) {
       arr.push({
-        label: "VMR",
         backgroundColor: "#88B980",
         borderColor: "#7aba79",
         borderWidth: 1,
@@ -158,15 +155,32 @@ const ValuationChart = () => {
         data: boxplotData,
         options: {
           responsive: true,
-          legend: {
-            position: "top",
+          scales: {
+            x: {
+              ticks: {
+                display: false,
+              },
+            },
           },
         },
       })
     }
   }, [])
 
-  return <canvas id="canvas" />
+  return (
+    <>
+      <canvas id="canvas" />
+      {legends?.length && (
+        <div className="chart-logos-wrapper">
+          {legends.map(l => (
+            <a href={chartLogosLink[l]} target="_blank" rel="noreferrer">
+              <img src={chartLogos[l]} alt={`logo-${l}`} />
+            </a>
+          ))}
+        </div>
+      )}
+    </>
+  )
 }
 
 export default ValuationChart
