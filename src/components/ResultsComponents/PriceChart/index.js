@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useMemo } from "react"
 import ButtonChevron from "../ButtonChevron"
+import { forSaleLogos } from "../../HeroNew/helpers"
 
-const PriceChart = ({ carName }) => {
+const PriceChart = ({ carName, year, make, model }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpand = useCallback(() => {
@@ -16,8 +17,37 @@ const PriceChart = ({ carName }) => {
     return (
       <div className="price-chart-container">
         <div className="h-divider w-100" />
-        <div className="price-chart-body"></div>
-        <div className="price-chart-body"></div>
+        <p className="pricing-title pt-4 mb-4">Search by Seller</p>
+        <div className="for-sale-wrapper">
+          <div className="first-row">
+            <a
+              href={`https://www.classic.com/search?q=${year}+${make}+${model}`}
+              target="_blank"
+            >
+              <img src={forSaleLogos["classic"]} alt="classic sale" />
+            </a>
+            <a
+              href={`https://www.hemmings.com/classifieds/cars-for-sale/${make}/${model}/${year}`}
+              target="_blank"
+            >
+              <img src={forSaleLogos["hemmings"]} alt="Hemmings sale" />
+            </a>
+          </div>
+          <div className="second-row">
+            <a
+              href={`https://classics.autotrader.com/classic-cars-for-sale/${year}-${make}-${model}-for-sale`}
+              target="_blank"
+            >
+              <img src={forSaleLogos["autoTrader"]} alt="Autotrader sale" />
+            </a>
+            <a
+              href={`https://www.ebay.com/sch/i.html?&_nkw=${year}+${make}+${model}`}
+              target="_blank"
+            >
+              <img src={forSaleLogos["ebay"]} alt="Ebay sale" />
+            </a>
+          </div>
+        </div>
       </div>
     )
   }, [isExpanded])

@@ -527,7 +527,50 @@ export const ResultsWrapper = styled.div`
             padding-top: 32px;
           }
           display: flex;
-          flex-wrap: wrap;
+          flex-flow: column wrap;
+
+          .pricing-title {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            color: #163750;
+          }
+
+          .for-sale-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .first-row,
+            .second-row {
+              display: flex;
+              align-items: center;
+              flex-flow: column wrap;
+              gap: 16px;
+
+              @media (min-width: 768px) {
+                flex-flow: row nowrap;
+              }
+
+              a {
+                background: #f9fafb;
+                border-radius: 12px;
+                text-align: center;
+                width: 100%;
+                height: 128px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @media (min-width: 768px) {
+                  padding: 40px 0;
+                }
+              }
+            }
+          }
         }
 
         .price-chart-body {

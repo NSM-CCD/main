@@ -102,7 +102,12 @@ const ResultsMain = () => {
             <Features />
           )}
           {description && <ModelOverview description={description} />}
-          {/*<PriceChart carName={`${year} ${makeLabel} ${model}`} />*/}
+          <PriceChart
+            carName={`${year} ${makeLabel} ${model}`}
+            year={year}
+            make={makeLabel}
+            model={model}
+          />
           {relatedVehicles?.length - 1 > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>
             <span>

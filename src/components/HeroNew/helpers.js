@@ -14,11 +14,23 @@ import belAir from "../../images/carousel/belair-interior.jpg"
 
 import classicCom from "../../images/logos/classic-com.svg"
 
+import autoTrader from "../../images/logos/autotrader.svg"
+import classic from "../../images/logos/classic.com.svg"
+import ebay from "../../images/logos/ebay.png"
+import hemmings from "../../images/logos/hemmings.svg"
+
 export const chartLogos = { NADA: nadaLogo, OCRPG: ocrLogo, VMR: vmrLogo }
 export const chartLogosLink = {
   NADA: "https://www.nada.org/nada/consumer-vehicle-values",
   OCRPG: "https://report.oldcarsweekly.com/",
   VMR: "http://www.vmrintl.com/",
+}
+
+export const forSaleLogos = {
+  autoTrader: autoTrader,
+  classic: classic,
+  ebay: ebay,
+  hemmings: hemmings,
 }
 
 export const trustBarLogos = {
