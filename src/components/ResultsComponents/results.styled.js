@@ -123,16 +123,31 @@ export const ResultsWrapper = styled.div`
         gap: 16px;
 
         @media (min-width: 564px) {
-          padding: 40px;
+          padding: 48px;
+        }
+
+        .features-collapse {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+
+        .features-collapse-button {
+          background-color: transparent;
+          border: none;
+          width: 20px;
+          height: 20px;
         }
 
         .features-title {
           font-family: "Raleway", sans-serif;
           font-style: normal;
           font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
+          font-size: 18px;
+          line-height: 28px;
           color: #3a576f;
+
+          margin: 0;
         }
 
         .items-wrapper {
@@ -202,6 +217,19 @@ export const ResultsWrapper = styled.div`
           padding: 48px;
         }
 
+        .model-collapse {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+
+        .model-collapse-button {
+          background-color: white;
+          border: none;
+          width: 20px;
+          height: 20px;
+        }
+
         .model-overview-title {
           font-family: "Raleway", sans-serif;
           font-style: normal;
@@ -209,6 +237,8 @@ export const ResultsWrapper = styled.div`
           font-size: 30px;
           line-height: 38px;
           color: #163750;
+
+          margin: 0;
         }
 
         .description {
@@ -258,8 +288,9 @@ export const ResultsWrapper = styled.div`
           font-style: normal;
           font-weight: 500;
           font-size: 14px;
-          padding: 8px 12px;
+          padding: 8px 16px;
           color: #fff;
+          max-height: 36px;
 
           &.active {
             background: #236092;
@@ -280,13 +311,36 @@ export const ResultsWrapper = styled.div`
           color: #163750;
         }
 
+        .avg-collapse {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          flex-direction: row;
+        }
+
+        .avg-header {
+          display: flex;
+          flex-direction: column;
+        }
+
         .avg-value {
           font-family: "Raleway", sans-serif;
           font-weight: 600;
           font-size: 36px;
+          line-height: 44px;
           color: #163750;
           margin-bottom: 0;
         }
+      }
+
+      .avg-collapse-button {
+        align-self: start;
+        border: none;
+        background-color: #fff;
+      }
+
+      .display-none {
+        display: none;
       }
 
       .h-divider {
@@ -298,6 +352,13 @@ export const ResultsWrapper = styled.div`
         font-weight: 600;
         font-size: 20px;
         color: #163750;
+
+        padding-top: 32px;
+        padding-bottom: 23px;
+      }
+
+      .sales-history-chart-separator {
+        padding-bottom: 64px;
       }
 
       .sales-history {
@@ -355,12 +416,75 @@ export const ResultsWrapper = styled.div`
         }
       }
 
+      .price-chart {
+        background-color: #fff;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: 768px) {
+          padding: 48px;
+        }
+
+        .price-chart-header {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .price-chart-title {
+            font-family: "Raleway", sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 38px;
+            color: #163750;
+            margin: 0;
+          }
+
+          .price-chart-button {
+            border: none;
+            background-color: #fff;
+          }
+        }
+
+        .price-chart-container {
+          @media (min-width: 768px) {
+            padding-top: 32px;
+          }
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .price-chart-body {
+          border-radius: 12px;
+          background-color: #f9fafb;
+          width: 100%;
+          height: 128px;
+        }
+
+        .price-chart-container > * {
+          flex-basis: calc(
+            50% - 10px
+          ); /* adjust the width based on your needs */
+          margin-right: 20px;
+          margin-bottom: 20px;
+        }
+
+        .price-chart-container > *:last-child {
+          margin-right: 0;
+        }
+      }
+
       .related-vehicles {
         background-color: #fff;
         border-radius: 12px;
 
         display: flex;
         flex-direction: column;
+
+        @media (min-width: 768px) {
+          padding: 48px;
+        }
 
         .related-vehicles-title {
           font-family: "Raleway", sans-serif;
@@ -370,17 +494,30 @@ export const ResultsWrapper = styled.div`
           line-height: 24px;
 
           color: #163750;
-
-          padding: 24px 24px 0;
+          margin: 0;
 
           @media (min-width: 768px) {
             font-size: 30px;
             line-height: 38px;
-            padding: 48px 48px 24px;
+            padding: 48px;
           }
         }
 
+        .relatedV-collapse {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+
+        .relatedV-collapse-button {
+          background-color: white;
+          border: none;
+          width: 20px;
+          height: 20px;
+        }
+
         .vehicles-list {
+          padding-top: 32px;
           .vehicle-details {
             display: flex;
             justify-content: space-between;

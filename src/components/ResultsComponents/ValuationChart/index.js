@@ -6,6 +6,8 @@ import {
 } from "@sgratzl/chartjs-chart-boxplot"
 import { ACIContext } from "../../../contexts/ACIContext"
 
+import NadaIcon from "../icons/NadaIcon.svg"
+
 // register controller in chart.js and ensure the defaults are set
 Chart.register(
   BoxPlotController,

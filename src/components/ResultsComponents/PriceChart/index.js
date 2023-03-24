@@ -1,6 +1,12 @@
-import React, { useCallback, useMemo, useState, useLayoutEffect } from "react"
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useMemo,
+  useLayoutEffect,
+} from "react"
 
-const ModelOverview = ({ description }) => {
+const PriceChart = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [arrowTransform, setArrowTransform] = useState("rotate(270 0 0)")
 
@@ -12,29 +18,25 @@ const ModelOverview = ({ description }) => {
     setArrowTransform(isExpanded ? "rotate(90 0 0)" : "rotate(270 0 0)")
   }, [isExpanded, setArrowTransform])
 
-  const modelOverviewSection = useMemo(() => {
+  const priceChartSection = useMemo(() => {
     if (!isExpanded) {
       return null
     }
 
     return (
-      <div className="description">
-        <p className="m-0 subtitle">Description</p>
-        <p
-          className="overview-content m-0"
-          dangerouslySetInnerHTML={{
-            __html: description.replaceAll("<a ", "<a target='_blank'"),
-          }}
-        />
+      <div className="price-chart-container">
+        <div className={"h-divider"} />
+        <div className="price-chart-body "></div>
+        <div className="price-chart-body "></div>
       </div>
     )
   }, [isExpanded])
 
   return (
-    <div className="container model-overview" id="modelOverview">
-      <div className="model-collapse">
-        <h2 className="model-overview-title">Model overview</h2>
-        <button onClick={toggleExpand} className="model-collapse-button">
+    <div className="price-chart">
+      <div className="price-chart-header">
+        <p className="price-chart-title ">1990 Acura NSX-Ts for Sale</p>
+        <button onClick={toggleExpand} className="price-chart-button">
           <svg
             width="20"
             height="20"
@@ -53,10 +55,9 @@ const ModelOverview = ({ description }) => {
           </svg>
         </button>
       </div>
-
-      {modelOverviewSection}
+      {priceChartSection}
     </div>
   )
 }
 
-export default ModelOverview
+export default PriceChart

@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useState } from "react"
 import Valuation from "./Valuation"
 import ModelOverview from "./ModelOverview"
 import RelatedVehicles from "./RelatedVehicles"
+import PriceChart from "./PriceChart"
 
 import { ResultsWrapper } from "./results.styled"
 import Link from "../../utils/link"
@@ -101,6 +102,7 @@ const ResultsMain = () => {
             <Features />
           )}
           {description && <ModelOverview description={description} />}
+          <PriceChart />
           {relatedVehicles?.length - 1 > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>
             <span>
