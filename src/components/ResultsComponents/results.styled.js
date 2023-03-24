@@ -258,11 +258,15 @@ export const ResultsWrapper = styled.div`
           font-family: "Raleway", sans-serif;
           font-style: normal;
           font-weight: 600;
-          font-size: 30px;
+          font-size: 24px;
           line-height: 38px;
           color: #163750;
 
           margin: 0;
+
+          @media (min-width: 768px) {
+            font-size: 30px;
+          }
         }
 
         .description {
@@ -459,6 +463,7 @@ export const ResultsWrapper = styled.div`
         border-radius: 12px;
         display: flex;
         flex-direction: column;
+        padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
@@ -473,10 +478,14 @@ export const ResultsWrapper = styled.div`
             font-family: "Raleway", sans-serif;
             font-style: normal;
             font-weight: 600;
-            font-size: 30px;
+            font-size: 24px;
             line-height: 38px;
             color: #163750;
             margin: 0;
+
+            @media (min-width: 768px) {
+              font-size: 30px;
+            }
           }
 
           .price-chart-button {
@@ -533,6 +542,7 @@ export const ResultsWrapper = styled.div`
 
         display: flex;
         flex-direction: column;
+        padding: 24px;
 
         @media (min-width: 768px) {
           padding: 48px;
@@ -542,7 +552,7 @@ export const ResultsWrapper = styled.div`
           font-family: "Raleway", sans-serif;
           font-style: normal;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 24px;
           line-height: 24px;
 
           color: #163750;
