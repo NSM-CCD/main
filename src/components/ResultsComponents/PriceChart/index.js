@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useMemo } from "react"
 import ButtonChevron from "../ButtonChevron"
 
-const PriceChart = () => {
+const PriceChart = ({ carName }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpand = useCallback(() => {
@@ -15,9 +15,9 @@ const PriceChart = () => {
 
     return (
       <div className="price-chart-container">
-        <div className="h-divider" />
-        <div className="price-chart-body "></div>
-        <div className="price-chart-body "></div>
+        <div className="h-divider w-100" />
+        <div className="price-chart-body"></div>
+        <div className="price-chart-body"></div>
       </div>
     )
   }, [isExpanded])
@@ -25,7 +25,7 @@ const PriceChart = () => {
   return (
     <div className="price-chart">
       <div className="price-chart-header">
-        <p className="price-chart-title ">1990 Acura NSX-Ts for Sale</p>
+        {carName && <p className="price-chart-title ">{carName}</p>}
         <ButtonChevron
           className="price-chart-button"
           isExpanded={isExpanded}

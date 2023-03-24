@@ -26,8 +26,8 @@ const SalesHistoryCharts = ({
 
     return (
       <div>
-        <div className="h-divider " />
-        <h5 className="sales-title">Sales history</h5>
+        <div className="h-divider" />
+        <h5 className="sales-title pt-4">Sales history</h5>
         <div className="sales-history-chart-separator">
           <ValuationChart />
         </div>

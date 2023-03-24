@@ -534,19 +534,6 @@ export const ResultsWrapper = styled.div`
           border-radius: 12px;
           background-color: #f9fafb;
           width: 100%;
-          height: 128px;
-        }
-
-        .price-chart-container > * {
-          flex-basis: calc(
-            50% - 10px
-          ); /* adjust the width based on your needs */
-          margin-right: 20px;
-          margin-bottom: 20px;
-        }
-
-        .price-chart-container > *:last-child {
-          margin-right: 0;
         }
       }
 
