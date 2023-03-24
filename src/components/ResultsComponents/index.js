@@ -102,7 +102,7 @@ const ResultsMain = () => {
             <Features />
           )}
           {description && <ModelOverview description={description} />}
-          <PriceChart />
+          {/*<PriceChart />*/}
           {relatedVehicles?.length - 1 > 0 && <RelatedVehicles />}
           <Link to="/" className="restart-calc" onClick={handleReset}>
             <span>
