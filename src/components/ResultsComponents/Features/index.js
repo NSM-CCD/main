@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useMemo, useState } from "react"
 import CircleIcon from "./CircleIcon"
 import CircleActive from "./CircleActive"
 import { ACIContext } from "../../../contexts/ACIContext"
+import ButtonChevron from "../ButtonChevron"
 
 const Features = () => {
   const { optionsList, selectedOptions, setSelectedOptions } =
@@ -55,26 +56,11 @@ const Features = () => {
         <p className="features-title">
           Does your vehicle contain any non-standard features?
         </p>
-        <button
-          onClick={toggleExpand}
-          className={`features-collapse-button ${isExpanded ? "active" : ""}`}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18 15L12 9L6 15"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+        <ButtonChevron
+          className="features-collapse-button"
+          isExpanded={isExpanded}
+          onToggleExpand={toggleExpand}
+        />
       </div>
 
       {featuresSection}

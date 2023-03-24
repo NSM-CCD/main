@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useState, useMemo } from "react"
 import { navigate } from "gatsby"
 import { ACIContext } from "../../../contexts/ACIContext"
+import ButtonChevron from "../ButtonChevron"
 
 const RelatedVehicles = () => {
   const { relatedVehicles, trim, makeLabel, model, setTrim } =
@@ -68,26 +69,11 @@ const RelatedVehicles = () => {
     <div className="related-vehicles" id="relatedVehicles">
       <div className="relatedV-collapse">
         <h2 className="related-vehicles-title">Related Vehicles</h2>
-        <button
-          onClick={toggleExpand}
-          className={`relatedV-collapse-button ${isExpanded ? "active" : ""}`}
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18 15L12 9L6 15"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+        <ButtonChevron
+          className="relatedV-collapse-button"
+          isExpanded={isExpanded}
+          onToggleExpand={toggleExpand}
+        />
       </div>
 
       {relatedVehiclesSection}

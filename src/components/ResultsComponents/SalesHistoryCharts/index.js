@@ -4,6 +4,7 @@ import ValuationChart from "../ValuationChart"
 import ValuationTable from "../ValuationTable"
 import SalesHistory from "../SalesHistory"
 import { ACIContext } from "../../../contexts/ACIContext"
+import ButtonChevron from "../ButtonChevron"
 
 const SalesHistoryCharts = ({
   noChart,
@@ -56,28 +57,11 @@ const SalesHistoryCharts = ({
                     ) : null}
                     <p className="avg-value">${standardPriceArr[0]?.avg}</p>
                   </div>
-                  <button
-                    onClick={toggleExpand}
-                    className={`avg-collapse-button ${
-                      isExpanded ? "active" : ""
-                    }`}
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M18 15L12 9L6 15"
-                        stroke="black"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
+                  <ButtonChevron
+                    className="avg-collapse-button"
+                    isExpanded={isExpanded}
+                    onToggleExpand={toggleExpand}
+                  />
                 </div>
               </div>
             )}
