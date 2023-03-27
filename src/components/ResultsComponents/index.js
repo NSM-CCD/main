@@ -103,7 +103,7 @@ const ResultsMain = () => {
           )}
           {description && <ModelOverview description={description} />}
           <PriceChart
-            carName={`${year} ${makeLabel} ${model}`}
+            carName={`${year} ${makeLabel} ${model}s`}
             year={year}
             make={makeLabel}
             model={model}

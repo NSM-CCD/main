@@ -1,8 +1,9 @@
-import React, { useCallback, useContext } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import { navigate } from "gatsby"
 import { ACIContext } from "../../../contexts/ACIContext"
 
 const Valuation = ({ carName, trim }) => {
+  const [showTooltip, setShowTooltip] = useState(false)
   const { resetForm } = useContext(ACIContext)
   const url = typeof window !== "undefined" ? window.location.href : ""
 
@@ -12,8 +13,15 @@ const Valuation = ({ carName, trim }) => {
   }, [resetForm])
 
   const handleCopyLink = useCallback(() => {
+    setShowTooltip(!showTooltip)
     navigator.clipboard.writeText(url)
-  }, [url])
+  }, [url, showTooltip])
+
+  useEffect(() => {
+    if (showTooltip) {
+      setTimeout(() => setShowTooltip(false), 1000)
+    }
+  }, [showTooltip])
 
   return (
     <>
@@ -40,6 +48,14 @@ const Valuation = ({ carName, trim }) => {
 
           <button className="btn btn-share" onClick={handleCopyLink}>
             Share Report
+            <div
+              className={`fade ${
+                showTooltip ? "show" : "hide"
+              } tooltip bs-tooltip-bottom`}
+            >
+              <div className="tooltip-arrow"></div>
+              <div className="tooltip-inner">Link Copied!</div>
+            </div>
             <svg
               width="20"
               height="20"

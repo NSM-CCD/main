@@ -720,6 +720,11 @@ export const ResultsWrapper = styled.div`
             border: 1px solid #e7f2f7;
             box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
             border-radius: 8px;
+
+            .tooltip {
+              z-index: auto;
+              top: 38px;
+            }
           }
         }
       }
