@@ -13,7 +13,7 @@ const Features = () => {
     [setSelectedOptions]
   )
 
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)

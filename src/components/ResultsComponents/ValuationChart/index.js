@@ -173,7 +173,12 @@ const ValuationChart = () => {
       {legends?.length && (
         <div className="chart-logos-wrapper">
           {legends.map(l => (
-            <a href={chartLogosLink[l]} target="_blank" rel="noreferrer">
+            <a
+              key={l}
+              href={chartLogosLink[l]}
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={chartLogos[l]} alt={`logo-${l}`} />
             </a>
           ))}

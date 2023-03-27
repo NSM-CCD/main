@@ -3,7 +3,7 @@ import ButtonChevron from "../ButtonChevron"
 import { forSaleLogos } from "../../HeroNew/helpers"
 
 const PriceChart = ({ carName, year, make, model }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)

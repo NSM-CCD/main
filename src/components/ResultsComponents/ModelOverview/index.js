@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from "react"
 import ButtonChevron from "../ButtonChevron"
 
 const ModelOverview = ({ description }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)

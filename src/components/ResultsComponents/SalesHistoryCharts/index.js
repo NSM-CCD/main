@@ -1,4 +1,10 @@
-import React, { useContext, useMemo, useState, useCallback } from "react"
+import React, {
+  useContext,
+  useMemo,
+  useState,
+  useCallback,
+  useEffect,
+} from "react"
 import ChartContainer from "./ChartContainer"
 import ValuationChart from "../ValuationChart"
 import ValuationTable from "../ValuationTable"
@@ -17,6 +23,10 @@ const SalesHistoryCharts = ({
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => setIsExpanded(true), 1500)
   }, [])
 
   const valuationSection = useMemo(() => {
