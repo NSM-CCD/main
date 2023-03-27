@@ -56,7 +56,7 @@ const PriceChart = ({ carName, year, make, model }) => {
     <div className="price-chart">
       <div className="price-chart-header">
         {carName && (
-          <p className="price-chart-title ">{`${carName} Available for sale`}</p>
+          <p className="price-chart-title ">{`${carName} Available for Sale`}</p>
         )}
         <ButtonChevron
           className="price-chart-button"

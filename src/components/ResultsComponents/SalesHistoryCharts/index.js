@@ -26,7 +26,7 @@ const SalesHistoryCharts = ({
   }, [])
 
   useEffect(() => {
-    setTimeout(() => setIsExpanded(true), 1500)
+    setTimeout(() => setIsExpanded(true), 1800)
   }, [])
 
   const valuationSection = useMemo(() => {
@@ -58,14 +58,16 @@ const SalesHistoryCharts = ({
       case "Average Value":
         return (
           <>
-            {standardPriceArr?.length && (
+            {standardPriceArr?.length ? (
               <div className="price">
                 <div className="avg-collapse">
                   <div className="avg-header">
                     {isExpanded ? (
                       <h5 className="avg-title">Average Retail Value</h5>
                     ) : null}
-                    <p className="avg-value">${standardPriceArr[0]?.avg}</p>
+                    <p className="avg-value">
+                      ${standardPriceArr[0]?.avg ?? ""}
+                    </p>
                   </div>
                   <ButtonChevron
                     className="avg-collapse-button"
@@ -74,6 +76,8 @@ const SalesHistoryCharts = ({
                   />
                 </div>
               </div>
+            ) : (
+              "loading data..."
             )}
             {valuationSection}
           </>
