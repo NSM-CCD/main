@@ -16,7 +16,7 @@ import classicCom from "../../images/logos/classic-com.svg"
 
 import autoTrader from "../../images/logos/autotrader.svg"
 import classic from "../../images/logos/classic.com.svg"
-import ebay from "../../images/logos/ebay.png"
+import ebay from "../../images/logos/ebay.svg"
 import hemmings from "../../images/logos/hemmings.svg"
 
 export const chartLogos = { NADA: nadaLogo, OCRPG: ocrLogo, VMR: vmrLogo }
