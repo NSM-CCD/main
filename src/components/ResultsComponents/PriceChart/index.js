@@ -15,7 +15,7 @@ const PriceChart = ({ carName, year, make, model }) => {
     }
 
     return (
-      <div className="price-chart-container">
+      <div id="forSale" className="price-chart-container">
         <div className="h-divider w-100" />
         <p className="pricing-title pt-4 mb-4">Search by Seller</p>
         <div className="for-sale-wrapper">

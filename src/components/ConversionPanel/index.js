@@ -8,7 +8,7 @@ import {
 } from "./conversion.styles"
 import { navigate } from "gatsby"
 
-const ConversionPanel = ({ ctaButtonColor = "bg-white" }) => {
+const ConversionPanel = ({ ctaButtonColor = "bg-red" }) => {
   const handleClickInsured = useCallback(() => {
     navigate(
       "https://secure.americancollectors.com/Home/QuoteSelector?from=root"
@@ -23,8 +23,8 @@ const ConversionPanel = ({ ctaButtonColor = "bg-white" }) => {
             <img src={cpImage} alt="Conversion Panel" />
           </ImageWrapper>
           <TextBlock>
-            <span className="kicker">Need Insurance</span>
-            <p className="cp-title">Insurance for Any Collector</p>
+            <span className="kicker">Protect Your Passion</span>
+            <p className="cp-title">#1 Rated Collector Car Insurance</p>
             <p className="cp-description">
               At American Collectors Insurance, we provide top-rated insurance
               for a wide variety of collectibles and collector’s items,
@@ -37,7 +37,7 @@ const ConversionPanel = ({ ctaButtonColor = "bg-white" }) => {
               className={`cp-cta ${ctaButtonColor}`}
               onClick={handleClickInsured}
             >
-              Get Insured&nbsp;
+              Get a Quote&nbsp;
               <svg
                 width="20"
                 height="20"

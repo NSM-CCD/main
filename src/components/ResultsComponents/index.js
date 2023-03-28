@@ -70,6 +70,20 @@ const ResultsMain = () => {
               Model Overview
             </ScrollLink>
           )}
+
+          {year && makeLabel && model && (
+            <ScrollLink
+              spy
+              smooth
+              duration={250}
+              offset={-150}
+              activeClass="active"
+              to="forSale"
+              className="side-item"
+            >
+              Available for Sale
+            </ScrollLink>
+          )}
           {relatedVehicles?.length - 1 > 0 && (
             <ScrollLink
               spy

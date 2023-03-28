@@ -99,7 +99,7 @@ export const Copyright = styled.p`
   font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 28px;
   color: #98a2b3;
   margin: 0;
@@ -115,7 +115,7 @@ export const PrivacyTerms = styled.div`
     font-family: "Raleway", sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 28px;
     color: #98a2b3;
     text-decoration: none;
