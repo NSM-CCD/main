@@ -9,12 +9,13 @@ import ProcessSlider from "../components/ProcessSlider"
 
 const IndexPage = () => (
   <Layout ctaBackgroundColor="bg-red">
-    <Seo title="Home" />
     <Hero />
     <OffsetGrid />
     <ProcessSlider />
     <ConversionPanel />
   </Layout>
 )
+
+export const Head = () => <Seo title="Home" />
 
 export default IndexPage

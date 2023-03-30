@@ -11,12 +11,9 @@ import { useStaticQuery, graphql } from "gatsby"
 function Seo({
   title = "",
   noindex = false,
-  lang = `en`,
   meta = [],
   keywords = [],
   description = "",
-  image = null,
-  children,
 }) {
   const { site } = useStaticQuery(
     graphql`
@@ -55,7 +52,7 @@ function Seo({
     },
     {
       property: `og:image`,
-      content: `${image || site.siteMetadata.image}`,
+      content: `${site.siteMetadata.image}`,
     },
     {
       property: `og:url`,
@@ -100,7 +97,6 @@ function Seo({
           return <meta key={`${m.content}-${i}`} {...m} />
         })}
       <meta id="robots" name="robots" content={noindex ? "noindex" : "index"} />
-      {children}
     </>
   )
 }
