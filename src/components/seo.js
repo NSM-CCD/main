@@ -39,26 +39,6 @@ function Seo({
       content: metaDescription,
     },
     {
-      property: `og:title`,
-      content: `${title} - American Collectors Pricing Tool`,
-    },
-    {
-      property: `og:description`,
-      content: metaDescription,
-    },
-    {
-      property: `og:type`,
-      content: `website`,
-    },
-    {
-      property: `og:image`,
-      content: `${site.siteMetadata.image}`,
-    },
-    {
-      property: `og:url`,
-      content: `${site.siteMetadata.url}`,
-    },
-    {
       name: `twitter:card`,
       content: `summary`,
     },
@@ -77,6 +57,26 @@ function Seo({
     {
       name: `twitter:description`,
       content: metaDescription,
+    },
+    {
+      property: `og:title`,
+      content: `${title} - American Collectors Pricing Tool`,
+    },
+    {
+      property: `og:description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:type`,
+      content: `website`,
+    },
+    {
+      property: `og:image`,
+      content: `${site.siteMetadata.image}`,
+    },
+    {
+      property: `og:url`,
+      content: `${site.siteMetadata.url}`,
     },
   ]
     .concat(
