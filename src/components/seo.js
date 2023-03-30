@@ -71,6 +71,10 @@ function Seo({
       content: `${title} - American Collectors Pricing Tool`,
     },
     {
+      property: `twitter:image`,
+      content: `${site.siteMetadata.image}`,
+    },
+    {
       name: `twitter:description`,
       content: metaDescription,
     },

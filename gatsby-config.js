@@ -11,6 +11,13 @@ module.exports = {
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-image`,
     {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://classiccarvalue.com/",
+        sitemap: "https://classiccarvalue.com/sitemap-index.xml",
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
