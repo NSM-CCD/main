@@ -61,7 +61,7 @@ const ResultsPage = props => {
 
   return (
     <Layout ctaBackgroundColor={ctaColor}>
-      <Seo title="Home" />
+      <Seo title="Results" />
       <ResultsMain />
       <ConversionPanel ctaButtonColor="bg-red" />
       <ConversionIntegration />

@@ -1,11 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `American collectors`,
-    description: `American collectors - Classic Car Calculator.`,
-    author: `@r-ichard`,
+    title: `American Collectors Pricing Tool`,
+    description: `How much is your classic car worth? Use American Collectors Insurance’s multi-source classic car valuation tool to more accurately determine a vehicle's value.`,
+    author: `Webstacks dev`,
+    image: "/images/acc-calculator-logo.pn",
+    url: "https://classiccarvalue.com",
+    siteUrl: "https://classiccarvalue.com",
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
