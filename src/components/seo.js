@@ -32,7 +32,6 @@ function Seo({
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const canonicalUrl = typeof window !== "undefined" ? window.location.href : ""
 
   const metaTags = [
     {
@@ -53,11 +52,11 @@ function Seo({
     },
     {
       property: `og:image`,
-      content: `${canonicalUrl}${site.siteMetadata.image}`,
+      content: `${site.siteMetadata.image}`,
     },
     {
       property: `og:url`,
-      content: `${canonicalUrl || site.siteMetadata.url}`,
+      content: `${site.siteMetadata.url}`,
     },
     {
       name: `twitter:card`,
@@ -77,7 +76,7 @@ function Seo({
     },
     {
       property: `twitter:image`,
-      content: `${canonicalUrl}${site.siteMetadata.image}`,
+      content: `${site.siteMetadata.image}`,
     },
     {
       name: `twitter:description`,
