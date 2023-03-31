@@ -6,7 +6,7 @@ module.exports = {
     image:
       "https://acccalculatormain-refactorcalc.gatsbyjs.io/images/opengraph.png",
     url: "https://acccalculatormain-refactorcalc.gatsbyjs.io",
-    siteUrl: "https://classiccarvalue.com",
+    siteUrl: "https://acccalculatormain-refactorcalc.gatsbyjs.io",
   },
   plugins: [
     `gatsby-plugin-sitemap`,
