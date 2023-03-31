@@ -3,10 +3,9 @@ module.exports = {
     title: `American Collectors Pricing Tool`,
     description: `How much is your classic car worth? Use American Collectors Insurance’s multi-source classic car valuation tool to more accurately determine a vehicle's value.`,
     author: `Webstacks dev`,
-    image:
-      "https://acccalculatormain-refactorcalc.gatsbyjs.io/images/opengraph.png",
-    url: "https://acccalculatormain-refactorcalc.gatsbyjs.io",
-    siteUrl: "https://acccalculatormain-refactorcalc.gatsbyjs.io",
+    image: "/images/opengraph.png",
+    url: "https://classiccarvalue.com",
+    siteUrl: "https://classiccarvalue.com",
   },
   plugins: [
     `gatsby-plugin-sitemap`,

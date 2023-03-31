@@ -51,12 +51,12 @@ function Seo({
       content: `website`,
     },
     {
-      property: `og:image`,
-      content: `${site.siteMetadata.image}`,
-    },
-    {
       property: `og:url`,
       content: `${site.siteMetadata.url}`,
+    },
+    {
+      property: `og:image`,
+      content: `${site.siteMetadata.image}`,
     },
     {
       name: `twitter:card`,
