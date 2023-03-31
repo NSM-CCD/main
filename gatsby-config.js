@@ -3,7 +3,7 @@ module.exports = {
     title: `American Collectors Pricing Tool`,
     description: `How much is your classic car worth? Use American Collectors Insurance’s multi-source classic car valuation tool to more accurately determine a vehicle's value.`,
     author: `Webstacks dev`,
-    image: "/images/opengraph.png",
+    image: "images/opengraph.png",
     url: "https://classiccarvalue.com",
     siteUrl: "https://classiccarvalue.com",
   },

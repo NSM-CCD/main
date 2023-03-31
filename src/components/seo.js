@@ -53,7 +53,7 @@ function Seo({
     },
     {
       property: `og:image`,
-      content: `${site.siteMetadata.image}`,
+      content: `${canonicalUrl}${site.siteMetadata.image}`,
     },
     {
       property: `og:url`,
@@ -77,7 +77,7 @@ function Seo({
     },
     {
       property: `twitter:image`,
-      content: `${site.siteMetadata.image}`,
+      content: `${canonicalUrl}${site.siteMetadata.image}`,
     },
     {
       name: `twitter:description`,
