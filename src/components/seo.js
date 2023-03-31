@@ -40,11 +40,11 @@ function Seo({
     },
     {
       name: `twitter:card`,
-      content: `summary`,
+      content: `summary_large_image`,
     },
     {
       name: `twitter:card`,
-      content: `summary_large_image`,
+      content: `summary`,
     },
     {
       name: `twitter:creator`,
