@@ -7,6 +7,7 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import aciLogo from "../images/opengraph.png"
 
 function Seo({
   title = "",
@@ -56,7 +57,7 @@ function Seo({
     },
     {
       property: `twitter:image`,
-      content: `${site.siteMetadata.image}`,
+      content: `${site.siteMetadata.image ?? aciLogo}`,
     },
     {
       name: `twitter:description`,
@@ -76,7 +77,7 @@ function Seo({
     },
     {
       property: `og:image`,
-      content: `${site.siteMetadata.image}`,
+      content: `${site.siteMetadata.image ?? aciLogo}`,
     },
     {
       property: `og:url`,
