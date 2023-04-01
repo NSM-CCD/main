@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from "react"
-import Link from "../../../../utils/link"
 import chevronLeftIcon from "../../../../images/icons/chevron-left.svg"
 import { FormInfoWrapper } from "../../../HeroNew/Form/FormInfo/forminfo.styles"
 import axios from "axios"
@@ -17,7 +16,7 @@ const FormIntegration = ({ onClose }) => {
   const formObj = useMemo(
     () => ({
       cd_accountkey: "ayxPofCEvkuQt4gtmoabMQ",
-      cd_domain: "classiccarvalues.com",
+      cd_domain: "classiccarvalue.com",
       cd_visitorkey:
         typeof window !== "undefined"
           ? window?.clickDimensionsVisitorKey
@@ -72,8 +71,7 @@ const FormIntegration = ({ onClose }) => {
       setHasError(false)
       await axios
         .post(
-          //@TODO: update link before launch - remove cors bypass
-          "https://justcors.com/l_42d5nkpzh3g/https://analytics.clickdimensions.com/forms/?visitor=contact",
+          "https://analytics.clickdimensions.com/forms/?visitor=contact",
           fd
         )
         .then(() => {
@@ -176,13 +174,23 @@ const FormIntegration = ({ onClose }) => {
       <div className="terms-policy">
         <p className="agreement m-0">
           By clicking "Submit", you agree to the&nbsp;
-          <Link to="/terms" openInNewTab>
-            Terms
-          </Link>
+          <a
+            href="https://americancollectors.com/terms-of-use/"
+            className="terms-conditions"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Terms & Conditions
+          </a>
           &nbsp;and&nbsp;
-          <Link to="/privacy" openInNewTab>
+          <a
+            href="https://americancollectors.com/privacy-policy/"
+            className="privacy-policy"
+            target="_blank"
+            rel="noreferrer"
+          >
             Privacy Policy
-          </Link>
+          </a>
           .
         </p>
       </div>

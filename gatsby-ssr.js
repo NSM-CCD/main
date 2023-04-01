@@ -85,7 +85,7 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       type="text/javascript"
       dangerouslySetInnerHTML={{
         __html: `var cdAnalytics = new clickdimensions.Analytics('analytics.clickdimensions.com');
-        cdAnalytics.setDomain('acccalculatormain-refactorcalc.gatsbyjs.io');
+        cdAnalytics.setDomain('classiccarvalue.com');
         cdAnalytics.setAccountKey('ayxPofCEvkuQt4gtmoabMQ');
         cdAnalytics.setScore(typeof(cdScore) == "undefined" ? 0 : (cdScore == 0 ? null : cdScore));
         

@@ -19,7 +19,7 @@ const FormInfo = ({ onClose }) => {
   const formObj = useMemo(
     () => ({
       cd_accountkey: "ayxPofCEvkuQt4gtmoabMQ",
-      cd_domain: "classiccarvalues.com",
+      cd_domain: "classiccarvalue.com",
       cd_visitorkey:
         typeof window !== "undefined"
           ? window?.clickDimensionsVisitorKey
@@ -59,11 +59,7 @@ const FormInfo = ({ onClose }) => {
 
     if (email) {
       await axios
-        .post(
-          //@TODO: update link before launch - remove cors bypass for testing
-          "https://justcors.com/l_42d5nkpzh3g/https://analytics.clickdimensions.com/forms/?visitor=lead",
-          fd
-        )
+        .post("https://analytics.clickdimensions.com/forms/?visitor=lead", fd)
         .then(() => {
           toast.success("Success! Generating report...", {
             autoClose: 1500,
