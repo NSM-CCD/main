@@ -97,7 +97,6 @@ const ResultsMain = () => {
               Related Vehicles
             </ScrollLink>
           )}
-          <p className="beta-text">Beta 0.1</p>
         </div>
         <div className="content-wrapper">
           <Valuation
