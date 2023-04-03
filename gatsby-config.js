@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `American Collectors Pricing Tool`,
@@ -37,13 +41,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-bootstrap-5`,
-        short_name: `gb5-starter`,
+        name: `american-car-collectors-quote-tool`,
+        short_name: `acc-quote-tool`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `standalone`,
-        icon: `src/images/acc-calculator-logo.png`, // This path is relative to the root of the site.
+        icon: `src/images/acc-calculator-logo.png`,
       },
     },
     {
@@ -52,7 +56,7 @@ module.exports = {
         uri: "https://graphql-prod.classic.com",
         headers: {
           Authorization:
-            "License aC9tZXRacS8wZ25VbldvVnNycVNHa2ZhZ3JEVnl3dk1PTE1QbmdaMEdQcz0=", // @TODO move to env variable
+            `License ${process.env.CLASSIC_API_KEY}`,
         },
       },
     },

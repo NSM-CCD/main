@@ -134,7 +134,7 @@ const FormInfo = ({ onClose }) => {
       </div>
       <div className="terms-policy">
         <p className="agreement m-0">
-          Your personal Information will never be shared and is Optional. By
+          Your personal Information will never be shared and is optional. By
           clicking "Get Estimate" You agree to the&nbsp;
           <a
             href="https://americancollectors.com/terms-of-use/"
