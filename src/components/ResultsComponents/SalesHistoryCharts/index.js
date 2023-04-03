@@ -18,8 +18,12 @@ const SalesHistoryCharts = ({
   activeChart,
   onChangeActiveChart,
 }) => {
-  const { standardPriceArr, ocwStandardPriceArr, vmrStandardPriceArr } =
-    useContext(ACIContext)
+  const {
+    modifiedPriceArr,
+    standardPriceArr,
+    ocwStandardPriceArr,
+    vmrStandardPriceArr,
+  } = useContext(ACIContext)
 
   const [isExpanded, setIsExpanded] = useState(false)
   const [hideLoadingText, setHideLoadingText] = useState(false)
@@ -45,7 +49,7 @@ const SalesHistoryCharts = ({
       return null
     }
 
-    return standardPriceArr?.length ||
+    return modifiedPriceArr?.length ||
       ocwStandardPriceArr?.length ||
       vmrStandardPriceArr?.length ? (
       <div>
@@ -57,9 +61,12 @@ const SalesHistoryCharts = ({
         <ValuationTable />
       </div>
     ) : (
-      <div className="no-chart">No data for this time period</div>
+      <>
+        <h5 className="sales-title">Sales history</h5>
+        <div className="no-chart">No data for this time period</div>
+      </>
     )
-  }, [isExpanded])
+  }, [isExpanded, modifiedPriceArr, ocwStandardPriceArr, vmrStandardPriceArr])
 
   const charts = useMemo(() => {
     switch (activeChart) {
@@ -73,7 +80,7 @@ const SalesHistoryCharts = ({
       case "Average Value":
         return (
           <>
-            {standardPriceArr?.length ? (
+            {modifiedPriceArr?.length ? (
               <div className="price">
                 <div className="avg-collapse">
                   <div className="avg-header">
@@ -104,6 +111,7 @@ const SalesHistoryCharts = ({
     activeChart,
     hideLoadingText,
     standardPriceArr,
+    modifiedPriceArr,
     toggleExpand,
     valuationSection,
   ])

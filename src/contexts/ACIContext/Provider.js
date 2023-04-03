@@ -19,15 +19,25 @@ const ACIProvider = ({ children }) => {
   const [createMarketWidgetFromTaxonomyName, { error }] =
     useMutation(MARKET_WIDGET)
 
-  const setYear = useCallback(year => {
-    dispatch({ type: "set_year", year })
-    dispatch({ type: "set_description", description: "" })
-    dispatch({ type: "set_chart", chartUrl: "" })
-    dispatch({
-      type: "set_selected_options",
-      selectedOptions: [],
-    })
-  }, [])
+  const setYear = useCallback(
+    year => {
+      dispatch({ type: "set_year", year })
+      dispatch({ type: "set_description", description: "" })
+      dispatch({ type: "set_chart", chartUrl: "" })
+      dispatch({
+        type: "set_selected_options",
+        selectedOptions: [],
+      })
+
+      dispatch({ type: "set_model", model: "" })
+      dispatch({ type: "set_trim", trim: "" })
+
+      if (state.isYear) {
+        dispatch({ type: "set_make", make: "" })
+      }
+    },
+    [state.isYear]
+  )
 
   const setMake = useCallback(make => {
     dispatch({ type: "set_make", make })
@@ -37,6 +47,13 @@ const ACIProvider = ({ children }) => {
       type: "set_selected_options",
       selectedOptions: [],
     })
+
+    dispatch({ type: "set_model", model: "" })
+    dispatch({ type: "set_trim", trim: "" })
+
+    if (!state.isYear) {
+      dispatch({ type: "set_year", year: "" })
+    }
   }, [])
 
   const setModel = useCallback(
