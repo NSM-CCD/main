@@ -20,7 +20,7 @@ const ACIProvider = ({ children }) => {
     useMutation(MARKET_WIDGET)
 
   const setYear = useCallback(
-    year => {
+    (year, reset = false) => {
       dispatch({ type: "set_year", year })
       dispatch({ type: "set_description", description: "" })
       dispatch({ type: "set_chart", chartUrl: "" })
@@ -29,32 +29,39 @@ const ACIProvider = ({ children }) => {
         selectedOptions: [],
       })
 
-      dispatch({ type: "set_model", model: "" })
-      dispatch({ type: "set_trim", trim: "" })
+      if (reset) {
+        dispatch({ type: "set_model", model: "" })
+        dispatch({ type: "set_trim", trim: "" })
+      }
 
-      if (state.isYear) {
+      if (state.isYear && reset) {
         dispatch({ type: "set_make", make: "" })
       }
     },
     [state.isYear]
   )
 
-  const setMake = useCallback(make => {
-    dispatch({ type: "set_make", make })
-    dispatch({ type: "set_description", description: "" })
-    dispatch({ type: "set_chart", chartUrl: "" })
-    dispatch({
-      type: "set_selected_options",
-      selectedOptions: [],
-    })
+  const setMake = useCallback(
+    (make, reset = false) => {
+      dispatch({ type: "set_make", make })
+      dispatch({ type: "set_description", description: "" })
+      dispatch({ type: "set_chart", chartUrl: "" })
+      dispatch({
+        type: "set_selected_options",
+        selectedOptions: [],
+      })
 
-    dispatch({ type: "set_model", model: "" })
-    dispatch({ type: "set_trim", trim: "" })
+      if (reset) {
+        dispatch({ type: "set_model", model: "" })
+        dispatch({ type: "set_trim", trim: "" })
+      }
 
-    if (!state.isYear) {
-      dispatch({ type: "set_year", year: "" })
-    }
-  }, [])
+      if (!state.isYear && reset) {
+        dispatch({ type: "set_year", year: "" })
+      }
+    },
+    [state.isYear]
+  )
 
   const setModel = useCallback(
     model => dispatch({ type: "set_model", model }),
