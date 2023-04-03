@@ -18,8 +18,11 @@ const SalesHistoryCharts = ({
   activeChart,
   onChangeActiveChart,
 }) => {
-  const { standardPriceArr } = useContext(ACIContext)
+  const { standardPriceArr, ocwStandardPriceArr, vmrStandardPriceArr } =
+    useContext(ACIContext)
+
   const [isExpanded, setIsExpanded] = useState(false)
+  const [hideLoadingText, setHideLoadingText] = useState(false)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)
@@ -29,12 +32,22 @@ const SalesHistoryCharts = ({
     setTimeout(() => setIsExpanded(true), 1800)
   }, [])
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (!hideLoadingText) {
+        setHideLoadingText(true)
+      }
+    }, 2000)
+  }, [hideLoadingText])
+
   const valuationSection = useMemo(() => {
     if (!isExpanded) {
       return null
     }
 
-    return (
+    return standardPriceArr?.length ||
+      ocwStandardPriceArr?.length ||
+      vmrStandardPriceArr?.length ? (
       <div>
         <div className="h-divider" />
         <h5 className="sales-title pt-4">Sales history</h5>
@@ -43,6 +56,8 @@ const SalesHistoryCharts = ({
         </div>
         <ValuationTable />
       </div>
+    ) : (
+      <div className="no-chart">No data for this time period</div>
     )
   }, [isExpanded])
 
@@ -76,16 +91,22 @@ const SalesHistoryCharts = ({
                   />
                 </div>
               </div>
-            ) : (
+            ) : !hideLoadingText ? (
               "loading data..."
-            )}
+            ) : null}
             {valuationSection}
           </>
         )
       default:
         return null
     }
-  }, [activeChart, standardPriceArr, toggleExpand, valuationSection])
+  }, [
+    activeChart,
+    hideLoadingText,
+    standardPriceArr,
+    toggleExpand,
+    valuationSection,
+  ])
 
   return (
     <div className="chart-tabs">
