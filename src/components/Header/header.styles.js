@@ -2,14 +2,34 @@ import styled from "styled-components"
 
 export const HeaderMain = styled.header`
   border-bottom: 1px solid #eaecf0;
+  background-color: #fff;
+
+  position: sticky;
+  top: 0;
+  z-index: 3;
 
   nav {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px 24px;
 
     @media (min-width: 768px) {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding: 16px 0;
+    }
+
+    &.container {
+      @media (min-width: 1366px) {
+        max-width: 1170px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .logo {
+    max-width: 133px;
+    max-height: 45px;
+
+    @media (min-width: 768px) {
+      max-width: 164px;
+      max-height: 56px;
     }
   }
 
@@ -41,8 +61,20 @@ export const HeaderMain = styled.header`
 
     &.bg-red {
       color: #fff;
-      background: #93272c;
-      border: 1px solid #93272c;
+      background: #bc2f2c;
+      border: 1px solid #bc2f2c;
+
+      svg path {
+        stroke: #fff;
+      }
+    }
+
+    &.bg-blue {
+      color: #fff;
+      background: #5e8ab4;
+      border: 1px solid #5e8ab4;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+      border-radius: 8px;
 
       svg path {
         stroke: #fff;

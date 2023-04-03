@@ -6,10 +6,15 @@
  */
 
 import * as React from "react"
-import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function Seo({ description, lang = "en", meta = [], title }) {
+function Seo({
+  title = "",
+  noindex = false,
+  meta = [],
+  keywords = [],
+  description = "",
+}) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +23,8 @@ function Seo({ description, lang = "en", meta = [], title }) {
             title
             description
             author
+            image
+            url
           }
         }
       }
@@ -25,50 +32,80 @@ function Seo({ description, lang = "en", meta = [], title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+
+  const metaTags = [
+    {
+      name: `description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:title`,
+      content: `${title} - American Collectors Pricing Tool`,
+    },
+    {
+      property: `og:description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:type`,
+      content: `website`,
+    },
+    {
+      property: `og:url`,
+      content: `${site.siteMetadata.url}`,
+    },
+    {
+      property: `og:image`,
+      content: `${site.siteMetadata.image}`,
+    },
+    {
+      name: `twitter:card`,
+      content: `summary_large_image`,
+    },
+    {
+      name: `twitter:card`,
+      content: `summary`,
+    },
+    {
+      name: `twitter:creator`,
+      content: site.siteMetadata.author,
+    },
+    {
+      name: `twitter:title`,
+      content: `${title} - American Collectors Pricing Tool`,
+    },
+    {
+      property: `twitter:image`,
+      content: `${site.siteMetadata.image}`,
+    },
+    {
+      name: `twitter:description`,
+      content: metaDescription,
+    },
+  ]
+    .concat(
+      keywords.length > 0
+        ? {
+            name: `keywords`,
+            content: keywords.join(`, `),
+          }
+        : []
+    )
+    .concat(meta)
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <>
+      <title>
+        {title
+          ? `${title} - American Collectors Pricing Tool`
+          : "American Collectors Pricing Tool"}
+      </title>
+      {metaTags.length &&
+        metaTags.map((m, i) => {
+          return <meta key={`${m.content}-${i}`} {...m} />
+        })}
+      <meta id="robots" name="robots" content={noindex ? "noindex" : "index"} />
+    </>
   )
 }
 
