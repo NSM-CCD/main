@@ -56,7 +56,7 @@ module.exports = {
         uri: "https://graphql-prod.classic.com",
         headers: {
           Authorization:
-            `License ${process.env.CLASSIC_API_KEY}`,
+            `License ${process.env.GATSBY_CLASSIC_API_KEY}`,
         },
       },
     },
