@@ -49,7 +49,7 @@ const SalesHistoryCharts = ({
       return null
     }
 
-    return standardPriceArr?.length ||
+    return (standardPriceArr?.length && standardPriceArr[0]?.avg !== "N/A") ||
       ocwStandardPriceArr?.length ||
       vmrStandardPriceArr?.length ? (
       <div>
@@ -80,7 +80,7 @@ const SalesHistoryCharts = ({
       case "Average Value":
         return (
           <>
-            {standardPriceArr?.length ? (
+            {standardPriceArr?.length && standardPriceArr[0]?.avg !== "N/A" ? (
               <div className="price">
                 <div className="avg-collapse">
                   <div className="avg-header">
