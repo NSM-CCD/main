@@ -26,6 +26,7 @@ const SalesHistoryCharts = ({
   } = useContext(ACIContext)
 
   const [isExpanded, setIsExpanded] = useState(false)
+  const [hideLoadingText, setHideLoadingText] = useState(false)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)
@@ -34,6 +35,14 @@ const SalesHistoryCharts = ({
   useEffect(() => {
     setTimeout(() => setIsExpanded(true), 2000)
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!hideLoadingText) {
+        setHideLoadingText(true)
+      }
+    }, 2000)
+  }, [hideLoadingText])
 
   const valuationSection = useMemo(() => {
     if (!isExpanded) {
@@ -91,6 +100,8 @@ const SalesHistoryCharts = ({
                   />
                 </div>
               </div>
+            ) : !hideLoadingText ? (
+              "loading data..."
             ) : null}
             {valuationSection}
           </>
@@ -100,6 +111,7 @@ const SalesHistoryCharts = ({
     }
   }, [
     activeChart,
+    hideLoadingText,
     standardPriceArr,
     modifiedPriceArr,
     toggleExpand,
