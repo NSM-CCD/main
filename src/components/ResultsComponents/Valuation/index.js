@@ -4,13 +4,11 @@ import { ACIContext } from "../../../contexts/ACIContext"
 
 const Valuation = ({ carName, trim }) => {
   const [showTooltip, setShowTooltip] = useState(false)
-  const { resetForm } = useContext(ACIContext)
   const url = typeof window !== "undefined" ? window.location.href : ""
 
   const handleBack = useCallback(() => {
-    resetForm()
     navigate("/")
-  }, [resetForm])
+  }, [])
 
   const handleCopyLink = useCallback(() => {
     setShowTooltip(!showTooltip)

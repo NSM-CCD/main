@@ -18,23 +18,40 @@ const SalesHistoryCharts = ({
   activeChart,
   onChangeActiveChart,
 }) => {
-  const { standardPriceArr } = useContext(ACIContext)
+  const {
+    modifiedPriceArr,
+    standardPriceArr,
+    ocwStandardPriceArr,
+    vmrStandardPriceArr,
+  } = useContext(ACIContext)
+
   const [isExpanded, setIsExpanded] = useState(false)
+  const [hideLoadingText, setHideLoadingText] = useState(false)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)
   }, [])
 
   useEffect(() => {
-    setTimeout(() => setIsExpanded(true), 1800)
+    setTimeout(() => setIsExpanded(true), 2000)
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!hideLoadingText) {
+        setHideLoadingText(true)
+      }
+    }, 2000)
+  }, [hideLoadingText])
 
   const valuationSection = useMemo(() => {
     if (!isExpanded) {
       return null
     }
 
-    return (
+    return (standardPriceArr?.length && standardPriceArr[0]?.avg !== "N/A") ||
+      ocwStandardPriceArr?.length ||
+      vmrStandardPriceArr?.length ? (
       <div>
         <div className="h-divider" />
         <h5 className="sales-title pt-4">Sales history</h5>
@@ -43,8 +60,13 @@ const SalesHistoryCharts = ({
         </div>
         <ValuationTable />
       </div>
+    ) : (
+      <>
+        <h5 className="sales-title">Sales history</h5>
+        <div className="no-chart">No data for this time period</div>
+      </>
     )
-  }, [isExpanded])
+  }, [isExpanded, standardPriceArr, ocwStandardPriceArr, vmrStandardPriceArr])
 
   const charts = useMemo(() => {
     switch (activeChart) {
@@ -58,16 +80,18 @@ const SalesHistoryCharts = ({
       case "Average Value":
         return (
           <>
-            {standardPriceArr?.length ? (
+            {standardPriceArr?.length && standardPriceArr[0]?.avg !== "N/A" ? (
               <div className="price">
                 <div className="avg-collapse">
                   <div className="avg-header">
                     {isExpanded ? (
-                      <h5 className="avg-title">Average Retail Value</h5>
+                      <>
+                        <h5 className="avg-title">Average Retail Value</h5>
+                        <p className="avg-value">
+                          ${standardPriceArr[0]?.avg ?? ""}
+                        </p>
+                      </>
                     ) : null}
-                    <p className="avg-value">
-                      ${standardPriceArr[0]?.avg ?? ""}
-                    </p>
                   </div>
                   <ButtonChevron
                     className="avg-collapse-button"
@@ -76,16 +100,23 @@ const SalesHistoryCharts = ({
                   />
                 </div>
               </div>
-            ) : (
+            ) : !hideLoadingText ? (
               "loading data..."
-            )}
+            ) : null}
             {valuationSection}
           </>
         )
       default:
         return null
     }
-  }, [activeChart, standardPriceArr, toggleExpand, valuationSection])
+  }, [
+    activeChart,
+    hideLoadingText,
+    standardPriceArr,
+    modifiedPriceArr,
+    toggleExpand,
+    valuationSection,
+  ])
 
   return (
     <div className="chart-tabs">

@@ -23,19 +23,16 @@ const HeroForm = ({
     resetForm,
   } = useContext(ACIContext)
 
-  const handleSelector = useCallback(
-    () => setIsYear(!isYear),
-    [isYear, setIsYear]
-  )
+  const handleYearSelector = useCallback(year => setIsYear(year), [setIsYear])
 
   const handleYear = useCallback(
-    ({ target }) => setYear(target.value),
+    ({ target }) => setYear(target.value, true),
     [setYear]
   )
 
   const handleMake = useCallback(
     ({ target }) => {
-      setMake(target.value)
+      setMake(target.value, true)
       setMakeLabel(target.options[target.selectedIndex].text)
     },
     [setMake, setMakeLabel]
@@ -63,13 +60,13 @@ const HeroForm = ({
           <div className="selector">
             <button
               className={isYear ? "is-year" : ""}
-              onClick={handleSelector}
+              onClick={() => handleYearSelector(true)}
             >
               Select By Year
             </button>
             <button
               className={!isYear ? "is-make" : ""}
-              onClick={handleSelector}
+              onClick={() => handleYearSelector(false)}
             >
               Select By Make
             </button>
