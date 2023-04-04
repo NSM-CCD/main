@@ -44,6 +44,11 @@ const SalesHistoryCharts = ({
     }, 2000)
   }, [hideLoadingText])
 
+  const loadingText = useMemo(
+    () => (!hideLoadingText ? "loading data..." : null),
+    [hideLoadingText]
+  )
+
   const valuationSection = useMemo(() => {
     if (!isExpanded) {
       return null
@@ -91,7 +96,14 @@ const SalesHistoryCharts = ({
                           ${standardPriceArr[0]?.avg ?? ""}
                         </p>
                       </>
-                    ) : null}
+                    ) : (
+                      <p className="avg-value">
+                        $
+                        {standardPriceArr[0]?.avg
+                          ? standardPriceArr[0]?.avg
+                          : loadingText}
+                      </p>
+                    )}
                   </div>
                   <ButtonChevron
                     className="avg-collapse-button"
@@ -100,9 +112,9 @@ const SalesHistoryCharts = ({
                   />
                 </div>
               </div>
-            ) : !hideLoadingText ? (
-              "loading data..."
-            ) : null}
+            ) : (
+              loadingText
+            )}
             {valuationSection}
           </>
         )
@@ -116,6 +128,7 @@ const SalesHistoryCharts = ({
     modifiedPriceArr,
     toggleExpand,
     valuationSection,
+    loadingText,
   ])
 
   return (
