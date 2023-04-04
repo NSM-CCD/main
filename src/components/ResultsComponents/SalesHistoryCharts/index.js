@@ -50,6 +50,7 @@ const SalesHistoryCharts = ({
     }
 
     return modifiedPriceArr?.length ||
+      standardPriceArr?.length ||
       ocwStandardPriceArr?.length ||
       vmrStandardPriceArr?.length ? (
       <div>
@@ -66,7 +67,13 @@ const SalesHistoryCharts = ({
         <div className="no-chart">No data for this time period</div>
       </>
     )
-  }, [isExpanded, modifiedPriceArr, ocwStandardPriceArr, vmrStandardPriceArr])
+  }, [
+    isExpanded,
+    modifiedPriceArr,
+    standardPriceArr,
+    ocwStandardPriceArr,
+    vmrStandardPriceArr,
+  ])
 
   const charts = useMemo(() => {
     switch (activeChart) {
