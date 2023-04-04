@@ -26,7 +26,6 @@ const SalesHistoryCharts = ({
   } = useContext(ACIContext)
 
   const [isExpanded, setIsExpanded] = useState(false)
-  const [hideLoadingText, setHideLoadingText] = useState(false)
 
   const toggleExpand = useCallback(() => {
     setIsExpanded(expanded => !expanded)
@@ -35,14 +34,6 @@ const SalesHistoryCharts = ({
   useEffect(() => {
     setTimeout(() => setIsExpanded(true), 2000)
   }, [])
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (!hideLoadingText) {
-        setHideLoadingText(true)
-      }
-    }, 2000)
-  }, [hideLoadingText])
 
   const valuationSection = useMemo(() => {
     if (!isExpanded) {
@@ -85,11 +76,13 @@ const SalesHistoryCharts = ({
                 <div className="avg-collapse">
                   <div className="avg-header">
                     {isExpanded ? (
-                      <h5 className="avg-title">Average Retail Value</h5>
+                      <>
+                        <h5 className="avg-title">Average Retail Value</h5>
+                        <p className="avg-value">
+                          ${standardPriceArr[0]?.avg ?? ""}
+                        </p>
+                      </>
                     ) : null}
-                    <p className="avg-value">
-                      ${standardPriceArr[0]?.avg ?? ""}
-                    </p>
                   </div>
                   <ButtonChevron
                     className="avg-collapse-button"
@@ -98,8 +91,6 @@ const SalesHistoryCharts = ({
                   />
                 </div>
               </div>
-            ) : !hideLoadingText ? (
-              "loading data..."
             ) : null}
             {valuationSection}
           </>
@@ -109,7 +100,6 @@ const SalesHistoryCharts = ({
     }
   }, [
     activeChart,
-    hideLoadingText,
     standardPriceArr,
     modifiedPriceArr,
     toggleExpand,
