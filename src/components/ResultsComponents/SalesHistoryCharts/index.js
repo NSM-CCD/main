@@ -49,8 +49,7 @@ const SalesHistoryCharts = ({
       return null
     }
 
-    return modifiedPriceArr?.length ||
-      standardPriceArr?.length ||
+    return standardPriceArr?.length ||
       ocwStandardPriceArr?.length ||
       vmrStandardPriceArr?.length ? (
       <div>
@@ -67,13 +66,7 @@ const SalesHistoryCharts = ({
         <div className="no-chart">No data for this time period</div>
       </>
     )
-  }, [
-    isExpanded,
-    modifiedPriceArr,
-    standardPriceArr,
-    ocwStandardPriceArr,
-    vmrStandardPriceArr,
-  ])
+  }, [isExpanded, standardPriceArr, ocwStandardPriceArr, vmrStandardPriceArr])
 
   const charts = useMemo(() => {
     switch (activeChart) {
@@ -87,7 +80,7 @@ const SalesHistoryCharts = ({
       case "Average Value":
         return (
           <>
-            {standardPriceArr?.length || modifiedPriceArr?.length ? (
+            {standardPriceArr?.length ? (
               <div className="price">
                 <div className="avg-collapse">
                   <div className="avg-header">
