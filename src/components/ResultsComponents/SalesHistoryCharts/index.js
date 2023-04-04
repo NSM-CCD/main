@@ -33,7 +33,7 @@ const SalesHistoryCharts = ({
   }, [])
 
   useEffect(() => {
-    setTimeout(() => setIsExpanded(true), 1800)
+    setTimeout(() => setIsExpanded(true), 2000)
   }, [])
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const SalesHistoryCharts = ({
       case "Average Value":
         return (
           <>
-            {modifiedPriceArr?.length ? (
+            {standardPriceArr?.length || modifiedPriceArr?.length ? (
               <div className="price">
                 <div className="avg-collapse">
                   <div className="avg-header">
