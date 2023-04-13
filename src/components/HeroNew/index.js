@@ -15,13 +15,13 @@ import {
 } from "./helpers"
 import { HeroContent, HeroSection, ImageWrapper } from "./hero.styles"
 import heroBg from "../../images/hero-bg.webp"
+import { toast } from "react-toastify"
 
 const Hero = () => {
-  const [openModalForm, setOpenModalForm] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const isWiderScreen = useMediaQuery("(min-width: 1200px)")
 
   const {
-    isFormSubmitted,
     slugParams,
     modelOptions,
     makeOptions,
@@ -30,15 +30,16 @@ const Hero = () => {
     resetForm,
   } = useContext(ACIContext)
 
-  const handleOpenModalForm = useCallback(() => {
-    if (!isFormSubmitted) {
-      setOpenModalForm(true)
-    } else {
-      navigate(`/results?rdata=${btoa(slugParams)}`)
-    }
-  }, [isFormSubmitted, slugParams])
-
-  const handleCloseModal = useCallback(() => setOpenModalForm(false), [])
+  const handleEstimate = useCallback(() => {
+    setSubmitting(true)
+    toast.success("Generating report...", {
+      autoClose: 1500,
+      onClose: () => {
+        setSubmitting(false)
+        navigate(`/results?rdata=${btoa(slugParams)}`)
+      },
+    })
+  }, [slugParams])
 
   const years = useMemo(
     () =>
@@ -155,11 +156,12 @@ const Hero = () => {
               </div>
             </div>
             <HeroForm
+              isSubmitting={submitting}
               makeOptions={availableMakes}
               modelOptions={availableModels}
               trimOptions={availableTrims}
               yearOptions={years}
-              onEstimate={handleOpenModalForm}
+              onEstimate={handleEstimate}
               onReset={resetForm}
             />
           </div>
@@ -168,10 +170,6 @@ const Hero = () => {
       <ImageWrapper>
         <img src={heroBg} alt="Hero bottom" className="img-fluid" />
       </ImageWrapper>
-      <ModalMain
-        open={openModalForm}
-        content={<FormInfo onClose={handleCloseModal} />}
-      />
     </HeroSection>
   )
 }

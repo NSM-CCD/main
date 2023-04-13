@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from "react"
 import { ACIContext } from "../../../contexts/ACIContext"
 
 const HeroForm = ({
+  isSubmitting,
   makeOptions,
   modelOptions,
   yearOptions,
@@ -143,14 +144,23 @@ const HeroForm = ({
           </div>
           <hr className="m-0" />
           <div className="action-buttons">
-            <button type="reset" className="btn-reset" onClick={resetForm}>
+            <button
+              disabled={isSubmitting}
+              type="reset"
+              className="btn-reset"
+              onClick={resetForm}
+            >
               Reset Selections
             </button>
             <button
               type="button"
               className="btn-estimate"
               disabled={
-                !year || !model || !make || (trimOptions?.length > 0 && !trim)
+                !year ||
+                !model ||
+                !make ||
+                (trimOptions?.length > 0 && !trim) ||
+                isSubmitting
               }
               onClick={onEstimate}
             >
