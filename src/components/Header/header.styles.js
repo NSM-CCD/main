@@ -37,7 +37,7 @@ export const HeaderMain = styled.header`
     border: 1px solid #d0d5dd;
     box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
     border-radius: 8px;
-    padding: 8px 14px;
+    padding: 4px 14px;
     font-family: "Raleway", sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -49,6 +49,7 @@ export const HeaderMain = styled.header`
 
     @media (min-width: 465px) {
       max-width: fit-content;
+      padding: 8px 14px;
     }
 
     &:hover {
