@@ -24,7 +24,7 @@ const Header = ({ ctaBackgroundColor }) => {
           className={`btn-cta ${ctaBackgroundColor}`}
           onClick={handleClickInsured}
         >
-          Get a Quote
+          Get an Insurance Quote
           <svg
             width="20"
             height="20"
