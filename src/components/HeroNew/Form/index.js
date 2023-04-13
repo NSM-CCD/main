@@ -156,11 +156,11 @@ const HeroForm = ({
               type="button"
               className="btn-estimate"
               disabled={
+                isSubmitting ||
                 !year ||
                 !model ||
                 !make ||
-                (trimOptions?.length > 0 && !trim) ||
-                isSubmitting
+                (trimOptions?.length > 0 && !trim)
               }
               onClick={onEstimate}
             >
