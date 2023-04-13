@@ -45,6 +45,11 @@ export const HeaderMain = styled.header`
     line-height: 24px;
     color: #344054;
     user-select: none;
+    max-width: 160px;
+
+    @media (min-width: 465px) {
+      max-width: fit-content;
+    }
 
     &:hover {
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
