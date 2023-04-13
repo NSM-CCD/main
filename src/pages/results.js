@@ -24,16 +24,6 @@ const ResultsPage = props => {
     setYear,
   } = useContext(ACIContext)
 
-  let ctaColor
-
-  if (isDesktop) {
-    ctaColor = "bg-red"
-  } else if (isTablet) {
-    ctaColor = "bg-blue"
-  } else {
-    ctaColor = "bg-white"
-  }
-
   useEffect(() => {
     const params = new URLSearchParams(props?.location?.search)
     const reportsData = params.get("rdata")
@@ -60,7 +50,7 @@ const ResultsPage = props => {
   ])
 
   return (
-    <Layout ctaBackgroundColor={ctaColor}>
+    <Layout ctaBackgroundColor="bg-red">
       <ResultsMain />
       <ConversionPanel ctaButtonColor="bg-red" />
       <ConversionIntegration />
