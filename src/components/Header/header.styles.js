@@ -47,7 +47,7 @@ export const HeaderMain = styled.header`
     user-select: none;
     max-width: 160px;
 
-    @media (min-width: 465px) {
+    @media (min-width: 576px) {
       max-width: fit-content;
       padding: 8px 14px;
     }
