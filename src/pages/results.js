@@ -5,14 +5,10 @@ import Seo from "../components/seo"
 import ConversionPanel from "../components/ConversionPanel"
 import ConversionIntegration from "../components/CoversionIntegration"
 import ResultsMain from "../components/ResultsComponents"
-import { useMediaQuery } from "../utils/useMediaQuery"
 import { useContext, useEffect } from "react"
 import { ACIContext } from "../contexts/ACIContext"
 
 const ResultsPage = props => {
-  const isTablet = useMediaQuery("(min-width: 768px)")
-  const isDesktop = useMediaQuery("(min-width: 992px)")
-
   const {
     make,
     model,
