@@ -37,7 +37,7 @@ const ConversionPanel = ({ ctaButtonColor = "bg-red" }) => {
               className={`cp-cta ${ctaButtonColor}`}
               onClick={handleClickInsured}
             >
-              Get a Quote&nbsp;
+              Get an Insurance Quote&nbsp;
               <svg
                 width="20"
                 height="20"

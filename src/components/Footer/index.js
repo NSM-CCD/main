@@ -67,7 +67,7 @@ const Footer = () => (
                 target="_blank"
                 rel="noreferrer"
               >
-                Get a Quote
+                Get an Insurance Quote
               </a>
               <a
                 href="https://americancollectors.com/community/"

@@ -5,14 +5,10 @@ import Seo from "../components/seo"
 import ConversionPanel from "../components/ConversionPanel"
 import ConversionIntegration from "../components/CoversionIntegration"
 import ResultsMain from "../components/ResultsComponents"
-import { useMediaQuery } from "../utils/useMediaQuery"
 import { useContext, useEffect } from "react"
 import { ACIContext } from "../contexts/ACIContext"
 
 const ResultsPage = props => {
-  const isTablet = useMediaQuery("(min-width: 768px)")
-  const isDesktop = useMediaQuery("(min-width: 992px)")
-
   const {
     make,
     model,
@@ -23,16 +19,6 @@ const ResultsPage = props => {
     setTrim,
     setYear,
   } = useContext(ACIContext)
-
-  let ctaColor
-
-  if (isDesktop) {
-    ctaColor = "bg-red"
-  } else if (isTablet) {
-    ctaColor = "bg-blue"
-  } else {
-    ctaColor = "bg-white"
-  }
 
   useEffect(() => {
     const params = new URLSearchParams(props?.location?.search)
@@ -60,7 +46,7 @@ const ResultsPage = props => {
   ])
 
   return (
-    <Layout ctaBackgroundColor={ctaColor}>
+    <Layout ctaBackgroundColor="bg-red">
       <ResultsMain />
       <ConversionPanel ctaButtonColor="bg-red" />
       <ConversionIntegration />
