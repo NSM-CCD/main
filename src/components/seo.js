@@ -105,6 +105,10 @@ function Seo({
           return <meta key={`${m.content}-${i}`} {...m} />
         })}
       <meta id="robots" name="robots" content={noindex ? "noindex" : "index"} />
+      <meta
+        name="google-site-verification"
+        content="jCjdpRw8tn0DX1dRm-j0nV8BWf05JvZF2hPUGi9qpLs"
+      />
     </>
   )
 }
