@@ -1,6 +1,6 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
 module.exports = {
   siteMetadata: {
@@ -55,9 +55,15 @@ module.exports = {
       options: {
         uri: "https://graphql-prod.classic.com",
         headers: {
-          Authorization:
-            `License ${process.env.GATSBY_CLASSIC_API_KEY}`,
+          Authorization: `License ${process.env.GATSBY_CLASSIC_API_KEY}`,
         },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-5ZCKKD",
+        includeInDevelopment: false,
       },
     },
     `gatsby-plugin-gatsby-cloud`,
