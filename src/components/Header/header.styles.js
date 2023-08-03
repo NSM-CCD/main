@@ -46,6 +46,7 @@ export const HeaderMain = styled.header`
     color: #344054;
     user-select: none;
     max-width: 160px;
+    text-decoration: none;
 
     @media (min-width: 576px) {
       max-width: fit-content;
