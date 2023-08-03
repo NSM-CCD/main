@@ -599,7 +599,6 @@ const ACIProvider = ({ children }) => {
 
   useEffect(() => {
     if (state.makeLabel && state.model && state.year) {
-      console.log(state.makeLabel, state.model, state.year)
       createMarketWidgetFromTaxonomyName({
         variables: {
           makeName: state.makeLabel,
