@@ -105,9 +105,9 @@ const ACIProvider = ({ children }) => {
     if (state.trimsList.length > 0) {
       let trims = []
       state.trimsList.forEach(trim => {
-        if (trim.entryId === 1 || trim.entryId === 5) {
-          if (!trims.includes(trim.model)) trims.push(trim.model)
-        }
+        // if (trim.entryId === 1 || trim.entryId === 5) {
+        if (!trims.includes(trim.model)) trims.push(trim.model)
+        // }
       })
       setRelatedVehicles(trims)
       return trims
@@ -147,13 +147,14 @@ const ACIProvider = ({ children }) => {
         // save original model obj
         dispatch({
           type: "set_model_obj",
-          modelObjArr: data.filter(m => m.entryId === 1 || m.entryId === 5),
+          modelObjArr: data,
+          // modelObjArr: data.filter(m => m.entryId === 1 || m.entryId === 5),
         })
         data.forEach(model => {
-          if (model?.entryId === 1 || model?.entryId === 5) {
-            if (!modelOptions.includes(model?.modelcat))
-              modelOptions.push(model?.modelcat)
-          }
+          // if (model?.entryId === 1 || model?.entryId === 5) {
+          if (!modelOptions.includes(model?.modelcat))
+            modelOptions.push(model?.modelcat)
+          // }
         })
       }
       // model options "Select model"
@@ -598,6 +599,7 @@ const ACIProvider = ({ children }) => {
 
   useEffect(() => {
     if (state.makeLabel && state.model && state.year) {
+      console.log(state.makeLabel, state.model, state.year)
       createMarketWidgetFromTaxonomyName({
         variables: {
           makeName: state.makeLabel,
