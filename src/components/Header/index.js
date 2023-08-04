@@ -1,15 +1,9 @@
-import React, { useCallback } from "react"
-import { Link, navigate } from "gatsby"
+import React from "react"
+import { Link } from "gatsby"
 import { HeaderMain } from "./header.styles"
 import logo from "../../images/logo-new.webp"
 
 const Header = ({ ctaBackgroundColor }) => {
-  const handleClickInsured = useCallback(() => {
-    navigate(
-      "https://secure.americancollectors.com/Home/QuoteSelector?from=root"
-    )
-  }, [])
-
   return (
     <HeaderMain>
       <nav className="container navbar">
@@ -20,9 +14,9 @@ const Header = ({ ctaBackgroundColor }) => {
             className="logo img-fluid"
           />
         </Link>
-        <button
+        <a
+          href="https://secure.americancollectors.com/Home/QuoteSelector?from=root"
           className={`btn-cta ${ctaBackgroundColor}`}
-          onClick={handleClickInsured}
         >
           Get an Insurance Quote
           <svg
@@ -40,7 +34,7 @@ const Header = ({ ctaBackgroundColor }) => {
               strokeLinejoin="round"
             />
           </svg>
-        </button>
+        </a>
       </nav>
     </HeaderMain>
   )
