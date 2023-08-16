@@ -105,7 +105,9 @@ const ACIProvider = ({ children }) => {
     if (state.trimsList.length > 0) {
       let trims = []
       state.trimsList.forEach(trim => {
-        if (!trims.includes(trim.model)) trims.push(trim.model)
+        if (trim.entryId === 6) {
+          if (!trims.includes(trim.model)) trims.push(trim.model)
+        }
       })
       setRelatedVehicles(trims)
       return trims
@@ -145,11 +147,13 @@ const ACIProvider = ({ children }) => {
         // save original model obj
         dispatch({
           type: "set_model_obj",
-          modelObjArr: data,
+          modelObjArr: data.filter(m => m.entryId === 6),
         })
         data.forEach(model => {
-          if (!modelOptions.includes(model?.modelcat))
-            modelOptions.push(model?.modelcat)
+          if (model?.entryId === 6) {
+            if (!modelOptions.includes(model?.modelcat))
+              modelOptions.push(model?.modelcat)
+          }
         })
       }
       // model options "Select model"
