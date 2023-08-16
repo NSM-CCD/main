@@ -105,7 +105,7 @@ const ACIProvider = ({ children }) => {
     if (state.trimsList.length > 0) {
       let trims = []
       state.trimsList.forEach(trim => {
-        if (trim.entryId === 6) {
+        if (trim.entryId !== 6) {
           if (!trims.includes(trim.model)) trims.push(trim.model)
         }
       })
@@ -147,10 +147,10 @@ const ACIProvider = ({ children }) => {
         // save original model obj
         dispatch({
           type: "set_model_obj",
-          modelObjArr: data.filter(m => m.entryId === 6),
+          modelObjArr: data.filter(m => m.entryId !== 6),
         })
         data.forEach(model => {
-          if (model?.entryId === 6) {
+          if (model?.entryId !== 6) {
             if (!modelOptions.includes(model?.modelcat))
               modelOptions.push(model?.modelcat)
           }
