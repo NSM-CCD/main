@@ -16,6 +16,8 @@ const ACIProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
+  const excludedIds = process.env.GATSBY_EXCLUDED_IDS || []
+
   const [createMarketWidgetFromTaxonomyName, { error }] =
     useMutation(MARKET_WIDGET)
 
@@ -105,13 +107,15 @@ const ACIProvider = ({ children }) => {
     if (state.trimsList.length > 0) {
       let trims = []
       state.trimsList.forEach(trim => {
-        if (!trims.includes(trim.model)) trims.push(trim.model)
+        if (!excludedIds.includes(trim.entryId)) {
+          if (!trims.includes(trim.model)) trims.push(trim.model)
+        }
       })
       setRelatedVehicles(trims)
       return trims
     }
     return []
-  }, [state.trimsList, setRelatedVehicles])
+  }, [state.trimsList, setRelatedVehicles, excludedIds])
 
   const getMakesByYear = useMemo(async () => {
     if (state.year) {
@@ -145,17 +149,19 @@ const ACIProvider = ({ children }) => {
         // save original model obj
         dispatch({
           type: "set_model_obj",
-          modelObjArr: data,
+          modelObjArr: data.filter(m => m.entryId !== 6),
         })
         data.forEach(model => {
-          if (!modelOptions.includes(model?.modelcat))
-            modelOptions.push(model?.modelcat)
+          if (!excludedIds.includes(model?.entryId)) {
+            if (!modelOptions.includes(model?.modelcat))
+              modelOptions.push(model?.modelcat)
+          }
         })
       }
       // model options "Select model"
       dispatch({ type: "set_models", modelList: modelOptions })
     }
-  }, [state.make, state.year])
+  }, [state.make, state.year, excludedIds])
 
   const getTrimsByMakeYearModel = useMemo(async () => {
     if (state.make && state.model && state.year) {
