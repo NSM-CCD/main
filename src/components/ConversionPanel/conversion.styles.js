@@ -111,12 +111,13 @@ export const TextBlock = styled.div`
     }
   }
 
-  button.cp-cta {
+  .cp-cta {
     border: 1px solid #d0d5dd;
     box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
     border-radius: 8px;
     max-width: fit-content;
     padding: 12px 20px;
+    text-decoration: none;
 
     font-family: "Raleway", sans-serif;
     font-style: normal;

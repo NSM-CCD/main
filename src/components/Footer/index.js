@@ -63,7 +63,7 @@ const Footer = () => (
             <div className="footer-menu">
               <p className="menu-title">Helpful Links</p>
               <a
-                href="https://secure.americancollectors.com/Home/QuoteSelector?from=root"
+                href="https://member.americancollectors.com/quote-portal/home?type=collectorauto"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -111,6 +111,7 @@ const Footer = () => (
               href="https://americancollectors.com/privacy-policy/"
               className="privacy-policy"
               target="_blank"
+              rel="noreferrer"
             >
               Privacy Policy
             </a>
@@ -118,6 +119,7 @@ const Footer = () => (
               href="https://americancollectors.com/terms-of-use/"
               className="terms-conditions"
               target="_blank"
+              rel="noreferrer"
             >
               Terms & Conditions
             </a>

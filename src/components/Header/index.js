@@ -15,7 +15,7 @@ const Header = ({ ctaBackgroundColor }) => {
           />
         </Link>
         <a
-          href="https://secure.americancollectors.com/Home/QuoteSelector?from=root"
+          href="https://member.americancollectors.com/quote-portal/home?type=collectorauto"
           className={`btn-cta ${ctaBackgroundColor}`}
         >
           Get an Insurance Quote
