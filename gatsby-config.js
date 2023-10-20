@@ -67,6 +67,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-gatsby-cloud`,
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-styled-components`,
   ],
 }
