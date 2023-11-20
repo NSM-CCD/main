@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react"
+import React, { useCallback, useContext, useEffect } from "react"
 import { ACIContext } from "../../../contexts/ACIContext"
 
 const HeroForm = ({
@@ -56,7 +56,7 @@ const HeroForm = ({
     const canonicalUrl = data.site.siteMetadata.siteURL + location.pathname
   }
 
-  if (typeof window !== "undefined") {
+  useEffect(() => {
     const search = new URL(window.location).searchParams
     const urlYear = search.get("year")
   }
