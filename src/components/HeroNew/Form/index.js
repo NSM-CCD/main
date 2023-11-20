@@ -1,4 +1,5 @@
 import React, { useCallback, useContext } from "react"
+import { Link, userParams } from "react-router-dom"
 import { ACIContext } from "../../../contexts/ACIContext"
 
 const HeroForm = ({
@@ -52,11 +53,14 @@ const HeroForm = ({
     [setTrim]
   )
 
+  let urlYear = userParams().year
+
   return (
     <div className="col-12 col-md-6 form-wrapper">
       <div className="form-container">
         <h2 className="form-title">Calculate the value of your classic car</h2>
         <p className="form-subtitle">Enter the details of your vehicle</p>
+        <p className="form-subtitle">{urlYear}</p>
         <div className="form">
           <div className="selector">
             <button
