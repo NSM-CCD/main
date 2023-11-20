@@ -52,15 +52,16 @@ const HeroForm = ({
     [setTrim]
   )
 
-  const params = new URLSearchParams(location.search)
-  const urlYear = params.get("year")
+  const Page = ({ location, data }) => {
+    const canonicalUrl = data.site.siteMetadata.siteURL + location.pathname
+  }
 
   return (
     <div className="col-12 col-md-6 form-wrapper">
       <div className="form-container">
         <h2 className="form-title">Calculate the value of your classic car</h2>
         <p className="form-subtitle">Enter the details of your vehicle</p>
-        <p className="form-subtitle">{urlYear}</p>
+        <p className="form-subtitle">{canonicalUrl}</p>
         <div className="form">
           <div className="selector">
             <button
