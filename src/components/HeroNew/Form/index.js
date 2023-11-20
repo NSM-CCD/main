@@ -56,14 +56,14 @@ const HeroForm = ({
     const canonicalUrl = data.site.siteMetadata.siteURL + location.pathname
   }
 
-  componentDidMount() {
+  componentDidMount(); {
     const search = new URL(window.location).searchParams;
     const term = search.get("year");
     if (term)
       this.setState({
         value: term
       });
-  };
+  }
 
   return (
     <div className="col-12 col-md-6 form-wrapper">
