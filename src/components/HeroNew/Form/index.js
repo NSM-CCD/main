@@ -63,7 +63,7 @@ const HeroForm = ({
       this.setState({
         value: term
       });
-  }
+  };
 
   return (
     <div className="col-12 col-md-6 form-wrapper">
