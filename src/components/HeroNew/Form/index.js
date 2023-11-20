@@ -61,6 +61,7 @@ const HeroForm = ({
       <div className="form-container">
         <h2 className="form-title">Calculate the value of your classic car</h2>
         <p className="form-subtitle">Enter the details of your vehicle</p>
+        <p className="form-subtitle">Test</p>
         <div className="form">
           <div className="selector">
             <button
