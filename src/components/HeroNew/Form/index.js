@@ -57,9 +57,9 @@ const HeroForm = ({
   }
 
   useEffect(() => {
-    const search = new URL(window.location).searchParams
-    const urlYear = search.get("year")
-  };
+    const search = new URL(window.location).searchParams;
+    const urlYear = search.get("year");
+  }
 
   return (
     <div className="col-12 col-md-6 form-wrapper">
