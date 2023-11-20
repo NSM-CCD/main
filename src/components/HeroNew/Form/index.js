@@ -57,8 +57,8 @@ const HeroForm = ({
   }
 
   componentDidMount() {
-    const search = new URL(window.location).searchParams;
-    const urlYear = search.get("year");
+    const search = new URL(window.location).searchParams
+    const urlYear = search.get("year")
   }
 
   return (
