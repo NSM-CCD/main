@@ -52,6 +52,9 @@ const HeroForm = ({
     [setTrim]
   )
 
+  const queryParamaters = new URLSearchParams(window.location.search)
+  const urlYear = queryParameters.get("year")
+
   return (
     <div className="col-12 col-md-6 form-wrapper">
       <div className="form-container">
